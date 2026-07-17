@@ -99,15 +99,7 @@ jobs:
           mapfile -t FILES < <(find out -maxdepth 1 -type f -name '*.pmtiles' -print | sort)
           test "${#FILES[@]}" -gt 0
 
-          EXPECTED_COUNT="$(python3 - <<'PY'
-          import json
-
-          with open('out/validation.json', encoding='utf-8') as handle:
-          	validation = json.load(handle)
-
-          print(int(validation['asset_count']))
-          PY
-          )"
+          EXPECTED_COUNT="$(python3 -c 'import json; print(int(json.load(open("out/validation.json", encoding="utf-8"))["asset_count"]))')"
 
           if [ "${#FILES[@]}" -ne "$EXPECTED_COUNT" ]; then
             echo "PMTiles count mismatch: ${#FILES[@]} files, ${EXPECTED_COUNT} expected." >&2
