@@ -146,4 +146,4 @@ jobs:
         if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: scripts/prune-releases.sh 3 arome-
+        run: bash scripts/prune-releases.sh 3 arome-
