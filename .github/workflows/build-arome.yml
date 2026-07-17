@@ -93,15 +93,31 @@ jobs:
             --output-directory out \
             --pmtiles-binary "$PMTILES_BIN"
 
-      - name: Inspect first and last PMTiles archives
+      - name: Verify all PMTiles archives
         if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
         run: |
-          mapfile -t FILES < <(find out -maxdepth 1 -name '*.pmtiles' -print | sort)
+          mapfile -t FILES < <(find out -maxdepth 1 -type f -name '*.pmtiles' -print | sort)
           test "${#FILES[@]}" -gt 0
-          "$PMTILES_BIN" show "${FILES[0]}"
-          "$PMTILES_BIN" verify "${FILES[0]}"
-          "$PMTILES_BIN" show "${FILES[-1]}"
-          "$PMTILES_BIN" verify "${FILES[-1]}"
+
+          EXPECTED_COUNT="$(python3 - <<'PY'
+          import json
+
+          with open('out/validation.json', encoding='utf-8') as handle:
+          	validation = json.load(handle)
+
+          print(int(validation['asset_count']))
+          PY
+          )"
+
+          if [ "${#FILES[@]}" -ne "$EXPECTED_COUNT" ]; then
+            echo "PMTiles count mismatch: ${#FILES[@]} files, ${EXPECTED_COUNT} expected." >&2
+            exit 1
+          fi
+
+          for FILE in "${FILES[@]}"; do
+            echo "Verify ${FILE}"
+            "$PMTILES_BIN" verify "$FILE"
+          done
 
       - name: Upload diagnostic source artifact
         if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
@@ -134,6 +150,25 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ steps.probe.outputs.tag }}
         run: gh release upload "$TAG" out/* --clobber
+
+      - name: Install Easyname upload dependency
+        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
+      - name: Upload complete run to Easyname
+        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
+        env:
+          HOST: ${{ secrets.HOST }}
+          USER: ${{ secrets.USER }}
+          PASS: ${{ secrets.PASS }}
+          TAG: ${{ steps.probe.outputs.tag }}
+          REFERENCE_TIME: ${{ steps.probe.outputs.reference_time }}
+          LOCAL_DIR: out
+          REMOTE_BASE: Wetter/AROME
+          RETAINED_RUNS: '3'
+        run: bash scripts/upload-easyname.sh
 
       - name: Publish complete release
         if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
