@@ -89,14 +89,17 @@ Es werden keine Secrets benötigt. GeoSphere verlangt für diese öffentlich zug
 
 ## Lokal testen
 
-Voraussetzungen: Python 3.12+, Go 1.25+ und genügend freier Speicher.
+Voraussetzungen: Python 3.12+ und genügend freier Speicher.
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[dev]'
 pytest -q
-GOBIN="$PWD/.local/bin" go install github.com/protomaps/go-pmtiles/cmd/pmtiles@v1.30.1
+mkdir -p .local/bin
+curl -fsSL \
+	https://github.com/protomaps/go-pmtiles/releases/download/v1.30.1/go-pmtiles_1.30.1_Linux_x86_64.tar.gz \
+	| tar -xz -C .local/bin pmtiles
 python -m weather_build probe --output probe.json
 python -m weather_build build \
 	--work-directory work \
