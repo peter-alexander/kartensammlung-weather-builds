@@ -15,6 +15,11 @@ fi
 
 LOCAL_DIR="${LOCAL_DIR:-out}"
 REMOTE_BASE="${REMOTE_BASE:-Wetter/AROME}"
+if [[ -z "$REMOTE_BASE" || "$REMOTE_BASE" == "/" || "$REMOTE_BASE" == "." || "$REMOTE_BASE" == ".." ]]; then
+	echo "Unsicheres Remote-Basisverzeichnis: ${REMOTE_BASE}" >&2
+	exit 1
+fi
+
 RETAINED_RUNS="${RETAINED_RUNS:-3}"
 RUN_ID="${GITHUB_RUN_ID:-local}"
 RUN_ATTEMPT="${GITHUB_RUN_ATTEMPT:-1}"
@@ -112,7 +117,8 @@ set ftp:ssl-force yes
 set ftp:ssl-protect-data yes
 set ftp:passive-mode yes
 set ssl:verify-certificate yes
-cls -1 "$REMOTE_BASE"
+cd "$REMOTE_BASE"
+cls -1
 bye
 LFTP
 )" || {
