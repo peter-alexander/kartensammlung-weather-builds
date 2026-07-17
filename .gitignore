@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+work/
+out/
+*.mbtiles
+*.pmtiles
+*.nc
+*:Zone.Identifier

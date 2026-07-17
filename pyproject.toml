@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kartensammlung-weather-builds"
+version = "0.1.0"
+description = "Build numerical GeoSphere AROME raster PMTiles for Kartensammlung"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [
+	{ name = "Peter-Alexander" }
+]
+dependencies = [
+	"netCDF4>=1.7.2,<2",
+	"numpy>=2.1,<3",
+	"Pillow>=11,<13",
+	"rasterio>=1.4,<2",
+	"requests>=2.32,<3",
+	"xarray>=2025.1,<2027"
+]
+
+[project.optional-dependencies]
+dev = [
+	"pytest>=8.3,<10"
+]
+
+[project.scripts]
+weather-build = "weather_build.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["weather_build"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

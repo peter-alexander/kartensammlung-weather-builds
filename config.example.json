@@ -1,0 +1,6 @@
+{
+  "min_zoom": 3,
+  "max_zoom": 8,
+  "aggregate_through_zoom": 5,
+  "retained_releases": 3
+}

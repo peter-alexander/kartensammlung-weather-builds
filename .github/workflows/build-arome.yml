@@ -1,0 +1,153 @@
+name: Build GeoSphere AROME weather tiles
+
+on:
+  workflow_dispatch:
+    inputs:
+      forecast_offset:
+        description: 0 = newest run, 1 = previous run
+        required: true
+        default: '0'
+      force:
+        description: Rebuild even if the release already exists
+        required: true
+        type: boolean
+        default: false
+  schedule:
+    - cron: '17 * * * *'
+
+concurrency:
+  group: geosphere-arome-weather-build
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      FORECAST_OFFSET: ${{ github.event_name == 'workflow_dispatch' && inputs.forecast_offset || '0' }}
+      FORCE_BUILD: ${{ github.event_name == 'workflow_dispatch' && inputs.force || false }}
+      PMTILES_BIN: ${{ github.workspace }}/.local/bin/pmtiles
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.25.x'
+          cache: false
+
+      - name: Install Python package
+        run: python -m pip install --upgrade pip && python -m pip install '.[dev]'
+
+      - name: Run unit tests
+        run: pytest -q
+
+      - name: Probe newest model run
+        id: probe
+        run: |
+          python -m weather_build probe \
+            --forecast-offset "$FORECAST_OFFSET" \
+            --output probe.json \
+            --github-output "$GITHUB_OUTPUT"
+
+      - name: Check whether release exists
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.probe.outputs.tag }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Stop when model run is already published
+        if: steps.release.outputs.exists == 'true' && env.FORCE_BUILD != 'true'
+        run: echo "Release ${{ steps.probe.outputs.tag }} already exists; nothing to do."
+
+      - name: Install pinned PMTiles CLI
+        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
+        run: |
+          mkdir -p "$(dirname "$PMTILES_BIN")"
+          GOBIN="$(dirname "$PMTILES_BIN")" \
+            go install github.com/protomaps/go-pmtiles/cmd/pmtiles@v1.30.1
+          "$PMTILES_BIN" version
+
+      - name: Remove existing release for forced rebuild
+        if: steps.release.outputs.exists == 'true' && env.FORCE_BUILD == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.probe.outputs.tag }}
+        run: gh release delete "$TAG" --yes --cleanup-tag
+
+      - name: Build numerical raster PMTiles
+        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
+        run: |
+          /usr/bin/time -v python -m weather_build build \
+            --reference-time '${{ steps.probe.outputs.reference_time }}' \
+            --work-directory work \
+            --output-directory out \
+            --pmtiles-binary "$PMTILES_BIN"
+
+      - name: Inspect first and last PMTiles archives
+        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
+        run: |
+          mapfile -t FILES < <(find out -maxdepth 1 -name '*.pmtiles' -print | sort)
+          test "${#FILES[@]}" -gt 0
+          "$PMTILES_BIN" show "${FILES[0]}"
+          "$PMTILES_BIN" verify "${FILES[0]}"
+          "$PMTILES_BIN" show "${FILES[-1]}"
+          "$PMTILES_BIN" verify "${FILES[-1]}"
+
+      - name: Upload diagnostic source artifact
+        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: arome-source-${{ steps.probe.outputs.tag }}
+          path: |
+            probe.json
+            work/source/*.nc
+            out/manifest.json
+            out/validation.json
+          retention-days: 3
+          if-no-files-found: error
+
+      - name: Create draft release
+        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.probe.outputs.tag }}
+          REFERENCE_TIME: ${{ steps.probe.outputs.reference_time }}
+        run: |
+          gh release create "$TAG" \
+            --draft \
+            --title "GeoSphere AROME ${REFERENCE_TIME}" \
+            --notes "Numerical AROME raster PMTiles for precipitation and total cloud cover. Source: GeoSphere Austria, CC BY 4.0."
+
+      - name: Upload release assets
+        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.probe.outputs.tag }}
+        run: gh release upload "$TAG" out/* --clobber
+
+      - name: Publish complete release
+        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.probe.outputs.tag }}
+        run: gh release edit "$TAG" --draft=false --latest
+
+      - name: Prune old AROME releases
+        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: scripts/prune-releases.sh 3 arome-
