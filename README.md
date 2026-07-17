@@ -18,7 +18,7 @@ Das Repository hat absichtlich keine technische Abhängigkeit zu `kartensammlung
 precipitation_1h[t] = rr_acc[t] - rr_acc[t - 1]
 ```
 
-Kleine negative Rundungsartefakte bis 0,05 mm werden auf null gesetzt. Größere negative Differenzen brechen den Build ab.
+Kleine negative Rundungsartefakte bis 0,1 mm werden auf null gesetzt. Größere negative Differenzen brechen den Build ab.
 
 ### Zoomabhängige Rasterung
 
