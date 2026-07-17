@@ -18,6 +18,7 @@ Das Repository hat absichtlich keine technische Abhängigkeit zu `kartensammlung
 precipitation_1h[t] = rr_acc[t] - rr_acc[t - 1]
 ```
 
+Wenn GeoSphere den Startzeitpunkt des Modelllaufs für `rr_acc` vollständig als NoData liefert, wird dieser Startwert als 0 mm behandelt.
 Kleine negative Rundungsartefakte bis 0,1 mm werden auf null gesetzt. Größere negative Differenzen brechen den Build ab.
 
 ### Zoomabhängige Rasterung

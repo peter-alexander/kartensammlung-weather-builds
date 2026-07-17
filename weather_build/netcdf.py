@@ -122,9 +122,14 @@ def accumulated_to_interval_precipitation(
 	if rr_acc.ndim != 3:
 		raise ForecastDataError(f"rr_acc muss dreidimensional sein, erhalten: {rr_acc.shape}")
 
-	result = np.empty_like(rr_acc, dtype=np.float32)
-	result[0] = rr_acc[0]
-	result[1:] = rr_acc[1:] - rr_acc[:-1]
+	rr_acc_work = rr_acc.copy()
+	initial_accumulation_missing = bool(np.all(~np.isfinite(rr_acc_work[0])))
+	if initial_accumulation_missing:
+		rr_acc_work[0] = 0.0
+
+	result = np.empty_like(rr_acc_work, dtype=np.float32)
+	result[0] = rr_acc_work[0]
+	result[1:] = rr_acc_work[1:] - rr_acc_work[:-1]
 
 	finite = np.isfinite(result)
 	serious_negative = finite & (result < -config.negative_precipitation_tolerance_mm)
@@ -153,6 +158,7 @@ def accumulated_to_interval_precipitation(
 	return result, {
 		"accumulated_min_mm": float(np.nanmin(rr_acc)),
 		"accumulated_max_mm": float(np.nanmax(rr_acc)),
+		"initial_accumulation_missing_assumed_zero": initial_accumulation_missing,
 		"interval_min_mm": float(np.nanmin(result)),
 		"interval_max_mm": float(np.nanmax(result)),
 		"tiny_negative_values_clamped": tiny_negative_count,
