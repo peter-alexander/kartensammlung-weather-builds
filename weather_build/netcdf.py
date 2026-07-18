@@ -127,26 +127,57 @@ def accumulated_to_interval_precipitation(
 	if initial_accumulation_missing:
 		rr_acc_work[0] = 0.0
 
-	result = np.empty_like(rr_acc_work, dtype=np.float32)
-	result[0] = rr_acc_work[0]
-	result[1:] = rr_acc_work[1:] - rr_acc_work[:-1]
+	raw_interval = np.empty_like(rr_acc_work, dtype=np.float32)
+	raw_interval[0] = rr_acc_work[0]
+	raw_interval[1:] = rr_acc_work[1:] - rr_acc_work[:-1]
 
-	finite = np.isfinite(result)
-	serious_negative = finite & (result < -config.negative_precipitation_tolerance_mm)
+	raw_finite = np.isfinite(raw_interval)
+	serious_negative = raw_finite & (raw_interval < -config.negative_precipitation_tolerance_mm)
 	serious_count = int(np.count_nonzero(serious_negative))
-	minimum = float(np.nanmin(result))
+	minimum_raw_interval = float(np.nanmin(raw_interval))
 	if serious_count:
 		indices = np.argwhere(serious_negative)
 		first = indices[0].tolist()
 		raise ForecastDataError(
-			f"{serious_count} unplausible negative Niederschlagsdifferenzen; Minimum {minimum:.3f} mm, "
-			f"erste Position {first}."
+			f"{serious_count} unplausible negative Niederschlagsdifferenzen; "
+			f"Minimum {minimum_raw_interval:.3f} mm, erste Position {first}."
 		)
 
-	tiny_negative = finite & (result < 0)
-	tiny_negative_count = int(np.count_nonzero(tiny_negative))
-	result[tiny_negative] = 0.0
+	tolerated_negative = raw_finite & (raw_interval < 0)
+	tolerated_negative_count = int(np.count_nonzero(tolerated_negative))
 
+	accumulation_finite = np.isfinite(rr_acc_work)
+	monotonic_input = np.where(accumulation_finite, rr_acc_work, -np.inf)
+	monotonic_accumulation = np.maximum.accumulate(monotonic_input, axis=0)
+	monotonic_accumulation = np.where(
+		accumulation_finite,
+		monotonic_accumulation,
+		np.nan
+	).astype(np.float32, copy=False)
+
+	accumulation_correction = monotonic_accumulation - rr_acc_work
+	corrected_accumulation = accumulation_finite & (accumulation_correction > 0)
+	corrected_accumulation_count = int(np.count_nonzero(corrected_accumulation))
+	maximum_accumulation_correction = (
+		float(np.nanmax(accumulation_correction))
+		if corrected_accumulation_count
+		else 0.0
+	)
+
+	if tolerated_negative_count:
+		LOGGER.warning(
+			"Korrigiere %d kleine negative Niederschlagsdifferenzen; "
+			"Minimum %.3f mm, maximale Akkumulationskorrektur %.3f mm",
+			tolerated_negative_count,
+			minimum_raw_interval,
+			maximum_accumulation_correction
+		)
+
+	result = np.empty_like(monotonic_accumulation, dtype=np.float32)
+	result[0] = monotonic_accumulation[0]
+	result[1:] = monotonic_accumulation[1:] - monotonic_accumulation[:-1]
+
+	finite = np.isfinite(result)
 	overflow = finite & (result > config.precipitation_max_mm)
 	overflow_count = int(np.count_nonzero(overflow))
 	if overflow_count:
@@ -159,9 +190,12 @@ def accumulated_to_interval_precipitation(
 		"accumulated_min_mm": float(np.nanmin(rr_acc)),
 		"accumulated_max_mm": float(np.nanmax(rr_acc)),
 		"initial_accumulation_missing_assumed_zero": initial_accumulation_missing,
+		"raw_interval_min_mm": minimum_raw_interval,
 		"interval_min_mm": float(np.nanmin(result)),
 		"interval_max_mm": float(np.nanmax(result)),
-		"tiny_negative_values_clamped": tiny_negative_count,
+		"tiny_negative_values_clamped": tolerated_negative_count,
+		"negative_accumulation_values_corrected": corrected_accumulation_count,
+		"maximum_accumulation_correction_mm": maximum_accumulation_correction,
 		"serious_negative_values": serious_count,
 		"encoding_overflow_values": overflow_count,
 		"nodata_values": int(np.count_nonzero(~finite))
