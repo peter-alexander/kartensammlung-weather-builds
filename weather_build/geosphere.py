@@ -9,6 +9,8 @@ from pathlib import Path
 import re
 from typing import Any, Iterable
 
+from rasterio.crs import CRS
+from rasterio.warp import transform_bounds
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -52,7 +54,10 @@ class ProbeResult:
 
 	@property
 	def valid_times(self) -> list[datetime]:
-		return [self.reference_time + index * self.step for index in range(self.forecast_length)]
+		return [
+			self.reference_time + index * self.step
+			for index in range(self.forecast_length)
+		]
 
 
 @dataclass(frozen=True)
@@ -111,7 +116,8 @@ class GeoSphereClient:
 		reference_times = _reference_times(metadata)
 		if forecast_offset < 0 or forecast_offset >= len(reference_times):
 			raise GeoSphereError(
-				f"forecast_offset={forecast_offset} ist ungültig; verfügbar sind 0 bis {len(reference_times) - 1}."
+				f"forecast_offset={forecast_offset} ist ungültig; "
+				f"verfügbar sind 0 bis {len(reference_times) - 1}."
 			)
 
 		reference_time = reference_times[forecast_offset]
@@ -119,7 +125,12 @@ class GeoSphereClient:
 		step = _forecast_step(metadata, self.config.resource_id)
 		bbox = _bounding_box(metadata)
 		resolution, resolution_unit = _spatial_resolution(metadata)
-		grid_width, grid_height = _grid_shape(bbox, resolution)
+		grid_width, grid_height = _grid_shape(
+			bbox,
+			resolution,
+			resolution_unit,
+			metadata
+		)
 		grid_points = grid_width * grid_height
 		tag = f"{self.config.release_prefix}-{reference_time:%Y%m%dT%H%MZ}"
 
@@ -137,20 +148,31 @@ class GeoSphereClient:
 			metadata=metadata
 		)
 
-	def plan_downloads(self, probe: ProbeResult, directory: Path) -> list[DownloadChunk]:
-		value_budget = math.floor(self.config.request_value_limit * self.config.request_safety_factor)
+	def plan_downloads(
+		self,
+		probe: ProbeResult,
+		directory: Path
+	) -> list[DownloadChunk]:
+		value_budget = math.floor(
+			self.config.request_value_limit * self.config.request_safety_factor
+		)
 		values_per_time = probe.grid_points * len(self.config.parameters)
 		max_times_per_request = value_budget // values_per_time
 		if max_times_per_request < 1:
 			raise GeoSphereError(
-				"Das vollständige Raster überschreitet bereits für einen Zeitpunkt das NetCDF-Request-Limit."
+				"Das vollständige Raster überschreitet bereits für einen Zeitpunkt "
+				"das NetCDF-Request-Limit."
 			)
 
 		directory.mkdir(parents=True, exist_ok=True)
 		valid_times = probe.valid_times
 		chunks: list[DownloadChunk] = []
-		for chunk_index, start_index in enumerate(range(0, len(valid_times), max_times_per_request)):
-			chunk_times = valid_times[start_index:start_index + max_times_per_request]
+		for chunk_index, start_index in enumerate(
+			range(0, len(valid_times), max_times_per_request)
+		):
+			chunk_times = valid_times[
+				start_index:start_index + max_times_per_request
+			]
 			chunks.append(
 				DownloadChunk(
 					index=chunk_index,
@@ -168,18 +190,22 @@ class GeoSphereClient:
 		)
 		return chunks
 
-	def download_chunks(self, probe: ProbeResult, chunks: Iterable[DownloadChunk]) -> list[dict[str, Any]]:
+	def download_chunks(
+		self,
+		probe: ProbeResult,
+		chunks: Iterable[DownloadChunk]
+	) -> list[dict[str, Any]]:
 		records: list[dict[str, Any]] = []
 		for chunk in chunks:
 			offset = self._resolve_current_offset(probe.reference_time)
 			params: list[tuple[str, str | int]] = [
-				*(('parameters', parameter) for parameter in self.config.parameters),
-				('bbox', probe.bbox.api_value()),
-				('forecast_offset', offset),
-				('start', _api_time(chunk.start)),
-				('end', _api_time(chunk.end)),
-				('output_format', 'netcdf'),
-				('filename', chunk.path.stem)
+				*(("parameters", parameter) for parameter in self.config.parameters),
+				("bbox", probe.bbox.api_value()),
+				("forecast_offset", offset),
+				("start", _api_time(chunk.start)),
+				("end", _api_time(chunk.end)),
+				("output_format", "netcdf"),
+				("filename", chunk.path.stem)
 			]
 			LOGGER.info(
 				"Lade NetCDF-Teil %d: %s bis %s (Offset %d)",
@@ -223,7 +249,8 @@ class GeoSphereClient:
 			if reference_time == selected_reference_time:
 				return index
 		raise GeoSphereError(
-			"Der ausgewählte Modelllauf ist während des Builds aus der verfügbaren Forecast-Liste verschwunden."
+			"Der ausgewählte Modelllauf ist während des Builds aus der verfügbaren "
+			"Forecast-Liste verschwunden."
 		)
 
 
@@ -235,9 +262,9 @@ def write_probe_json(probe: ProbeResult, path: Path) -> None:
 		"bbox": probe.bbox.maplibre_value(),
 		"spatial_resolution": list(probe.spatial_resolution),
 		"spatial_resolution_unit": probe.spatial_resolution_unit,
-		"grid_width": probe.grid_width,
-		"grid_height": probe.grid_height,
-		"grid_points": probe.grid_points,
+		"estimated_grid_width": probe.grid_width,
+		"estimated_grid_height": probe.grid_height,
+		"estimated_grid_points": probe.grid_points,
 		"tag": probe.tag
 	}
 	path.parent.mkdir(parents=True, exist_ok=True)
@@ -268,9 +295,15 @@ def _parameter_names(metadata: dict[str, Any]) -> set[str]:
 
 
 def _reference_times(metadata: dict[str, Any]) -> list[datetime]:
-	values = metadata.get("available_forecast_reftimes") or metadata.get("availableForecastReftimes")
+	values = (
+		metadata.get("available_forecast_reftimes")
+		or metadata.get("availableForecastReftimes")
+	)
 	if not isinstance(values, list) or not values:
-		last = metadata.get("last_forecast_reftime") or metadata.get("lastForecastReftime")
+		last = (
+			metadata.get("last_forecast_reftime")
+			or metadata.get("lastForecastReftime")
+		)
 		if last is None:
 			raise GeoSphereError("Keine Forecast-Referenzzeiten in den Metadaten gefunden.")
 		values = [last]
@@ -296,29 +329,82 @@ def _bounding_box(metadata: dict[str, Any]) -> BoundingBox:
 	if isinstance(value, str):
 		parts = [float(item.strip()) for item in value.split(",")]
 		if len(parts) == 4:
-			return BoundingBox(south=parts[0], west=parts[1], north=parts[2], east=parts[3])
+			return BoundingBox(
+				south=parts[0],
+				west=parts[1],
+				north=parts[2],
+				east=parts[3]
+			)
 	raise GeoSphereError(f"bbox_outer konnte nicht gelesen werden: {value!r}")
 
 
-def _spatial_resolution(metadata: dict[str, Any]) -> tuple[tuple[float, float], str]:
+def _spatial_resolution(
+	metadata: dict[str, Any]
+) -> tuple[tuple[float, float], str]:
 	value = metadata.get("spatial_resolution") or metadata.get("spatialResolution")
-	unit = str(metadata.get("spatial_resolution_unit") or metadata.get("spatialResolutionUnit") or "")
+	unit = str(
+		metadata.get("spatial_resolution_unit")
+		or metadata.get("spatialResolutionUnit")
+		or ""
+	)
 	if isinstance(value, (list, tuple)) and len(value) == 2:
 		return (abs(float(value[0])), abs(float(value[1]))), unit
 
-	legacy = metadata.get("spatial_resolution_m") or metadata.get("spatialResolutionM")
+	legacy = (
+		metadata.get("spatial_resolution_m")
+		or metadata.get("spatialResolutionM")
+	)
 	if legacy is not None:
 		resolution = abs(float(legacy))
 		return (resolution, resolution), "m"
 	raise GeoSphereError("Keine räumliche Auflösung in den Metadaten gefunden.")
 
 
-def _grid_shape(bbox: BoundingBox, resolution: tuple[float, float]) -> tuple[int, int]:
+def _grid_shape(
+	bbox: BoundingBox,
+	resolution: tuple[float, float],
+	resolution_unit: str,
+	metadata: dict[str, Any]
+) -> tuple[int, int]:
 	dx, dy = resolution
-	width = round((bbox.east - bbox.west) / dx) + 1
-	height = round((bbox.north - bbox.south) / dy) + 1
+	unit = resolution_unit.lower()
+	if unit in {"deg", "degree", "degrees"}:
+		width = math.ceil((bbox.east - bbox.west) / dx) + 1
+		height = math.ceil((bbox.north - bbox.south) / dy) + 1
+	elif unit in {"m", "meter", "meters", "metre", "metres"}:
+		crs_value = (
+			metadata.get("crs")
+			or metadata.get("spatial_ref")
+			or metadata.get("projection")
+		)
+		if not crs_value:
+			raise GeoSphereError(
+				"Meterbasierte Rasterauflösung ohne Quell-CRS in den Metadaten."
+			)
+		try:
+			source_crs = CRS.from_user_input(crs_value)
+			left, bottom, right, top = transform_bounds(
+				CRS.from_epsg(4326),
+				source_crs,
+				bbox.west,
+				bbox.south,
+				bbox.east,
+				bbox.north,
+				densify_pts=21
+			)
+		except Exception as exc:
+			raise GeoSphereError(
+				f"BBox konnte nicht nach {crs_value!r} transformiert werden."
+			) from exc
+		width = math.ceil((right - left) / dx) + 1
+		height = math.ceil((top - bottom) / dy) + 1
+	else:
+		raise GeoSphereError(f"Unbekannte räumliche Einheit: {resolution_unit!r}")
+
 	if width < 1 or height < 1:
-		raise GeoSphereError(f"Ungültige Rasterform aus BBox und Auflösung: {width} × {height}")
+		raise GeoSphereError(
+			f"Ungültige Rasterform aus BBox und Auflösung: {width} × {height}"
+		)
 	return width, height
 
 
@@ -350,7 +436,10 @@ def _parse_duration_text(value: str) -> timedelta | None:
 	iso_match = re.fullmatch(r"pt(\d+(?:\.\d+)?)h", text)
 	if iso_match:
 		return timedelta(hours=float(iso_match.group(1)))
-	match = re.fullmatch(r"(\d+(?:\.\d+)?)\s*(min|m|h|hour|hours|d|day|days)", text)
+	match = re.fullmatch(
+		r"(\d+(?:\.\d+)?)\s*(min|m|h|hour|hours|d|day|days)",
+		text
+	)
 	if match:
 		return _duration(float(match.group(1)), match.group(2))
 	return None
@@ -397,4 +486,6 @@ def _validate_netcdf_magic(path: Path) -> None:
 	with path.open("rb") as handle:
 		magic = handle.read(8)
 	if not (magic.startswith(b"CDF") or magic.startswith(b"\x89HDF\r\n\x1a\n")):
-		raise GeoSphereError(f"Antwort ist keine erkennbare NetCDF-Datei: {path} ({magic!r})")
+		raise GeoSphereError(
+			f"Antwort ist keine erkennbare NetCDF-Datei: {path} ({magic!r})"
+		)

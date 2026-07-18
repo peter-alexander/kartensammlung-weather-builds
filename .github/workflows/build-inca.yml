@@ -1,0 +1,252 @@
+name: Build GeoSphere INCA nowcast tiles
+
+on:
+  workflow_dispatch:
+    inputs:
+      forecast_offset:
+        description: 0 = newest run, 1 = previous run
+        required: true
+        default: '0'
+      force:
+        description: Rebuild even if the release already exists
+        required: true
+        type: boolean
+        default: false
+
+concurrency:
+  group: geosphere-inca-nowcast-build
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      FORECAST_OFFSET: ${{ inputs.forecast_offset }}
+      FORCE_BUILD: ${{ inputs.force }}
+    outputs:
+      should_build: ${{ steps.decision.outputs.should_build }}
+      release_exists: ${{ steps.decision.outputs.release_exists }}
+      release_draft: ${{ steps.decision.outputs.release_draft }}
+      tag: ${{ steps.probe.outputs.tag }}
+      reference_time: ${{ steps.probe.outputs.reference_time }}
+    steps:
+      - name: Probe newest INCA run
+        id: probe
+        env:
+          METADATA_URL: https://dataset.api.hub.geosphere.at/v1/grid/forecast/nowcast-v1-15min-1km/metadata
+        run: |
+          curl --fail --silent --show-error --location \
+            --retry 5 --retry-all-errors \
+            --connect-timeout 30 --max-time 120 \
+            "$METADATA_URL" \
+            --output metadata.json
+
+          python3 - <<'PY'
+          from datetime import datetime, timezone
+          import json
+          import os
+
+          with open('metadata.json', encoding='utf-8') as handle:
+          	metadata = json.load(handle)
+
+          reference_times = (
+          	metadata.get('available_forecast_reftimes')
+          	or metadata.get('availableForecastReftimes')
+          )
+          if not isinstance(reference_times, list) or not reference_times:
+          	last_reference_time = (
+          		metadata.get('last_forecast_reftime')
+          		or metadata.get('lastForecastReftime')
+          	)
+          	if last_reference_time is None:
+          		raise RuntimeError('GeoSphere-Metadaten enthalten keine INCA-Referenzzeit.')
+          	reference_times = [last_reference_time]
+
+          forecast_offset = int(os.environ['FORECAST_OFFSET'])
+          if forecast_offset < 0 or forecast_offset >= len(reference_times):
+          	raise RuntimeError(
+          		f'forecast_offset={forecast_offset} ist ungültig; '
+          		f'verfügbar sind 0 bis {len(reference_times) - 1}.'
+          	)
+
+          raw_reference_time = str(reference_times[forecast_offset]).strip()
+          parsed_reference_time = datetime.fromisoformat(
+          	raw_reference_time[:-1] + '+00:00'
+          	if raw_reference_time.endswith('Z')
+          	else raw_reference_time
+          )
+          if parsed_reference_time.tzinfo is None:
+          	parsed_reference_time = parsed_reference_time.replace(tzinfo=timezone.utc)
+          parsed_reference_time = parsed_reference_time.astimezone(timezone.utc)
+
+          reference_time = parsed_reference_time.strftime('%Y-%m-%dT%H:%M:%SZ')
+          tag = f"inca-{parsed_reference_time:%Y%m%dT%H%MZ}"
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as handle:
+          	handle.write(f'tag={tag}\n')
+          	handle.write(f'reference_time={reference_time}\n')
+
+          print(f'Neuester ausgewählter INCA-Lauf: {tag}')
+          PY
+
+      - name: Decide whether an INCA build is needed
+        id: decision
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.probe.outputs.tag }}
+        run: |
+          RELEASE_EXISTS=false
+          RELEASE_DRAFT=false
+
+          if RELEASE_DRAFT_VALUE="$(
+            gh release view "$TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --json isDraft \
+              --jq '.isDraft' \
+              2>/dev/null
+          )"; then
+            RELEASE_EXISTS=true
+            RELEASE_DRAFT="$RELEASE_DRAFT_VALUE"
+          fi
+
+          if [[ "$FORCE_BUILD" == 'true' ]]; then
+            SHOULD_BUILD=true
+            REASON='forced rebuild requested'
+          elif [[ "$RELEASE_EXISTS" == 'true' && "$RELEASE_DRAFT" != 'true' ]]; then
+            SHOULD_BUILD=false
+            REASON='published release already exists'
+          elif [[ "$RELEASE_DRAFT" == 'true' ]]; then
+            SHOULD_BUILD=true
+            REASON='incomplete draft release exists'
+          else
+            SHOULD_BUILD=true
+            REASON='no release exists'
+          fi
+
+          echo "release_exists=$RELEASE_EXISTS" >> "$GITHUB_OUTPUT"
+          echo "release_draft=$RELEASE_DRAFT" >> "$GITHUB_OUTPUT"
+          echo "should_build=$SHOULD_BUILD" >> "$GITHUB_OUTPUT"
+          echo "Decision for $TAG: should_build=$SHOULD_BUILD ($REASON)"
+
+  build:
+    needs: probe
+    if: needs.probe.outputs.should_build == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      TAG: ${{ needs.probe.outputs.tag }}
+      REFERENCE_TIME: ${{ needs.probe.outputs.reference_time }}
+      PMTILES_BIN: ${{ github.workspace }}/.local/bin/pmtiles
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install Python package
+        run: python -m pip install --upgrade pip && python -m pip install '.[dev]'
+
+      - name: Run unit tests
+        run: pytest -q
+
+      - name: Install pinned PMTiles CLI
+        run: |
+          mkdir -p "$(dirname "$PMTILES_BIN")"
+          curl -fsSL \
+            https://github.com/protomaps/go-pmtiles/releases/download/v1.30.1/go-pmtiles_1.30.1_Linux_x86_64.tar.gz \
+            | tar -xz -C "$(dirname "$PMTILES_BIN")" pmtiles
+          "$PMTILES_BIN" version
+
+      - name: Remove incomplete or forced existing INCA release
+        if: needs.probe.outputs.release_exists == 'true' && (needs.probe.outputs.release_draft == 'true' || inputs.force == true)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [[ "${{ needs.probe.outputs.release_draft }}" == 'true' ]]; then
+            gh release delete "$TAG" --yes
+          else
+            gh release delete "$TAG" --yes --cleanup-tag
+          fi
+
+      - name: Build INCA raster PMTiles
+        run: |
+          /usr/bin/time -v python -m weather_build.inca \
+            --config config/inca-nowcast.json \
+            build \
+            --reference-time "$REFERENCE_TIME" \
+            --work-directory work-inca \
+            --output-directory out-inca \
+            --pmtiles-binary "$PMTILES_BIN"
+
+      - name: Verify all INCA PMTiles archives
+        run: |
+          mapfile -t FILES < <(find out-inca -maxdepth 1 -type f -name '*.pmtiles' -print | sort)
+          test "${#FILES[@]}" -gt 0
+
+          EXPECTED_COUNT="$(python3 -c 'import json; print(int(json.load(open("out-inca/validation.json", encoding="utf-8"))["asset_count"]))')"
+
+          if [ "${#FILES[@]}" -ne "$EXPECTED_COUNT" ]; then
+            echo "INCA PMTiles count mismatch: ${#FILES[@]} files, ${EXPECTED_COUNT} expected." >&2
+            exit 1
+          fi
+
+          for FILE in "${FILES[@]}"; do
+            echo "Verify ${FILE}"
+            "$PMTILES_BIN" verify "$FILE"
+          done
+
+      - name: Upload INCA diagnostic source artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: inca-source-${{ env.TAG }}
+          path: |
+            work-inca/source/*.nc
+            out-inca/manifest.json
+            out-inca/validation.json
+          retention-days: 2
+          if-no-files-found: error
+
+      - name: Create INCA draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$TAG" \
+            --draft \
+            --title "GeoSphere INCA ${REFERENCE_TIME}" \
+            --notes "GeoSphere INCA 15-minute precipitation nowcast PMTiles. Source: GeoSphere Austria, CC BY 4.0."
+
+      - name: Upload INCA release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$TAG" out-inca/* --clobber
+
+      - name: Install Easyname upload dependency
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
+      - name: Upload complete INCA run to Easyname
+        env:
+          HOST: ${{ secrets.HOST }}
+          USER: ${{ secrets.USER }}
+          PASS: ${{ secrets.PASS }}
+          LOCAL_DIR: out-inca
+          REMOTE_BASE: Wetter/INCA
+          RETAINED_RUNS: '4'
+        run: bash scripts/upload-inca-easyname.sh
+
+      - name: Publish complete INCA release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release edit "$TAG" --draft=false
+
+      - name: Prune old INCA releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash scripts/prune-releases.sh 4 inca-
