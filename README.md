@@ -19,7 +19,7 @@ precipitation_1h[t] = rr_acc[t] - rr_acc[t - 1]
 ```
 
 Wenn GeoSphere den Startzeitpunkt des Modelllaufs für `rr_acc` vollständig als NoData liefert, wird dieser Startwert als 0 mm behandelt.
-Kleine negative Rundungsartefakte bis 0,1 mm werden auf null gesetzt. Größere negative Differenzen brechen den Build ab.
+Kleine lokale Rückgänge des Akkumulationsfelds bis 0,5 mm werden als Quantisierungs- oder Modellartefakte behandelt. Der Build macht die betroffene Zeitreihe monoton, sodass weder negativer Niederschlag noch ein künstlicher Nachholeffekt in der Folgestunde entsteht. Die Korrekturen werden in `validation.json` protokolliert. Größere negative Differenzen brechen den Build weiterhin ab.
 
 ### Zoomabhängige Rasterung
 
