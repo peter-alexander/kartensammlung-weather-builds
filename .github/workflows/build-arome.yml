@@ -169,7 +169,12 @@ jobs:
         if: needs.probe.outputs.release_exists == 'true' && (needs.probe.outputs.release_draft == 'true' || inputs.force == true)
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release delete "$TAG" --yes --cleanup-tag
+        run: |
+          if [[ "${{ needs.probe.outputs.release_draft }}" == 'true' ]]; then
+            gh release delete "$TAG" --yes
+          else
+            gh release delete "$TAG" --yes --cleanup-tag
+          fi
 
       - name: Build numerical raster PMTiles
         run: |
