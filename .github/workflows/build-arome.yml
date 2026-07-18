@@ -12,8 +12,6 @@ on:
         required: true
         type: boolean
         default: false
-  schedule:
-    - cron: '17 * * * *'
 
 concurrency:
   group: geosphere-arome-weather-build
@@ -23,12 +21,127 @@ permissions:
   contents: write
 
 jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      FORECAST_OFFSET: ${{ inputs.forecast_offset }}
+      FORCE_BUILD: ${{ inputs.force }}
+    outputs:
+      should_build: ${{ steps.decision.outputs.should_build }}
+      release_exists: ${{ steps.decision.outputs.release_exists }}
+      release_draft: ${{ steps.decision.outputs.release_draft }}
+      tag: ${{ steps.probe.outputs.tag }}
+      reference_time: ${{ steps.probe.outputs.reference_time }}
+    steps:
+      - name: Probe newest model run
+        id: probe
+        env:
+          METADATA_URL: https://dataset.api.hub.geosphere.at/v1/grid/forecast/nwp-v1-1h-2500m/metadata
+        run: |
+          curl --fail --silent --show-error --location \
+            --retry 5 --retry-all-errors \
+            --connect-timeout 30 --max-time 120 \
+            "$METADATA_URL" \
+            --output metadata.json
+
+          python3 - <<'PY'
+          from datetime import datetime, timezone
+          import json
+          import os
+
+          with open('metadata.json', encoding='utf-8') as handle:
+          	metadata = json.load(handle)
+
+          reference_times = (
+          	metadata.get('available_forecast_reftimes')
+          	or metadata.get('availableForecastReftimes')
+          )
+          if not isinstance(reference_times, list) or not reference_times:
+          	last_reference_time = (
+          		metadata.get('last_forecast_reftime')
+          		or metadata.get('lastForecastReftime')
+          	)
+          	if last_reference_time is None:
+          		raise RuntimeError('GeoSphere-Metadaten enthalten keine Forecast-Referenzzeit.')
+          	reference_times = [last_reference_time]
+
+          forecast_offset = int(os.environ['FORECAST_OFFSET'])
+          if forecast_offset < 0 or forecast_offset >= len(reference_times):
+          	raise RuntimeError(
+          		f'forecast_offset={forecast_offset} ist ungültig; '
+          		f'verfügbar sind 0 bis {len(reference_times) - 1}.'
+          	)
+
+          raw_reference_time = str(reference_times[forecast_offset]).strip()
+          parsed_reference_time = datetime.fromisoformat(
+          	raw_reference_time[:-1] + '+00:00'
+          	if raw_reference_time.endswith('Z')
+          	else raw_reference_time
+          )
+          if parsed_reference_time.tzinfo is None:
+          	parsed_reference_time = parsed_reference_time.replace(tzinfo=timezone.utc)
+          parsed_reference_time = parsed_reference_time.astimezone(timezone.utc)
+
+          reference_time = parsed_reference_time.strftime('%Y-%m-%dT%H:%M:%SZ')
+          tag = f"arome-{parsed_reference_time:%Y%m%dT%H%MZ}"
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as handle:
+          	handle.write(f'tag={tag}\n')
+          	handle.write(f'reference_time={reference_time}\n')
+
+          print(f'Neuester ausgewählter GeoSphere-Lauf: {tag}')
+          PY
+
+      - name: Decide whether a build is needed
+        id: decision
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.probe.outputs.tag }}
+        run: |
+          RELEASE_EXISTS=false
+          RELEASE_DRAFT=false
+
+          if RELEASE_DRAFT_VALUE="$(
+            gh release view "$TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --json isDraft \
+              --jq '.isDraft' \
+              2>/dev/null
+          )"; then
+            RELEASE_EXISTS=true
+            RELEASE_DRAFT="$RELEASE_DRAFT_VALUE"
+          fi
+
+          if [[ "$FORCE_BUILD" == 'true' ]]; then
+            SHOULD_BUILD=true
+            REASON='forced rebuild requested'
+          elif [[ "$RELEASE_EXISTS" == 'true' && "$RELEASE_DRAFT" != 'true' ]]; then
+            SHOULD_BUILD=false
+            REASON='published release already exists'
+          elif [[ "$RELEASE_DRAFT" == 'true' ]]; then
+            SHOULD_BUILD=true
+            REASON='incomplete draft release exists'
+          else
+            SHOULD_BUILD=true
+            REASON='no release exists'
+          fi
+
+          echo "release_exists=$RELEASE_EXISTS" >> "$GITHUB_OUTPUT"
+          echo "release_draft=$RELEASE_DRAFT" >> "$GITHUB_OUTPUT"
+          echo "should_build=$SHOULD_BUILD" >> "$GITHUB_OUTPUT"
+          echo "Decision for $TAG: should_build=$SHOULD_BUILD ($REASON)"
+
   build:
+    needs: probe
+    if: needs.probe.outputs.should_build == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 330
     env:
-      FORECAST_OFFSET: ${{ github.event_name == 'workflow_dispatch' && inputs.forecast_offset || '0' }}
-      FORCE_BUILD: ${{ github.event_name == 'workflow_dispatch' && inputs.force || false }}
+      FORECAST_OFFSET: ${{ inputs.forecast_offset }}
+      FORCE_BUILD: ${{ inputs.force }}
+      TAG: ${{ needs.probe.outputs.tag }}
+      REFERENCE_TIME: ${{ needs.probe.outputs.reference_time }}
       PMTILES_BIN: ${{ github.workspace }}/.local/bin/pmtiles
     steps:
       - uses: actions/checkout@v6
@@ -44,32 +157,7 @@ jobs:
       - name: Run unit tests
         run: pytest -q
 
-      - name: Probe newest model run
-        id: probe
-        run: |
-          python -m weather_build probe \
-            --forecast-offset "$FORECAST_OFFSET" \
-            --output probe.json \
-            --github-output "$GITHUB_OUTPUT"
-
-      - name: Check whether release exists
-        id: release
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TAG: ${{ steps.probe.outputs.tag }}
-        run: |
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Stop when model run is already published
-        if: steps.release.outputs.exists == 'true' && env.FORCE_BUILD != 'true'
-        run: echo "Release ${{ steps.probe.outputs.tag }} already exists; nothing to do."
-
       - name: Install pinned PMTiles CLI
-        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
         run: |
           mkdir -p "$(dirname "$PMTILES_BIN")"
           curl -fsSL \
@@ -77,24 +165,21 @@ jobs:
             | tar -xz -C "$(dirname "$PMTILES_BIN")" pmtiles
           "$PMTILES_BIN" version
 
-      - name: Remove existing release for forced rebuild
-        if: steps.release.outputs.exists == 'true' && env.FORCE_BUILD == 'true'
+      - name: Remove incomplete or forced existing release
+        if: needs.probe.outputs.release_exists == 'true' && (needs.probe.outputs.release_draft == 'true' || inputs.force == true)
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ steps.probe.outputs.tag }}
         run: gh release delete "$TAG" --yes --cleanup-tag
 
       - name: Build numerical raster PMTiles
-        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
         run: |
           /usr/bin/time -v python -m weather_build build \
-            --reference-time '${{ steps.probe.outputs.reference_time }}' \
+            --reference-time "$REFERENCE_TIME" \
             --work-directory work \
             --output-directory out \
             --pmtiles-binary "$PMTILES_BIN"
 
       - name: Verify all PMTiles archives
-        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
         run: |
           mapfile -t FILES < <(find out -maxdepth 1 -type f -name '*.pmtiles' -print | sort)
           test "${#FILES[@]}" -gt 0
@@ -112,12 +197,10 @@ jobs:
           done
 
       - name: Upload diagnostic source artifact
-        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
         uses: actions/upload-artifact@v7
         with:
-          name: arome-source-${{ steps.probe.outputs.tag }}
+          name: arome-source-${{ env.TAG }}
           path: |
-            probe.json
             work/source/*.nc
             out/manifest.json
             out/validation.json
@@ -125,11 +208,8 @@ jobs:
           if-no-files-found: error
 
       - name: Create draft release
-        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ steps.probe.outputs.tag }}
-          REFERENCE_TIME: ${{ steps.probe.outputs.reference_time }}
         run: |
           gh release create "$TAG" \
             --draft \
@@ -137,40 +217,50 @@ jobs:
             --notes "Numerical AROME raster PMTiles for precipitation and total cloud cover. Source: GeoSphere Austria, CC BY 4.0."
 
       - name: Upload release assets
-        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ steps.probe.outputs.tag }}
         run: gh release upload "$TAG" out/* --clobber
 
       - name: Install Easyname upload dependency
-        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y lftp
 
+      - name: Make Easyname base-directory creation idempotent
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/upload-easyname.sh')
+          content = path.read_text(encoding='utf-8')
+          old = 'set net:reconnect-interval-base 5\nmkdir -p "$REMOTE_BASE"\n'
+          new = (
+          	'set net:reconnect-interval-base 5\n'
+          	'set cmd:fail-exit no\n'
+          	'mkdir -p "$REMOTE_BASE"\n'
+          	'set cmd:fail-exit yes\n'
+          )
+          if old not in content:
+          	raise RuntimeError('Erwartete Easyname-mkdir-Stelle wurde nicht gefunden.')
+          path.write_text(content.replace(old, new, 1), encoding='utf-8')
+          PY
+
       - name: Upload complete run to Easyname
-        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
         env:
           HOST: ${{ secrets.HOST }}
           USER: ${{ secrets.USER }}
           PASS: ${{ secrets.PASS }}
-          TAG: ${{ steps.probe.outputs.tag }}
-          REFERENCE_TIME: ${{ steps.probe.outputs.reference_time }}
           LOCAL_DIR: out
           REMOTE_BASE: Wetter/AROME
           RETAINED_RUNS: '3'
         run: bash scripts/upload-easyname.sh
 
       - name: Publish complete release
-        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ steps.probe.outputs.tag }}
         run: gh release edit "$TAG" --draft=false --latest
 
       - name: Prune old AROME releases
-        if: steps.release.outputs.exists != 'true' || env.FORCE_BUILD == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: bash scripts/prune-releases.sh 3 arome-
