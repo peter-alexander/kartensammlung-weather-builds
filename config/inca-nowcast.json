@@ -1,0 +1,15 @@
+{
+	"resource_id": "nowcast-v1-15min-1km",
+	"model_name": "INCA Nowcast",
+	"release_prefix": "inca",
+	"asset_prefix": "inca",
+	"asset_time_unit": "minutes",
+	"precipitation_parameter": "rr",
+	"precipitation_mode": "interval",
+	"precipitation_interval_minutes": 15,
+	"cloud_parameter": null,
+	"min_zoom": 3,
+	"max_zoom": 9,
+	"aggregate_through_zoom": 6,
+	"retained_releases": 4
+}
