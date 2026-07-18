@@ -22,7 +22,7 @@ class BuildConfig:
 	request_safety_factor: float = 0.98
 	request_timeout_seconds: int = 300
 	request_retries: int = 5
-	negative_precipitation_tolerance_mm: float = 0.1
+	negative_precipitation_tolerance_mm: float = 0.5
 	precipitation_max_mm: float = 655.35
 	cloud_min_tolerance: float = -0.01
 	cloud_max_tolerance: float = 1.01
