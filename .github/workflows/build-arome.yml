@@ -19,6 +19,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   probe:
@@ -202,6 +203,7 @@ jobs:
           done
 
       - name: Upload diagnostic source artifact
+        id: diagnostic-artifact
         uses: actions/upload-artifact@v7
         with:
           name: arome-source-${{ env.TAG }}
@@ -269,3 +271,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: bash scripts/prune-releases.sh 3 arome-
+
+      - name: Delete diagnostic source artifact after successful build
+        if: ${{ success() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ steps.diagnostic-artifact.outputs.artifact-id }}
+        run: gh api --method DELETE "/repos/${GITHUB_REPOSITORY}/actions/artifacts/${ARTIFACT_ID}"
