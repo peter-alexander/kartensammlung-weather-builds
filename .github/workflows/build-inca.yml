@@ -7,6 +7,11 @@ on:
         description: 0 = newest run, 1 = previous run
         required: true
         default: '0'
+      force:
+        description: Compatibility input; builds are always uploaded to Easyname
+        required: false
+        type: boolean
+        default: false
 
 concurrency:
   group: geosphere-inca-nowcast-build
