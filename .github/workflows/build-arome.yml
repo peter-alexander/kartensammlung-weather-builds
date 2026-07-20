@@ -7,18 +7,13 @@ on:
         description: 0 = newest run, 1 = previous run
         required: true
         default: '0'
-      force:
-        description: Rebuild even if the release already exists
-        required: true
-        type: boolean
-        default: false
 
 concurrency:
   group: geosphere-arome-weather-build
   cancel-in-progress: false
 
 permissions:
-  contents: write
+  contents: read
   actions: write
 
 jobs:
@@ -27,11 +22,7 @@ jobs:
     timeout-minutes: 5
     env:
       FORECAST_OFFSET: ${{ inputs.forecast_offset }}
-      FORCE_BUILD: ${{ inputs.force }}
     outputs:
-      should_build: ${{ steps.decision.outputs.should_build }}
-      release_exists: ${{ steps.decision.outputs.release_exists }}
-      release_draft: ${{ steps.decision.outputs.release_draft }}
       tag: ${{ steps.probe.outputs.tag }}
       reference_time: ${{ steps.probe.outputs.reference_time }}
     steps:
@@ -94,53 +85,12 @@ jobs:
           print(f'Neuester ausgewählter GeoSphere-Lauf: {tag}')
           PY
 
-      - name: Decide whether a build is needed
-        id: decision
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TAG: ${{ steps.probe.outputs.tag }}
-        run: |
-          RELEASE_EXISTS=false
-          RELEASE_DRAFT=false
-
-          if RELEASE_DRAFT_VALUE="$(
-            gh release view "$TAG" \
-              --repo "$GITHUB_REPOSITORY" \
-              --json isDraft \
-              --jq '.isDraft' \
-              2>/dev/null
-          )"; then
-            RELEASE_EXISTS=true
-            RELEASE_DRAFT="$RELEASE_DRAFT_VALUE"
-          fi
-
-          if [[ "$FORCE_BUILD" == 'true' ]]; then
-            SHOULD_BUILD=true
-            REASON='forced rebuild requested'
-          elif [[ "$RELEASE_EXISTS" == 'true' && "$RELEASE_DRAFT" != 'true' ]]; then
-            SHOULD_BUILD=false
-            REASON='published release already exists'
-          elif [[ "$RELEASE_DRAFT" == 'true' ]]; then
-            SHOULD_BUILD=true
-            REASON='incomplete draft release exists'
-          else
-            SHOULD_BUILD=true
-            REASON='no release exists'
-          fi
-
-          echo "release_exists=$RELEASE_EXISTS" >> "$GITHUB_OUTPUT"
-          echo "release_draft=$RELEASE_DRAFT" >> "$GITHUB_OUTPUT"
-          echo "should_build=$SHOULD_BUILD" >> "$GITHUB_OUTPUT"
-          echo "Decision for $TAG: should_build=$SHOULD_BUILD ($REASON)"
-
   build:
     needs: probe
-    if: needs.probe.outputs.should_build == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 330
     env:
       FORECAST_OFFSET: ${{ inputs.forecast_offset }}
-      FORCE_BUILD: ${{ inputs.force }}
       TAG: ${{ needs.probe.outputs.tag }}
       REFERENCE_TIME: ${{ needs.probe.outputs.reference_time }}
       PMTILES_BIN: ${{ github.workspace }}/.local/bin/pmtiles
@@ -165,17 +115,6 @@ jobs:
             https://github.com/protomaps/go-pmtiles/releases/download/v1.30.1/go-pmtiles_1.30.1_Linux_x86_64.tar.gz \
             | tar -xz -C "$(dirname "$PMTILES_BIN")" pmtiles
           "$PMTILES_BIN" version
-
-      - name: Remove incomplete or forced existing release
-        if: needs.probe.outputs.release_exists == 'true' && (needs.probe.outputs.release_draft == 'true' || inputs.force == true)
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          if [[ "${{ needs.probe.outputs.release_draft }}" == 'true' ]]; then
-            gh release delete "$TAG" --yes
-          else
-            gh release delete "$TAG" --yes --cleanup-tag
-          fi
 
       - name: Build numerical raster PMTiles
         run: |
@@ -214,20 +153,6 @@ jobs:
           retention-days: 3
           if-no-files-found: error
 
-      - name: Create draft release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh release create "$TAG" \
-            --draft \
-            --title "GeoSphere AROME ${REFERENCE_TIME}" \
-            --notes "Numerical AROME raster PMTiles for precipitation and total cloud cover. Source: GeoSphere Austria, CC BY 4.0."
-
-      - name: Upload release assets
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh release upload "$TAG" out/* --clobber
-
       - name: Install Easyname upload dependency
         run: |
           sudo apt-get update
@@ -261,16 +186,6 @@ jobs:
           REMOTE_BASE: Wetter/AROME
           RETAINED_RUNS: '3'
         run: bash scripts/upload-easyname.sh
-
-      - name: Publish complete release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh release edit "$TAG" --draft=false --latest
-
-      - name: Prune old AROME releases
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: bash scripts/prune-releases.sh 3 arome-
 
       - name: Delete diagnostic source artifact after successful build
         if: ${{ success() }}

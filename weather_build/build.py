@@ -4,7 +4,6 @@ from dataclasses import asdict
 from datetime import datetime, timezone
 import json
 import logging
-import os
 
 import numpy as np
 from pathlib import Path
@@ -121,12 +120,6 @@ def _manifest(
 	config: BuildConfig,
 	assets: list[dict[str, Any]]
 ) -> dict[str, Any]:
-	repository = os.environ.get("GITHUB_REPOSITORY")
-	download_template = None
-	if repository:
-		download_template = (
-			f"https://github.com/{repository}/releases/download/{probe.tag}/{{asset}}"
-		)
 	return {
 		"schema_version": 1,
 		"provider": "GeoSphere Austria",
@@ -188,7 +181,7 @@ def _manifest(
 				"nodata": 0
 			}
 		},
-		"download_url_template": download_template,
+		"download_url_template": None,
 		"timesteps": assets
 	}
 

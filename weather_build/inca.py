@@ -5,7 +5,6 @@ from dataclasses import asdict
 from datetime import datetime, timezone
 import json
 import logging
-import os
 from pathlib import Path
 import sqlite3
 import sys
@@ -438,12 +437,6 @@ def _manifest(
 	prepared: PreparedIncaForecast,
 	assets: list[dict[str, Any]]
 ) -> dict[str, Any]:
-	repository = os.environ.get("GITHUB_REPOSITORY")
-	download_template = (
-		f"https://github.com/{repository}/releases/download/{probe.tag}/{{asset}}"
-		if repository
-		else None
-	)
 	return {
 		"schema_version": 1,
 		"provider": "GeoSphere Austria",
@@ -504,7 +497,7 @@ def _manifest(
 				"nodata": 0
 			}
 		},
-		"download_url_template": download_template,
+		"download_url_template": None,
 		"timesteps": assets
 	}
 
