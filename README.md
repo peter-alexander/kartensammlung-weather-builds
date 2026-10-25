@@ -51,68 +51,28 @@ Dekodierung Bewölkung in Prozent:
 percent = B * (100 / 255)
 ```
 
-## Veröffentlichungsmodell
+## Veröffentlichung über GitHub Pages
 
-Der GitHub-Workflow läuft stündlich, prüft aber zunächst die GeoSphere-Referenzzeit. Bereits veröffentlichte Modellläufe werden ohne Build beendet. Für einen neuen Lauf:
+Beide Workflows prüfen die GeoSphere-Referenzzeit automatisch. AROME wird alle zehn Minuten geprüft, INCA alle fünf Minuten. Der Zeitplan ist Best Effort: GitHub kann Scheduled Runs verzögern oder auslassen. Ein manueller Start per `workflow_dispatch` bleibt möglich.
 
-1. Metadaten und konkrete Modell-Referenzzeit ermitteln.
-2. NetCDF-Abfragen unter dem 10-Millionen-Werte-Limit planen.
-3. Bei jeder Teilabfrage den aktuellen Offset derselben Referenzzeit neu bestimmen.
-4. NetCDF-Teile zusammenführen und vollständig validieren.
-5. Je Zeitpunkt Raster-PMTiles für Zoom 3–8 bauen.
-6. Jede erzeugte PMTiles-Datei mit `pmtiles verify` prüfen.
-7. Einen Draft-Release erstellen und alle Assets hochladen.
-8. Den vollständigen Lauf nach Easyname übertragen.
-9. `latest.json` auf Easyname erst nach vollständigem Upload umschalten.
-10. Den GitHub-Release erst danach veröffentlichen.
-11. Auf GitHub und Easyname nur die drei neuesten AROME-Läufe behalten.
+- Die Probe vergleicht den ausgewählten Lauf mit `gh-pages` **und** der öffentlich abrufbaren `latest.json`.
+- Bereits erfolgreich veröffentlichte Läufe werden ohne Build beendet.
+- Neue Läufe werden vollständig gebaut und alle PMTiles-Dateien verifiziert.
+- Der gemeinsame Workflow-Concurrency-Key verhindert konkurrierende Veröffentlichungen.
+- Der Veröffentlichungs-Snapshot wird im `gh-pages`-Branch gespeichert. Dieser wird absichtlich durch einen parentlosen Snapshot-Commit ersetzt, um ein unbegrenzt wachsendes Archiv historischer Wetterdateien in Git zu vermeiden.
+- Zusätzlich wird der vollständige Snapshot als Pages-Artefakt mit `actions/upload-pages-artifact` und `actions/deploy-pages` publiziert. Der Branch-Push allein löst keine GitHub-Pages-Veröffentlichung aus.
+- AROME behält drei Versionen, INCA vier. Metadaten für beide Modelle werden beim jeweils nächsten Build gemeinsam erhalten.
 
-Der wechselnde `forecast_offset` ist wichtig: Er verhindert, dass ein während des Downloads neu erscheinender Modelllauf die Teilabfragen mischt.
+**Einmalige Konfiguration:** Unter `Settings → Pages → Build and deployment` muss `GitHub Actions` als Quelle ausgewählt werden. Die GitHub-Actions-Workflowberechtigung zum Schreiben des Repository-Inhalts muss verfügbar sein. Der GitHub-Pages-Host wird nach der ersten erfolgreichen Veröffentlichung erreichbar.
 
-## Release-Inhalt
+Der öffentliche Inhalt lautet:
 
 ```text
-arome_f000.pmtiles
-arome_f001.pmtiles
-...
-arome_f060.pmtiles
-manifest.json
-validation.json
+https://peter-alexander.github.io/kartensammlung-weather-builds/AROME/latest.json
+https://peter-alexander.github.io/kartensammlung-weather-builds/INCA/latest.json
 ```
 
-`manifest.json` dokumentiert Modelllauf, Zeitpunkte, BBox, Aggregationsregeln, Codierung, Prüfsummen und Dateigrößen.
-
-## Easyname-Deployment
-
-Der Workflow verwendet die Repository-Secrets:
-
-```text
-HOST
-USER
-PASS
-```
-
-`HOST` enthält nur den FTP-Hostnamen. Der Upload erfolgt per explizitem FTPS mit `lftp`.
-
-Das Zielverzeichnis ist zentral im Workflow konfiguriert:
-
-```text
-Wetter/AROME
-```
-
-Jeder Modelllauf wird in ein unveränderliches Unterverzeichnis geladen:
-
-```text
-Wetter/AROME/arome-20260717T1500Z/
-```
-
-Der Workflow lädt zuerst in ein temporäres Verzeichnis, benennt dieses nach vollständigem Transfer auf den finalen Tag um und ersetzt danach zuletzt:
-
-```text
-Wetter/AROME/latest.json
-```
-
-`latest.json` enthält relative Verweise auf das aktuelle Manifest und die PMTiles-Dateien:
+Die `latest.json` verweist relativ auf `<tag>/manifest.json` und die PMTiles-Dateien:
 
 ```json
 {
@@ -124,17 +84,7 @@ Wetter/AROME/latest.json
 }
 ```
 
-Schlägt der Easyname-Upload fehl, bleibt der GitHub-Release ein Entwurf und `latest.json` zeigt weiterhin auf den vorherigen vollständigen Lauf.
-
-## Eigenes Repository einrichten
-
-1. Ein leeres öffentliches Repository anlegen, empfohlen: `kartensammlung-weather-builds`.
-2. Diesen Inhalt nach `main` pushen.
-3. Unter **Settings → Actions → General → Workflow permissions** Schreibrechte für `GITHUB_TOKEN` erlauben, sofern die Repository-Voreinstellung nur Leserechte zulässt.
-4. Die Secrets `HOST`, `USER` und `PASS` hinterlegen.
-5. Den Workflow **Build GeoSphere AROME weather tiles** zunächst manuell starten.
-
-GeoSphere verlangt für diese öffentlich zugänglichen Daten derzeit keinen API-Key.
+**Inbetriebnahme:** Vor der Umstellung der Kartensammlung HTTP-Range (206), CORS, Manifest und alle erforderlichen PMTiles-URLs im Browser testen. Nur `kartensammlung-weather-builds` wird durch diese Migration verändert; die eigentliche Kartensammlung bleibt unverändert.
 
 ## Lokal testen
 
