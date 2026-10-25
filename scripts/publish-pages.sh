@@ -77,4 +77,7 @@ git -C "$site" add -A
 tree="$(git -C "$site" write-tree)"
 new_sha="$(printf 'Publish %s %s to GitHub Pages\n' "$MODEL" "$TAG" | git -C "$site" -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit-tree "$tree")"
 git -C "$site" push --force-with-lease="refs/heads/gh-pages:${old_sha}" origin "${new_sha}:refs/heads/gh-pages"
-echo "Published $MODEL $TAG to gh-pages snapshot $new_sha"
+# The branch is storage; GitHub Pages is explicitly deployed by deploy-pages.
+mkdir -p "$RUNNER_TEMP/weather-pages-site"
+rsync -a --delete --exclude='.git' "$site/" "$RUNNER_TEMP/weather-pages-site/"
+echo "Prepared Pages snapshot $new_sha in $RUNNER_TEMP/weather-pages-site"
