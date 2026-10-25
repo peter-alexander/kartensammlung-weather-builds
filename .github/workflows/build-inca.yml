@@ -22,6 +22,8 @@ concurrency:
 permissions:
   contents: write
   actions: write
+  pages: write
+  id-token: write
 
 jobs:
   probe:
@@ -106,6 +108,9 @@ jobs:
     needs: probe
     if: needs.probe.outputs.is_new == 'true'
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     timeout-minutes: 10
     env:
       TAG: ${{ needs.probe.outputs.tag }}
@@ -166,3 +171,12 @@ jobs:
           LOCAL_DIR: out-inca
           GITHUB_TOKEN: ${{ github.token }}
         run: bash scripts/publish-pages.sh
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ runner.temp }}/weather-pages-site
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
