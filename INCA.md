@@ -43,18 +43,18 @@ Die Niederschlagsdekodierung ist identisch zu AROME:
 mm = R * 2.56 + G * 0.01
 ```
 
-## Easyname
+## GitHub Pages
 
 ```text
-Wetter/INCA/latest.json
-Wetter/INCA/inca-YYYYMMDDTHHMMZ/
+https://peter-alexander.github.io/kartensammlung-weather-builds/INCA/latest.json
+https://peter-alexander.github.io/kartensammlung-weather-builds/INCA/inca-YYYYMMDDTHHMMZ/
 ```
 
 Es werden vier vollständige INCA-Läufe behalten.
 
 ## Start
 
-Der Workflow wird zunächst manuell über `workflow_dispatch` gestartet. Der externe Easyname-Trigger muss anschließend zusätzlich auf `.github/workflows/build-inca.yml` zeigen.
+Der Workflow wird automatisch alle fünf Minuten über GitHub Actions `schedule` geprüft. Zusätzlich kann er manuell über `workflow_dispatch` gestartet werden. Der externe Easyname-Trigger ist nicht mehr erforderlich.
 
 Empfohlene Inputs:
 
