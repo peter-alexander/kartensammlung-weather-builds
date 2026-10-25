@@ -10,7 +10,7 @@ on:
         required: true
         default: '0'
       force:
-        description: Compatibility input; builds are always uploaded to Easyname
+        description: Compatibility input; ignored by scheduled Pages publisher
         required: false
         type: boolean
         default: false
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      FORECAST_OFFSET: ${{ inputs.forecast_offset }}
+      FORECAST_OFFSET: ${{ inputs.forecast_offset || '0' }}
     outputs:
       tag: ${{ steps.probe.outputs.tag }}
       reference_time: ${{ steps.probe.outputs.reference_time }}
@@ -113,7 +113,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     timeout-minutes: 330
     env:
-      FORECAST_OFFSET: ${{ inputs.forecast_offset }}
+      FORECAST_OFFSET: ${{ inputs.forecast_offset || '0' }}
       TAG: ${{ needs.probe.outputs.tag }}
       REFERENCE_TIME: ${{ needs.probe.outputs.reference_time }}
       PMTILES_BIN: ${{ github.workspace }}/.local/bin/pmtiles
