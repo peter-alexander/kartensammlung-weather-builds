@@ -1,6 +1,8 @@
 name: Build GeoSphere INCA nowcast tiles
 
 on:
+  schedule:
+    - cron: '*/5 * * * *'
   workflow_dispatch:
     inputs:
       forecast_offset:
@@ -14,11 +16,11 @@ on:
         default: false
 
 concurrency:
-  group: geosphere-inca-nowcast-build
+  group: geosphere-weather-pages-publisher
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
   actions: write
 
 jobs:
@@ -30,7 +32,10 @@ jobs:
     outputs:
       tag: ${{ steps.probe.outputs.tag }}
       reference_time: ${{ steps.probe.outputs.reference_time }}
+      is_new: ${{ steps.check.outputs.is_new }}
     steps:
+      - uses: actions/checkout@v6
+
       - name: Probe newest INCA run
         id: probe
         env:
@@ -90,8 +95,16 @@ jobs:
           print(f'Neuester ausgewählter INCA-Lauf: {tag}')
           PY
 
+      - name: Check GitHub Pages published run
+        id: check
+        env:
+          MODEL: INCA
+          TAG: ${{ steps.probe.outputs.tag }}
+        run: bash scripts/check-pages.sh
+
   build:
     needs: probe
+    if: needs.probe.outputs.is_new == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
@@ -147,36 +160,9 @@ jobs:
             "$PMTILES_BIN" verify "$FILE"
           done
 
-      - name: Upload INCA diagnostic source artifact
-        id: diagnostic-artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: inca-source-${{ env.TAG }}
-          path: |
-            work-inca/source/*.nc
-            out-inca/manifest.json
-            out-inca/validation.json
-          retention-days: 2
-          if-no-files-found: error
-
-      - name: Install Easyname upload dependency
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
-
-      - name: Upload complete INCA run to Easyname
+      - name: Publish complete INCA run to GitHub Pages
         env:
-          HOST: ${{ secrets.HOST }}
-          USER: ${{ secrets.USER }}
-          PASS: ${{ secrets.PASS }}
+          MODEL: INCA
           LOCAL_DIR: out-inca
-          REMOTE_BASE: Wetter/INCA
-          RETAINED_RUNS: '4'
-        run: bash scripts/upload-inca-easyname.sh
-
-      - name: Delete diagnostic source artifact after successful build
-        if: ${{ success() }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-          ARTIFACT_ID: ${{ steps.diagnostic-artifact.outputs.artifact-id }}
-        run: gh api --method DELETE "/repos/${GITHUB_REPOSITORY}/actions/artifacts/${ARTIFACT_ID}"
+          GITHUB_TOKEN: ${{ github.token }}
+        run: bash scripts/publish-pages.sh
