@@ -14,7 +14,7 @@ on:
         default: false
 
 concurrency:
-  group: geosphere-weather-pages-publisher
+  group: geosphere-weather-arome-${{ github.ref }}
   cancel-in-progress: false
 
 permissions:
@@ -106,9 +106,6 @@ jobs:
     needs: probe
     if: needs.probe.outputs.is_new == 'true'
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     timeout-minutes: 330
     env:
       FORECAST_OFFSET: ${{ inputs.forecast_offset || '0' }}
@@ -161,6 +158,37 @@ jobs:
             echo "Verify ${FILE}"
             "$PMTILES_BIN" verify "$FILE"
           done
+
+      - name: Upload validated AROME build
+        uses: actions/upload-artifact@v4
+        with:
+          name: weather-arome-build
+          path: out/
+          if-no-files-found: error
+          retention-days: 1
+
+  publish:
+    needs: [probe, build]
+    if: needs.build.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    concurrency:
+      group: geosphere-weather-pages-publisher
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      TAG: ${{ needs.probe.outputs.tag }}
+      REFERENCE_TIME: ${{ needs.probe.outputs.reference_time }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Download validated AROME build
+        uses: actions/download-artifact@v4
+        with:
+          name: weather-arome-build
+          path: out
 
       - name: Publish complete AROME run to GitHub Pages
         env:
