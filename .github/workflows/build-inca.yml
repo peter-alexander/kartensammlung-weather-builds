@@ -1,8 +1,6 @@
 name: Build GeoSphere INCA nowcast tiles
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'
   workflow_dispatch:
     inputs:
       forecast_offset:
