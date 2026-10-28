@@ -63,6 +63,29 @@ def read_2t_netcdf(path: Path, *, valid_time: datetime) -> tuple[np.ndarray, obj
 		return values, transform, BoundingBox(south=south, west=west, north=north, east=east)
 
 
+def forecast_request_parameters(valid_time: datetime) -> dict[str, str | int]:
+	"""Request a non-empty minute interval containing exactly one hourly grid timestamp."""
+	if valid_time.tzinfo is None or valid_time.utcoffset() != timedelta(0):
+		raise ValueError("Forecast timestamp must be UTC")
+	return {
+		"parameters": "2t",
+		"forecast_offset": 0,
+		"start": valid_time.strftime("%Y-%m-%dT%H:%M"),
+		"end": (valid_time + timedelta(minutes=1)).strftime("%Y-%m-%dT%H:%M"),
+		"output_format": "netcdf",
+	}
+
+
+def raise_geosphere_error(response: requests.Response) -> None:
+	if response.ok:
+		return
+	body = response.text[:4000]
+	raise RuntimeError(
+		f"GeoSphere Grid API returned HTTP {response.status_code} for "
+		f"{response.url}; response body: {body}"
+	)
+
+
 def build(output: Path, inventory_path: Path, *, minimum: float, maximum: float,
 	min_zoom: int, max_zoom: int, pmtiles_binary: str) -> dict:
 	output.mkdir(parents=True, exist_ok=True)
@@ -83,14 +106,8 @@ def build(output: Path, inventory_path: Path, *, minimum: float, maximum: float,
 	reftime_iso = reftime.strftime("%Y-%m-%dT%H:%M:%SZ")
 	valid_iso = valid_time.strftime("%Y-%m-%dT%H:%M:%SZ")
 	nc_path = output / "source-2t.nc"
-	response = session.get(API, params={
-		"parameters": "2t",
-		"forecast_offset": 0,
-		"start": valid_iso,
-		"end": valid_iso,
-		"output_format": "netcdf",
-	}, timeout=180)
-	response.raise_for_status()
+	response = session.get(API, params=forecast_request_parameters(valid_time), timeout=180)
+	raise_geosphere_error(response)
 	if not response.content.startswith(b"\\x89HDF\\r\\n\\x1a\\n") and not response.content.startswith(b"CDF"):
 		raise ValueError("Expected NetCDF response")
 	nc_path.write_bytes(response.content)
