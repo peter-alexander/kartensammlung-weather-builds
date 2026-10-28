@@ -18,8 +18,18 @@ URL = "https://dataset.api.hub.geosphere.at/v1/grid/forecast/nwp-v2-1h-1km/metad
 def inspect(metadata: dict[str, Any]) -> dict[str, Any]:
 	if not isinstance(metadata, dict):
 		raise ValueError("Metadata response must be a JSON object")
-	parameters = metadata.get("parameters")
-	if not isinstance(parameters, dict) or not parameters:
+	raw_parameters = metadata.get("parameters")
+	if isinstance(raw_parameters, dict):
+		parameters = raw_parameters
+	elif isinstance(raw_parameters, list):
+		parameters = {
+			str(item.get("name", item.get("code"))): item
+			for item in raw_parameters if isinstance(item, dict) and (item.get("name") or item.get("code"))
+		}
+		parameters.update({item: {} for item in raw_parameters if isinstance(item, str)})
+	else:
+		parameters = {}
+	if not parameters:
 		raise ValueError("No parameter metadata; check API response schema before migrating")
 	reftimes = metadata.get("available_forecast_reftimes") or metadata.get("availableForecastReftimes")
 	return {
