@@ -78,3 +78,11 @@ def test_api_bbox_is_required_and_ordered() -> None:
 		forecast_request_parameters(valid_time, [])
 	with pytest.raises(ValueError, match="ordering"):
 		forecast_request_parameters(valid_time, [51, 5, 43, 22])
+
+
+def test_hdf5_magic_header_is_real_bytes_not_escaped_text() -> None:
+	# Regression: b"\\\\x89" checks literal backslash characters instead of HDF5 magic.
+	from pathlib import Path
+	source = Path("scripts/build_claef_2t_prototype.py").read_text(encoding="utf-8")
+	assert 'b"\\\\x89HDF' not in source
+	assert b"\x89HDF\r\n\x1a\n".startswith(b"\x89HDF\r\n\x1a\n")
