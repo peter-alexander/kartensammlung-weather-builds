@@ -135,7 +135,12 @@ def accumulated_to_interval_precipitation(
 	serious_negative = raw_finite & (raw_interval < -config.negative_precipitation_tolerance_mm)
 	serious_count = int(np.count_nonzero(serious_negative))
 	minimum_raw_interval = float(np.nanmin(raw_interval))
-	if serious_count:
+	isolated_correction = bool(
+		serious_count > 0
+		and serious_count <= config.isolated_negative_precipitation_max_cells
+		and minimum_raw_interval >= -config.isolated_negative_precipitation_limit_mm
+	)
+	if serious_count and not isolated_correction:
 		indices = np.argwhere(serious_negative)
 		first = indices[0].tolist()
 		raise ForecastDataError(
@@ -164,6 +169,14 @@ def accumulated_to_interval_precipitation(
 		else 0.0
 	)
 
+	if isolated_correction:
+		LOGGER.warning(
+			"Korrigiere %d isolierte negative Niederschlagsdifferenz(en) "
+			"(Minimum %.3f mm, maximal zulässig %.3f mm); protokolliere Korrektur",
+			serious_count,
+			minimum_raw_interval,
+			config.isolated_negative_precipitation_limit_mm
+		)
 	if tolerated_negative_count:
 		LOGGER.warning(
 			"Korrigiere %d kleine negative Niederschlagsdifferenzen; "
@@ -197,6 +210,7 @@ def accumulated_to_interval_precipitation(
 		"negative_accumulation_values_corrected": corrected_accumulation_count,
 		"maximum_accumulation_correction_mm": maximum_accumulation_correction,
 		"serious_negative_values": serious_count,
+		"isolated_serious_negative_values_corrected": serious_count if isolated_correction else 0,
 		"encoding_overflow_values": overflow_count,
 		"nodata_values": int(np.count_nonzero(~finite))
 	}

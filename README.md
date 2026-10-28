@@ -19,7 +19,7 @@ precipitation_1h[t] = rr_acc[t] - rr_acc[t - 1]
 ```
 
 Wenn GeoSphere den Startzeitpunkt des Modelllaufs für `rr_acc` vollständig als NoData liefert, wird dieser Startwert als 0 mm behandelt.
-Kleine lokale Rückgänge des Akkumulationsfelds bis 0,5 mm werden als Quantisierungs- oder Modellartefakte behandelt. Der Build macht die betroffene Zeitreihe monoton, sodass weder negativer Niederschlag noch ein künstlicher Nachholeffekt in der Folgestunde entsteht. Die Korrekturen werden in `validation.json` protokolliert. Größere negative Differenzen brechen den Build weiterhin ab.
+Kleine lokale Rückgänge des Akkumulationsfelds bis 0,5 mm werden als Quantisierungs- oder Modellartefakte behandelt. Ein einzelner Ausreißer bis 0,75 mm darf ebenfalls korrigiert werden; Zahl und Korrekturhöhe werden in der Validierung erfasst. Mehrere oder größere Ausreißer bleiben harte Fehler. Der Build macht die betroffene Zeitreihe monoton, sodass weder negativer Niederschlag noch ein künstlicher Nachholeffekt in der Folgestunde entsteht. Die Korrekturen werden in `validation.json` protokolliert. Größere negative Differenzen brechen den Build weiterhin ab.
 
 ### Zoomabhängige Rasterung
 
@@ -68,7 +68,7 @@ Beide Workflows prüfen die GeoSphere-Referenzzeit automatisch. AROME wird alle 
 Der öffentliche Inhalt lautet:
 
 ```text
-https://peter-alexander.github.io/kartensammlung-weather-builds/AROME/latest.json
+https://peter-alexander.github.io/ks-wetter-builds/AROME/latest.json
 https://peter-alexander.github.io/kartensammlung-weather-builds/INCA/latest.json
 ```
 

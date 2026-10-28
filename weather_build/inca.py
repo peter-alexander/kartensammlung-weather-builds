@@ -106,6 +106,11 @@ def run_build(
 	probe = client.probe(forecast_offset=forecast_offset)
 	if expected_reference_time is not None and probe.reference_time != expected_reference_time:
 		probe = _probe_for_reference_time(client, expected_reference_time)
+	if expected_reference_time is not None and probe.reference_time != expected_reference_time:
+		raise RuntimeError(
+			f"Ausgewählter INCA-Lauf hat sich während des Builds geändert: "
+			f"erwartet {_iso_time(expected_reference_time)}, erhalten {_iso_time(probe.reference_time)}"
+		)
 
 	work_directory.mkdir(parents=True, exist_ok=True)
 	output_directory.mkdir(parents=True, exist_ok=True)

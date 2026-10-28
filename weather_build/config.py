@@ -29,6 +29,8 @@ class BuildConfig:
 	request_timeout_seconds: int = 300
 	request_retries: int = 5
 	negative_precipitation_tolerance_mm: float = 0.5
+	isolated_negative_precipitation_limit_mm: float = 0.75
+	isolated_negative_precipitation_max_cells: int = 1
 	precipitation_max_mm: float = 655.35
 	cloud_min_tolerance: float = -0.01
 	cloud_max_tolerance: float = 1.01

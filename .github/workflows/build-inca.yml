@@ -105,6 +105,8 @@ jobs:
   build:
     needs: probe
     if: needs.probe.outputs.is_new == 'true'
+    outputs:
+      ready: ${{ steps.build_status.outputs.ready }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
@@ -134,16 +136,29 @@ jobs:
           "$PMTILES_BIN" version
 
       - name: Build INCA raster PMTiles
+        id: build_status
         run: |
+          set +e
           /usr/bin/time -v python -m weather_build.inca \
             --config config/inca-nowcast.json \
             build \
             --reference-time "$REFERENCE_TIME" \
             --work-directory work-inca \
             --output-directory out-inca \
-            --pmtiles-binary "$PMTILES_BIN"
+            --pmtiles-binary "$PMTILES_BIN" 2>&1 | tee inca-build.log
+          status=${PIPESTATUS[0]}
+          set -e
+          if [ "$status" -eq 0 ]; then
+            echo 'ready=true' >> "$GITHUB_OUTPUT"
+          elif grep -Eq 'Zeitachse ist nicht vollständig|aus der verfügbaren Forecast-Liste verschwunden|Ausgewählter INCA-Lauf ist nicht mehr verfügbar|Ausgewählter INCA-Lauf hat sich während des Builds geändert' inca-build.log; then
+            echo 'ready=false' >> "$GITHUB_OUTPUT"
+            echo 'INCA data temporarily unavailable; leave published dataset untouched and retry at next trigger.' >> "$GITHUB_STEP_SUMMARY"
+          else
+            exit "$status"
+          fi
 
       - name: Verify all INCA PMTiles archives
+        if: steps.build_status.outputs.ready == 'true'
         run: |
           mapfile -t FILES < <(find out-inca -maxdepth 1 -type f -name '*.pmtiles' -print | sort)
           test "${#FILES[@]}" -gt 0
@@ -161,6 +176,7 @@ jobs:
           done
 
       - name: Upload validated INCA build
+        if: steps.build_status.outputs.ready == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: weather-inca-build
@@ -170,7 +186,7 @@ jobs:
 
   publish:
     needs: [probe, build]
-    if: needs.build.result == 'success'
+    if: needs.build.result == 'success' && needs.build.outputs.ready == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     concurrency:

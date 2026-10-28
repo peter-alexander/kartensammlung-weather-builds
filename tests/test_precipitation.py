@@ -48,6 +48,22 @@ def test_missing_initial_accumulation_is_assumed_zero() -> None:
 	assert validation["initial_accumulation_missing_assumed_zero"] is True
 
 
+def test_single_bounded_negative_anomaly_is_corrected_and_audited() -> None:
+	config = BuildConfig()
+	accumulated = np.array([[[1.0]], [[0.399]]], dtype=np.float32)
+	interval, validation = accumulated_to_interval_precipitation(accumulated, config)
+	assert np.allclose(interval[:, 0, 0], [1.0, 0.0])
+	assert validation["isolated_serious_negative_values_corrected"] == 1
+	assert validation["maximum_accumulation_correction_mm"] == pytest.approx(0.601, abs=1e-5)
+
+
+def test_multiple_serious_negative_values_still_fail() -> None:
+	config = BuildConfig()
+	accumulated = np.array([[[1., 1.]], [[0.4, 0.4]]], dtype=np.float32)
+	with pytest.raises(ForecastDataError):
+		accumulated_to_interval_precipitation(accumulated, config)
+
+
 def test_serious_negative_difference_fails() -> None:
 	config = BuildConfig()
 	accumulated = np.array([[[1.0]], [[0.4]]], dtype=np.float32)
