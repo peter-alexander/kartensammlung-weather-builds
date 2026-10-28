@@ -39,3 +39,9 @@ Die Tests verwenden synthetische Werte (keine Behauptung über tatsächliche C-L
 ## Integer-Kodierung der Wetterraster
 
 Der experimentelle Float32-RGBA-Transport wurde entfernt. Für numerische Kartenkacheln wird ein parameterabhängiger UInt8-/UInt16-Vertrag mit festem Skalierungsfaktor, Offset, quantifiziertem Wertebereich und reserviertem NoData-Code verwendet. Kodierungswahl und fachliche Auflösung sind pro Parameter aus dem GeoSphere-Audit abzuleiten; keine automatische stillschweigende Anpassung bei Werteüberlauf.
+
+## Auditgebundene Integer-Verträge
+
+`weather_build/quantization_contracts.py` liest den offiziell verifizierten Parameter-Audit und prüft Quelleinheiten, NetCDF-Einheiten, Packing-Datentyp, `scale_factor` und Zeitsemantik. Ein **separat fachlich freigegebener** Wertebereich (`declared_min`/`declared_max`) ist zwingend: Beobachtete Sample-Minima/Maxima dürfen nicht stillschweigend als langfristige Kodierungsgrenzen verwendet werden. Aus dem Wertebereich und dem nachgewiesenen Quellschritt wird das kleinste geeignete UInt8-/UInt16-Format gewählt; passt es nicht, bricht die Planung ab. Das erzeugte Manifest dokumentiert Skalierung, Offset, NoData und Herkunft.
+
+Noch nicht implementiert: verbindliche Wertebereichsfreigaben pro Parameter, räumliche Projektion/Resampling, PNG-/PMTiles-Verpackung und MapLibre-Decoder. Die Verifikation umfasst bisher Code- und Unit-Tests, keinen vollständigen neuen Wetter-Build.
