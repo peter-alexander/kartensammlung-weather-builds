@@ -75,16 +75,19 @@ def prepare_forecast(
 				"Kurvilineare 2D-Koordinaten werden absichtlich nicht stillschweigend interpoliert."
 			)
 
-		rr_acc = np.asarray(precipitation.values, dtype=np.float32)
+		precipitation_values = np.asarray(precipitation.values, dtype=np.float32)
 		tcc = np.asarray(cloud.values, dtype=np.float32)
-		if rr_acc.shape != tcc.shape:
-			raise ForecastDataError(f"Parameterformen unterscheiden sich: {rr_acc.shape} vs. {tcc.shape}")
+		if precipitation_values.shape != tcc.shape:
+			raise ForecastDataError(f"Parameterformen unterscheiden sich: {precipitation_values.shape} vs. {tcc.shape}")
 
-		rr_acc, tcc, x_values, y_values = _normalize_orientation(rr_acc, tcc, x_values, y_values)
+		precipitation_values, tcc, x_values, y_values = _normalize_orientation(precipitation_values, tcc, x_values, y_values)
 		transform = _center_coordinate_transform(x_values, y_values)
 		source_crs = _source_crs(combined, probe)
 
-		precipitation_mm, precip_validation = accumulated_to_interval_precipitation(rr_acc, config)
+		if config.precipitation_mode == "interval":
+			precipitation_mm, precip_validation = validate_interval_precipitation(precipitation_values, config)
+		else:
+			precipitation_mm, precip_validation = accumulated_to_interval_precipitation(precipitation_values, config)
 		cloud_fraction, cloud_validation = validate_cloud_fraction(tcc, config)
 
 		validation = {
@@ -113,6 +116,34 @@ def prepare_forecast(
 	finally:
 		for dataset in datasets:
 			dataset.close()
+
+
+def validate_interval_precipitation(
+	values: np.ndarray,
+	config: BuildConfig
+) -> tuple[np.ndarray, dict[str, Any]]:
+	"""Validate already deaccumulated hourly amounts; never difference consecutive values."""
+	if values.ndim != 3:
+		raise ForecastDataError(f"Stündlicher Niederschlag muss dreidimensional sein: {values.shape}")
+	finite = np.isfinite(values)
+	if not np.any(finite):
+		raise ForecastDataError("Keine gültigen Niederschlagswerte im Datensatz.")
+	negative = finite & (values < 0)
+	overflow = finite & (values > config.precipitation_max_mm)
+	if np.any(negative) or np.any(overflow):
+		raise ForecastDataError(
+			f"Dekumulierter Niederschlag außerhalb 0..{config.precipitation_max_mm} mm: "
+			f"{int(np.count_nonzero(negative))} negative Werte, "
+			f"{int(np.count_nonzero(overflow))} Überläufe."
+		)
+	return values.astype(np.float32, copy=True), {
+		"mode": "interval",
+		"interval_min_mm": float(np.min(values[finite])),
+		"interval_max_mm": float(np.max(values[finite])),
+		"negative_values": 0,
+		"encoding_overflow_values": 0,
+		"nodata_values": int(np.count_nonzero(~finite))
+	}
 
 
 def accumulated_to_interval_precipitation(

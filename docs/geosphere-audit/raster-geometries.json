@@ -1,0 +1,1353 @@
+[
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 47.90163803100586,
+        "last": 48.39933776855469,
+        "max": 48.42129135131836,
+        "min": 47.87989807128906,
+        "shape": [
+          579,
+          616
+        ],
+        "standard_name": "latitude",
+        "step_max": -3.0517578125e-05,
+        "step_min": -4.1961669921875e-05,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 15.976219177246094,
+        "last": 16.833036422729492,
+        "max": 16.833036422729492,
+        "min": 15.976219177246094,
+        "shape": [
+          579,
+          616
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.0013523101806640625,
+        "step_min": 0.00133514404296875,
+        "units": "degrees_east"
+      },
+      "x": {
+        "axis": "X",
+        "dtype": "int32",
+        "first": 597500.0,
+        "last": 659000.0,
+        "max": 659000.0,
+        "min": 597500.0,
+        "shape": [
+          616
+        ],
+        "standard_name": "projection_x_coordinate",
+        "step_max": 100.0,
+        "step_min": 100.0,
+        "units": "m"
+      },
+      "y": {
+        "axis": "Y",
+        "dtype": "int32",
+        "first": 448000.0,
+        "last": 505800.0,
+        "max": 505800.0,
+        "min": 448000.0,
+        "shape": [
+          579
+        ],
+        "standard_name": "projection_y_coordinate",
+        "step_max": 100.0,
+        "step_min": 100.0,
+        "units": "m"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "DIF",
+      "DIR_hori",
+      "DIR_real",
+      "RSSD",
+      "SSD"
+    ],
+    "dimensions": {
+      "time": 1,
+      "x": 616,
+      "y": 579
+    },
+    "global_crs": "EPSG:31287",
+    "grid_mapping": "lambert_conformal_conic",
+    "resource_id": "apolis-v2-1d-100m",
+    "sample_file": "apolis-v2-1d-100m__all-parameters__2026-10-27T0000.nc",
+    "spatial_resolution": "100",
+    "spatial_resolution_unit": null
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 47.90266036987305,
+        "last": 48.38423156738281,
+        "max": 48.40476608276367,
+        "min": 47.8823127746582,
+        "shape": [
+          19,
+          20
+        ],
+        "standard_name": "latitude",
+        "step_max": -0.00093841552734375,
+        "step_min": -0.00121307373046875,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 15.97833251953125,
+        "last": 16.799062728881836,
+        "max": 16.799062728881836,
+        "min": 15.97833251953125,
+        "shape": [
+          19,
+          20
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.04188346862792969,
+        "step_min": 0.041461944580078125,
+        "units": "degrees_east"
+      },
+      "x": {
+        "axis": "X",
+        "dtype": "float64",
+        "first": 193500.0,
+        "last": 250500.0,
+        "max": 250500.0,
+        "min": 193500.0,
+        "shape": [
+          20
+        ],
+        "standard_name": "projection_x_coordinate",
+        "step_max": 3000.0,
+        "step_min": 3000.0,
+        "units": "m"
+      },
+      "y": {
+        "axis": "Y",
+        "dtype": "float64",
+        "first": 46500.0,
+        "last": 100500.0,
+        "max": 100500.0,
+        "min": 46500.0,
+        "shape": [
+          19
+        ],
+        "standard_name": "projection_y_coordinate",
+        "step_max": 3000.0,
+        "step_min": 3000.0,
+        "units": "m"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "no2surf",
+      "o3surf",
+      "pm10surf",
+      "pm25surf"
+    ],
+    "dimensions": {
+      "time": 1,
+      "x": 20,
+      "y": 19
+    },
+    "global_crs": "PROJCS[\"undefined\",GEOGCS[\"undefined\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"standard_parallel_1\",30],PARAMETER[\"standard_parallel_2\",60],PARAMETER[\"latitude_of_origin\",47.5000076293945],PARAMETER[\"central_meridian\",13.3000001907349],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "grid_mapping": "lambert_conformal_conic",
+    "resource_id": "chem-v2-1h-3km",
+    "sample_file": "chem-v2-1h-3km__all-parameters__2026-10-28T0000.nc",
+    "spatial_resolution": "3000",
+    "spatial_resolution_unit": null
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 47.93056106567383,
+        "last": 48.32968521118164,
+        "max": 48.3489875793457,
+        "min": 47.91140365600586,
+        "shape": [
+          6,
+          7
+        ],
+        "standard_name": "latitude",
+        "step_max": -0.002864837646484375,
+        "step_min": -0.00354766845703125,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 15.979722023010254,
+        "last": 16.753597259521484,
+        "max": 16.753597259521484,
+        "min": 15.979722023010254,
+        "shape": [
+          6,
+          7
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.12551498413085938,
+        "step_min": 0.1244659423828125,
+        "units": "degrees_east"
+      },
+      "x": {
+        "axis": "X",
+        "dtype": "float64",
+        "first": 193500.0,
+        "last": 247500.0,
+        "max": 247500.0,
+        "min": 193500.0,
+        "shape": [
+          7
+        ],
+        "standard_name": "projection_x_coordinate",
+        "step_max": 9000.0,
+        "step_min": 9000.0,
+        "units": "m"
+      },
+      "y": {
+        "axis": "Y",
+        "dtype": "float64",
+        "first": 49500.0,
+        "last": 94500.0,
+        "max": 94500.0,
+        "min": 49500.0,
+        "shape": [
+          6
+        ],
+        "standard_name": "projection_y_coordinate",
+        "step_max": 9000.0,
+        "step_min": 9000.0,
+        "units": "m"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "no2surf",
+      "o3surf",
+      "pm10surf",
+      "pm25surf"
+    ],
+    "dimensions": {
+      "time": 1,
+      "x": 7,
+      "y": 6
+    },
+    "global_crs": "PROJCS[\"undefined\",GEOGCS[\"undefined\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"standard_parallel_1\",30],PARAMETER[\"standard_parallel_2\",60],PARAMETER[\"latitude_of_origin\",47.5000076293945],PARAMETER[\"central_meridian\",13.3000001907349],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "grid_mapping": "lambert_conformal_conic",
+    "resource_id": "chem-v2-1h-9km",
+    "sample_file": "chem-v2-1h-9km__all-parameters__2026-10-28T0000.nc",
+    "spatial_resolution": "9000",
+    "spatial_resolution_unit": null
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 47.90266036987305,
+        "last": 48.38423156738281,
+        "max": 48.40476608276367,
+        "min": 47.8823127746582,
+        "shape": [
+          19,
+          20
+        ],
+        "standard_name": "latitude",
+        "step_max": -0.00093841552734375,
+        "step_min": -0.00121307373046875,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 15.97833251953125,
+        "last": 16.799062728881836,
+        "max": 16.799062728881836,
+        "min": 15.97833251953125,
+        "shape": [
+          19,
+          20
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.04188346862792969,
+        "step_min": 0.041461944580078125,
+        "units": "degrees_east"
+      },
+      "x": {
+        "axis": "X",
+        "dtype": "float64",
+        "first": 193500.0,
+        "last": 250500.0,
+        "max": 250500.0,
+        "min": 193500.0,
+        "shape": [
+          20
+        ],
+        "standard_name": "projection_x_coordinate",
+        "step_max": 3000.0,
+        "step_min": 3000.0,
+        "units": "m"
+      },
+      "y": {
+        "axis": "Y",
+        "dtype": "float64",
+        "first": 46500.0,
+        "last": 100500.0,
+        "max": 100500.0,
+        "min": 46500.0,
+        "shape": [
+          19
+        ],
+        "standard_name": "projection_y_coordinate",
+        "step_max": 3000.0,
+        "step_min": 3000.0,
+        "units": "m"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "aqi"
+    ],
+    "dimensions": {
+      "time": 1,
+      "x": 20,
+      "y": 19
+    },
+    "global_crs": "PROJCS[\"undefined\",GEOGCS[\"undefined\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"standard_parallel_1\",30],PARAMETER[\"standard_parallel_2\",60],PARAMETER[\"latitude_of_origin\",47.5000076293945],PARAMETER[\"central_meridian\",13.3000001907349],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "grid_mapping": "lambert_conformal_conic",
+    "resource_id": "chem_aqi-v1-1d-3km",
+    "sample_file": "chem_aqi-v1-1d-3km__all-parameters__2026-10-28T0000.nc",
+    "spatial_resolution": "3000",
+    "spatial_resolution_unit": null
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "Y",
+        "dtype": "float64",
+        "first": 48.000000760000006,
+        "last": 48.20000076,
+        "max": 48.20000076,
+        "min": 48.000000760000006,
+        "shape": [
+          2
+        ],
+        "standard_name": "latitude",
+        "step_max": 0.19999999999999574,
+        "step_min": 0.19999999999999574,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "X",
+        "dtype": "float64",
+        "first": 16.000011999999856,
+        "last": 16.60001199999985,
+        "max": 16.60001199999985,
+        "min": 16.000011999999856,
+        "shape": [
+          4
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.20000000000000284,
+        "step_min": 0.19999999999999574,
+        "units": "degrees_east"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "dust"
+    ],
+    "dimensions": {
+      "lat": 2,
+      "lon": 4,
+      "time": 1
+    },
+    "global_crs": "EPSG:4326",
+    "grid_mapping": "latitude_longitude",
+    "resource_id": "chem_dust-v1-1h-0p2deg",
+    "sample_file": "chem_dust-v1-1h-0p2deg__all-parameters__2026-10-28T0000.nc",
+    "spatial_resolution": 0.2,
+    "spatial_resolution_unit": "deg"
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "Y",
+        "dtype": "float64",
+        "first": 47.90700000000019,
+        "last": 48.39300000000021,
+        "max": 48.39300000000021,
+        "min": 47.90700000000019,
+        "shape": [
+          55
+        ],
+        "standard_name": "latitude",
+        "step_max": 0.009000000000000341,
+        "step_min": 0.009000000000000341,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "X",
+        "dtype": "float64",
+        "first": 16.007199999999695,
+        "last": 16.790199999999672,
+        "max": 16.790199999999672,
+        "min": 16.007199999999695,
+        "shape": [
+          59
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.013500000000000512,
+        "step_min": 0.013499999999996959,
+        "units": "degrees_east"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "10fg_p10",
+      "10fg_p50",
+      "10fg_p90",
+      "10u_p10",
+      "10u_p50",
+      "10u_p90",
+      "10v_p10",
+      "10v_p50",
+      "10v_p90",
+      "2r_p10",
+      "2r_p50",
+      "2r_p90",
+      "2t_p10",
+      "2t_p50",
+      "2t_p90",
+      "cape_p10",
+      "cape_p50",
+      "cape_p90",
+      "msl_p10",
+      "msl_p50",
+      "msl_p90",
+      "rain_p10",
+      "rain_p50",
+      "rain_p90",
+      "sf_p10",
+      "sf_p50",
+      "sf_p90",
+      "snowlmt_p10",
+      "snowlmt_p50",
+      "snowlmt_p90",
+      "ssrd_p10",
+      "ssrd_p50",
+      "ssrd_p90",
+      "sund_p10",
+      "sund_p50",
+      "sund_p90",
+      "tcc_p10",
+      "tcc_p50",
+      "tcc_p90",
+      "tp_p10",
+      "tp_p50",
+      "tp_p90"
+    ],
+    "dimensions": {
+      "lat": 55,
+      "lon": 59,
+      "time": 1
+    },
+    "global_crs": "EPSG:4326",
+    "grid_mapping": "latitude_longitude",
+    "resource_id": "ensemble-v2-1h-1km",
+    "sample_file": "ensemble-v2-1h-1km__all-parameters__2026-10-28T1000.nc",
+    "spatial_resolution": "[0.0135 0.009 ]",
+    "spatial_resolution_unit": "deg"
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 47.90104675292969,
+        "last": 48.3917350769043,
+        "max": 48.41350555419922,
+        "min": 47.879486083984375,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "latitude",
+        "step_max": -0.00030517578125,
+        "step_min": -0.00040435791015625,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 15.982101440429688,
+        "last": 16.83169937133789,
+        "max": 16.83169937133789,
+        "min": 15.982101440429688,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.0135040283203125,
+        "step_min": 0.01335906982421875,
+        "units": "degrees_east"
+      },
+      "x": {
+        "axis": "X",
+        "dtype": "int32",
+        "first": 598000.0,
+        "last": 659000.0,
+        "max": 659000.0,
+        "min": 598000.0,
+        "shape": [
+          62
+        ],
+        "standard_name": "projection_x_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      },
+      "y": {
+        "axis": "Y",
+        "dtype": "int32",
+        "first": 448000.0,
+        "last": 505000.0,
+        "max": 505000.0,
+        "min": 448000.0,
+        "shape": [
+          58
+        ],
+        "standard_name": "projection_y_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "GL",
+      "P0",
+      "RH2M",
+      "RR",
+      "T2M",
+      "TD2M",
+      "UU",
+      "VV"
+    ],
+    "dimensions": {
+      "time": 1,
+      "x": 62,
+      "y": 58
+    },
+    "global_crs": "EPSG:31287",
+    "grid_mapping": "lambert_conformal_conic",
+    "resource_id": "inca-v1-1h-1km",
+    "sample_file": "inca-v1-1h-1km__all-parameters__2026-10-28T1500.nc",
+    "spatial_resolution": "1000",
+    "spatial_resolution_unit": null
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 47.90104675292969,
+        "last": 48.3917350769043,
+        "max": 48.41350555419922,
+        "min": 47.879486083984375,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "latitude",
+        "step_max": -0.00030517578125,
+        "step_min": -0.00040435791015625,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 15.982101440429688,
+        "last": 16.83169937133789,
+        "max": 16.83169937133789,
+        "min": 15.982101440429688,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.0135040283203125,
+        "step_min": 0.01335906982421875,
+        "units": "degrees_east"
+      },
+      "x": {
+        "axis": "X",
+        "dtype": "int32",
+        "first": 598000.0,
+        "last": 659000.0,
+        "max": 659000.0,
+        "min": 598000.0,
+        "shape": [
+          62
+        ],
+        "standard_name": "projection_x_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      },
+      "y": {
+        "axis": "Y",
+        "dtype": "int32",
+        "first": 448000.0,
+        "last": 505000.0,
+        "max": 505000.0,
+        "min": 448000.0,
+        "shape": [
+          58
+        ],
+        "standard_name": "projection_y_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "dd",
+      "ff",
+      "fx",
+      "pt",
+      "rh2m",
+      "rr",
+      "t2m",
+      "td"
+    ],
+    "dimensions": {
+      "time": 1,
+      "x": 62,
+      "y": 58
+    },
+    "global_crs": "EPSG:31287",
+    "grid_mapping": "lambert_conformal_conic",
+    "resource_id": "nowcast-v1-15min-1km",
+    "sample_file": "nowcast-v1-15min-1km__all-parameters__2026-10-28T1515.nc",
+    "spatial_resolution": "1000",
+    "spatial_resolution_unit": null
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "Y",
+        "dtype": "float64",
+        "first": 47.90700000000019,
+        "last": 48.39300000000021,
+        "max": 48.39300000000021,
+        "min": 47.90700000000019,
+        "shape": [
+          55
+        ],
+        "standard_name": "latitude",
+        "step_max": 0.009000000000000341,
+        "step_min": 0.009000000000000341,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "X",
+        "dtype": "float64",
+        "first": 16.007199999999695,
+        "last": 16.790199999999672,
+        "max": 16.790199999999672,
+        "min": 16.007199999999695,
+        "shape": [
+          59
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.013500000000000512,
+        "step_min": 0.013499999999996959,
+        "units": "degrees_east"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "10fg",
+      "10u",
+      "10v",
+      "2r",
+      "2t",
+      "cape",
+      "msl",
+      "pt",
+      "rain",
+      "sf",
+      "snowlmt",
+      "ssrd",
+      "sund",
+      "sy",
+      "tcc",
+      "tp"
+    ],
+    "dimensions": {
+      "lat": 55,
+      "lon": 59,
+      "time": 1
+    },
+    "global_crs": "EPSG:4326",
+    "grid_mapping": "latitude_longitude",
+    "resource_id": "nwp-v2-1h-1km",
+    "sample_file": "nwp-v2-1h-1km__all-parameters__2026-10-28T1000.nc",
+    "spatial_resolution": "[0.0135 0.009 ]",
+    "spatial_resolution_unit": "deg"
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 47.906131744384766,
+        "last": 48.39684295654297,
+        "max": 48.41859436035156,
+        "min": 47.88459014892578,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "latitude",
+        "step_max": -0.00030517578125,
+        "step_min": -0.00040435791015625,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 15.976447105407715,
+        "last": 16.826107025146484,
+        "max": 16.826107025146484,
+        "min": 15.976447105407715,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.013505935668945312,
+        "step_min": 0.013360977172851562,
+        "units": "degrees_east"
+      },
+      "x": {
+        "axis": "X",
+        "dtype": "int32",
+        "first": 597500.0,
+        "last": 658500.0,
+        "max": 658500.0,
+        "min": 597500.0,
+        "shape": [
+          62
+        ],
+        "standard_name": "projection_x_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      },
+      "y": {
+        "axis": "Y",
+        "dtype": "int32",
+        "first": 448500.0,
+        "last": 505500.0,
+        "max": 505500.0,
+        "min": 448500.0,
+        "shape": [
+          58
+        ],
+        "standard_name": "projection_y_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "snow_depth",
+      "swe_tot"
+    ],
+    "dimensions": {
+      "time": 1,
+      "x": 62,
+      "y": 58
+    },
+    "global_crs": "EPSG:3416",
+    "grid_mapping": "lambert_conformal_conic",
+    "resource_id": "snowgrid_cl-v2-1d-1km",
+    "sample_file": "snowgrid_cl-v2-1d-1km__all-parameters__2026-10-27T0000.nc",
+    "spatial_resolution": "1000",
+    "spatial_resolution_unit": null
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 47.906131744384766,
+        "last": 48.39684295654297,
+        "max": 48.41859436035156,
+        "min": 47.88459014892578,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "latitude",
+        "step_max": -0.00030517578125,
+        "step_min": -0.00040435791015625,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 15.976447105407715,
+        "last": 16.826107025146484,
+        "max": 16.826107025146484,
+        "min": 15.976447105407715,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.013505935668945312,
+        "step_min": 0.013360977172851562,
+        "units": "degrees_east"
+      },
+      "x": {
+        "axis": "X",
+        "dtype": "float64",
+        "first": 597500.0,
+        "last": 658500.0,
+        "max": 658500.0,
+        "min": 597500.0,
+        "shape": [
+          62
+        ],
+        "standard_name": "projection_x_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      },
+      "y": {
+        "axis": "Y",
+        "dtype": "float64",
+        "first": 448500.0,
+        "last": 505500.0,
+        "max": 505500.0,
+        "min": 448500.0,
+        "shape": [
+          58
+        ],
+        "standard_name": "projection_y_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "RR",
+      "SA",
+      "TM",
+      "TM24",
+      "TM24a_1961_1990",
+      "TM24a_1991_2020",
+      "TMa_1961_1990",
+      "TMa_1991_2020",
+      "TN",
+      "TX"
+    ],
+    "dimensions": {
+      "time": 1,
+      "x": 62,
+      "y": 58
+    },
+    "global_crs": "EPSG:3416",
+    "grid_mapping": "lambert_conformal_conic",
+    "resource_id": "spartacus-v3-1d-1km",
+    "sample_file": "spartacus-v3-1d-1km__all-parameters__2026-10-27T0000.nc",
+    "spatial_resolution": "1000",
+    "spatial_resolution_unit": null
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 47.906131744384766,
+        "last": 48.39684295654297,
+        "max": 48.41859436035156,
+        "min": 47.88459014892578,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "latitude",
+        "step_max": -0.00030517578125,
+        "step_min": -0.00040435791015625,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 15.976447105407715,
+        "last": 16.826107025146484,
+        "max": 16.826107025146484,
+        "min": 15.976447105407715,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.013505935668945312,
+        "step_min": 0.013360977172851562,
+        "units": "degrees_east"
+      },
+      "x": {
+        "axis": "X",
+        "dtype": "float64",
+        "first": 597500.0,
+        "last": 658500.0,
+        "max": 658500.0,
+        "min": 597500.0,
+        "shape": [
+          62
+        ],
+        "standard_name": "projection_x_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      },
+      "y": {
+        "axis": "Y",
+        "dtype": "float64",
+        "first": 448500.0,
+        "last": 505500.0,
+        "max": 505500.0,
+        "min": 448500.0,
+        "shape": [
+          58
+        ],
+        "standard_name": "projection_y_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "RR",
+      "RRa_1961_1990",
+      "RRa_1991_2020",
+      "SA",
+      "SAa_1961_1990",
+      "SAa_1991_2020",
+      "TM",
+      "TM24",
+      "TM24a_1961_1990",
+      "TM24a_1991_2020",
+      "TMa_1961_1990",
+      "TMa_1991_2020",
+      "TN",
+      "TNa_1961_1990",
+      "TNa_1991_2020",
+      "TX",
+      "TXa_1961_1990",
+      "TXa_1991_2020"
+    ],
+    "dimensions": {
+      "time": 1,
+      "x": 62,
+      "y": 58
+    },
+    "global_crs": "EPSG:3416",
+    "grid_mapping": "lambert_conformal_conic",
+    "resource_id": "spartacus-v3-1m-1km",
+    "sample_file": "spartacus-v3-1m-1km__all-parameters__2026-10-01T0000.nc",
+    "spatial_resolution": "1000",
+    "spatial_resolution_unit": null
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 47.906131744384766,
+        "last": 48.39684295654297,
+        "max": 48.41859436035156,
+        "min": 47.88459014892578,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "latitude",
+        "step_max": -0.00030517578125,
+        "step_min": -0.00040435791015625,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 15.976447105407715,
+        "last": 16.826107025146484,
+        "max": 16.826107025146484,
+        "min": 15.976447105407715,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.013505935668945312,
+        "step_min": 0.013360977172851562,
+        "units": "degrees_east"
+      },
+      "x": {
+        "axis": "X",
+        "dtype": "float64",
+        "first": 597500.0,
+        "last": 658500.0,
+        "max": 658500.0,
+        "min": 597500.0,
+        "shape": [
+          62
+        ],
+        "standard_name": "projection_x_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      },
+      "y": {
+        "axis": "Y",
+        "dtype": "float64",
+        "first": 448500.0,
+        "last": 505500.0,
+        "max": 505500.0,
+        "min": 448500.0,
+        "shape": [
+          58
+        ],
+        "standard_name": "projection_y_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "RR",
+      "RRa_1961_1990",
+      "RRa_1991_2020",
+      "SA",
+      "SAa_1961_1990",
+      "SAa_1991_2020",
+      "TM",
+      "TM24",
+      "TM24a_1961_1990",
+      "TM24a_1991_2020",
+      "TMa_1961_1990",
+      "TMa_1991_2020",
+      "TN",
+      "TNa_1961_1990",
+      "TNa_1991_2020",
+      "TX",
+      "TXa_1961_1990",
+      "TXa_1991_2020"
+    ],
+    "dimensions": {
+      "time": 1,
+      "x": 62,
+      "y": 58
+    },
+    "global_crs": "EPSG:3416",
+    "grid_mapping": "lambert_conformal_conic",
+    "resource_id": "spartacus-v3-1q-1km",
+    "sample_file": "spartacus-v3-1q-1km__all-parameters__2026-09-01T0000.nc",
+    "spatial_resolution": "1000",
+    "spatial_resolution_unit": null
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 47.906131744384766,
+        "last": 48.39684295654297,
+        "max": 48.41859436035156,
+        "min": 47.88459014892578,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "latitude",
+        "step_max": -0.00030517578125,
+        "step_min": -0.00040435791015625,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 15.976447105407715,
+        "last": 16.826107025146484,
+        "max": 16.826107025146484,
+        "min": 15.976447105407715,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.013505935668945312,
+        "step_min": 0.013360977172851562,
+        "units": "degrees_east"
+      },
+      "x": {
+        "axis": "X",
+        "dtype": "float64",
+        "first": 597500.0,
+        "last": 658500.0,
+        "max": 658500.0,
+        "min": 597500.0,
+        "shape": [
+          62
+        ],
+        "standard_name": "projection_x_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      },
+      "y": {
+        "axis": "Y",
+        "dtype": "float64",
+        "first": 448500.0,
+        "last": 505500.0,
+        "max": 505500.0,
+        "min": 448500.0,
+        "shape": [
+          58
+        ],
+        "standard_name": "projection_y_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "RR",
+      "RRa_1961_1990",
+      "RRa_1991_2020",
+      "SA",
+      "SAa_1961_1990",
+      "SAa_1991_2020",
+      "TM",
+      "TM24",
+      "TM24a_1961_1990",
+      "TM24a_1991_2020",
+      "TMa_1961_1990",
+      "TMa_1991_2020",
+      "TN",
+      "TNa_1961_1990",
+      "TNa_1991_2020",
+      "TX",
+      "TXa_1961_1990",
+      "TXa_1991_2020"
+    ],
+    "dimensions": {
+      "time": 1,
+      "x": 62,
+      "y": 58
+    },
+    "global_crs": "EPSG:3416",
+    "grid_mapping": "lambert_conformal_conic",
+    "resource_id": "spartacus-v3-1y-1km",
+    "sample_file": "spartacus-v3-1y-1km__all-parameters__2026-01-01T0000.nc",
+    "spatial_resolution": "1000",
+    "spatial_resolution_unit": null
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 47.906131744384766,
+        "last": 48.39684295654297,
+        "max": 48.41859436035156,
+        "min": 47.88459014892578,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "latitude",
+        "step_max": -0.00030517578125,
+        "step_min": -0.00040435791015625,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 15.976447105407715,
+        "last": 16.826107025146484,
+        "max": 16.826107025146484,
+        "min": 15.976447105407715,
+        "shape": [
+          58,
+          62
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.013505935668945312,
+        "step_min": 0.013360977172851562,
+        "units": "degrees_east"
+      },
+      "x": {
+        "axis": "X",
+        "dtype": "int32",
+        "first": 597500.0,
+        "last": 658500.0,
+        "max": 658500.0,
+        "min": 597500.0,
+        "shape": [
+          62
+        ],
+        "standard_name": "projection_x_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      },
+      "y": {
+        "axis": "Y",
+        "dtype": "int32",
+        "first": 448500.0,
+        "last": 505500.0,
+        "max": 505500.0,
+        "min": 448500.0,
+        "shape": [
+          58
+        ],
+        "standard_name": "projection_y_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "ET0",
+      "SPEI30",
+      "SPEI365",
+      "SPEI90"
+    ],
+    "dimensions": {
+      "time": 1,
+      "x": 62,
+      "y": 58
+    },
+    "global_crs": "EPSG:3416",
+    "grid_mapping": "lambert_conformal_conic",
+    "resource_id": "winfore-v2-1d-1km",
+    "sample_file": "winfore-v2-1d-1km__all-parameters__2026-10-27T0000.nc",
+    "spatial_resolution": "1000",
+    "spatial_resolution_unit": null
+  },
+  {
+    "coordinates": {
+      "lat": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 45.50288391113281,
+        "last": 49.396671295166016,
+        "max": 49.47817611694336,
+        "min": 45.50288391113281,
+        "shape": [
+          431,
+          701
+        ],
+        "standard_name": "latitude",
+        "step_max": 0.000606536865234375,
+        "step_min": -0.00051116943359375,
+        "units": "degrees_north"
+      },
+      "lon": {
+        "axis": "",
+        "dtype": "float32",
+        "first": 8.468643188476562,
+        "last": 17.74226951599121,
+        "max": 17.74226951599121,
+        "min": 8.09813404083252,
+        "shape": [
+          431,
+          701
+        ],
+        "standard_name": "longitude",
+        "step_max": 0.013795852661132812,
+        "step_min": 0.012766838073730469,
+        "units": "degrees_east"
+      },
+      "x": {
+        "axis": "X",
+        "dtype": "int32",
+        "first": 20000.0,
+        "last": 720000.0,
+        "max": 720000.0,
+        "min": 20000.0,
+        "shape": [
+          701
+        ],
+        "standard_name": "projection_x_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      },
+      "y": {
+        "axis": "Y",
+        "dtype": "int32",
+        "first": 190000.0,
+        "last": 620000.0,
+        "max": 620000.0,
+        "min": 190000.0,
+        "shape": [
+          431
+        ],
+        "standard_name": "projection_y_coordinate",
+        "step_max": 1000.0,
+        "step_min": 1000.0,
+        "units": "m"
+      }
+    },
+    "data_model": "NETCDF4",
+    "data_variables": [
+      "10u",
+      "10v",
+      "2d",
+      "2r",
+      "2t",
+      "msl",
+      "ssrd",
+      "tp"
+    ],
+    "dimensions": {
+      "time": 1,
+      "x": 701,
+      "y": 431
+    },
+    "global_crs": "EPSG:31287",
+    "grid_mapping": "lambert_conformal_conic",
+    "resource_id": "inca-v2-1h-1km",
+    "sample_file": "inca-v2-1h-1km__all-parameters__2026-10-28T1500.nc",
+    "spatial_resolution": "1000",
+    "spatial_resolution_unit": null
+  }
+]
