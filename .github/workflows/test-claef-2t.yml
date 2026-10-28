@@ -73,6 +73,12 @@ jobs:
           print("Verified:", [f["href"] for v in manifest["variables"] for f in v["frames"]])
           PY
 
+      - name: Package standalone browser demo
+        run: |
+          mkdir -p out-claef-2t/demo
+          cp web/claef-demo/index.html web/claef-demo/demo.mjs out-claef-2t/demo/
+          cp web/numeric-weather-decoder.mjs out-claef-2t/
+
       - name: Upload prototype for inspection
         if: always()
         uses: actions/upload-artifact@v6
@@ -83,5 +89,7 @@ jobs:
             out-claef-2t/*.pmtiles
             out-claef-2t/*.mbtiles
             out-claef-2t/source-2t.nc
+            out-claef-2t/demo/
+            out-claef-2t/numeric-weather-decoder.mjs
           if-no-files-found: warn
           retention-days: 3
