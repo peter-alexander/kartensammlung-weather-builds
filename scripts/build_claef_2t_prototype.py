@@ -113,7 +113,7 @@ def build(output: Path, inventory_path: Path, *, minimum: float, maximum: float,
 	nc_path = output / "source-2t.nc"
 	response = session.get(API, params=forecast_request_parameters(valid_time, meta["bbox_outer"]), timeout=180)
 	raise_geosphere_error(response)
-	if not response.content.startswith(b"\\x89HDF\\r\\n\\x1a\\n") and not response.content.startswith(b"CDF"):
+	if not response.content.startswith(b"\x89HDF\r\n\x1a\n") and not response.content.startswith(b"CDF"):
 		raise ValueError("Expected NetCDF response")
 	nc_path.write_bytes(response.content)
 	values, source_transform, bbox = read_2t_netcdf(nc_path, valid_time=valid_time)
