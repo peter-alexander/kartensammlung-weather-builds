@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="de">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>C-LAEF 2t – Integer-PMTiles-Browsertest</title>
+	<link href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+	<style>
+		html, body { margin: 0; height: 100%; font: 14px system-ui, sans-serif; }
+		#map { position: absolute; inset: 0; }
+		#toolbar { position: absolute; z-index: 2; top: 12px; left: 12px; background: white; padding: 12px; border-radius: 8px; max-width: 290px; box-shadow: 0 1px 10px #0003; }
+		#status { margin-top: 8px; font-size: 12px; overflow-wrap: anywhere; }
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+	<section id="toolbar">
+		<strong>GeoSphere C-LAEF · Temperatur 2 m</strong>
+		<p>Das PMTiles enthält numerische Integerwerte; die Farben kommen aus dem Style.</p>
+		<label for="style">Farbskala</label>
+		<select id="style"><option value="manifest">Manifest</option><option value="alternate">Alternative</option></select>
+		<div id="status" role="status">Lade Manifest und PMTiles …</div>
+	</section>
+	<script type="module" src="./demo.mjs"></script>
+</body>
+</html>
