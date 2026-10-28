@@ -63,12 +63,17 @@ def read_2t_netcdf(path: Path, *, valid_time: datetime) -> tuple[np.ndarray, obj
 		return values, transform, BoundingBox(south=south, west=west, north=north, east=east)
 
 
-def forecast_request_parameters(valid_time: datetime) -> dict[str, str | int]:
+def forecast_request_parameters(valid_time: datetime, bbox: list[float]) -> dict[str, str | int]:
 	"""Request a non-empty minute interval containing exactly one hourly grid timestamp."""
 	if valid_time.tzinfo is None or valid_time.utcoffset() != timedelta(0):
 		raise ValueError("Forecast timestamp must be UTC")
+	if not isinstance(bbox, list) or len(bbox) != 4 or not all(isinstance(v, (int, float)) and np.isfinite(v) for v in bbox):
+		raise ValueError("Expected four finite GeoSphere bbox coordinates")
+	if not (bbox[0] < bbox[2] and bbox[1] < bbox[3]):
+		raise ValueError("Invalid GeoSphere bbox ordering")
 	return {
 		"parameters": "2t",
+		"bbox": ",".join(str(value) for value in bbox),
 		"forecast_offset": 0,
 		"start": valid_time.strftime("%Y-%m-%dT%H:%M"),
 		"end": (valid_time + timedelta(minutes=1)).strftime("%Y-%m-%dT%H:%M"),
@@ -106,7 +111,7 @@ def build(output: Path, inventory_path: Path, *, minimum: float, maximum: float,
 	reftime_iso = reftime.strftime("%Y-%m-%dT%H:%M:%SZ")
 	valid_iso = valid_time.strftime("%Y-%m-%dT%H:%M:%SZ")
 	nc_path = output / "source-2t.nc"
-	response = session.get(API, params=forecast_request_parameters(valid_time), timeout=180)
+	response = session.get(API, params=forecast_request_parameters(valid_time, meta["bbox_outer"]), timeout=180)
 	raise_geosphere_error(response)
 	if not response.content.startswith(b"\\x89HDF\\r\\n\\x1a\\n") and not response.content.startswith(b"CDF"):
 		raise ValueError("Expected NetCDF response")
