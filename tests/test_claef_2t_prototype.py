@@ -52,10 +52,11 @@ def test_unit_and_time_must_match(tmp_path) -> None:
 
 def test_api_request_uses_nonempty_minute_interval() -> None:
 	from scripts.build_claef_2t_prototype import forecast_request_parameters
-	request = forecast_request_parameters(datetime(2026, 10, 28, 13, tzinfo=timezone.utc))
+	request = forecast_request_parameters(datetime(2026, 10, 28, 13, tzinfo=timezone.utc), [42.9975, 5.02495, 51.5025, 22.57495])
 	assert request["start"] == "2026-10-28T13:00"
 	assert request["end"] == "2026-10-28T13:01"
 	assert request["parameters"] == "2t"
+	assert request["bbox"] == "42.9975,5.02495,51.5025,22.57495"
 	assert request["forecast_offset"] == 0
 
 
@@ -68,3 +69,12 @@ def test_api_failure_exposes_validation_body() -> None:
 	response._content = b'{"detail":"Example validation error"}'
 	with pytest.raises(RuntimeError, match="Example validation error"):
 		raise_geosphere_error(response)
+
+
+def test_api_bbox_is_required_and_ordered() -> None:
+	from scripts.build_claef_2t_prototype import forecast_request_parameters
+	valid_time = datetime(2026, 10, 28, 13, tzinfo=timezone.utc)
+	with pytest.raises(ValueError, match="bbox"):
+		forecast_request_parameters(valid_time, [])
+	with pytest.raises(ValueError, match="ordering"):
+		forecast_request_parameters(valid_time, [51, 5, 43, 22])
