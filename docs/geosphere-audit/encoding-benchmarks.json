@@ -1,0 +1,1177 @@
+{
+  "actual_nodata_probe": {
+    "float32_rgba_plus_mask_png_bytes": 6105,
+    "float32_rgba_plus_mask_validity_exact": true,
+    "nodata_cells": 1227200,
+    "parameter": "tp",
+    "source_file": "nwp-v2-20261028T09-2t-tp-tcc.nc",
+    "source_sha256": "55b8208b43ae1f098857cf6af4692bcbcbf1954f53f9005070166ba2f31bd402",
+    "uint16_reserved_zero_png_bytes": 3648,
+    "uint16_reserved_zero_validity_exact": true,
+    "valid_cells": 0
+  },
+  "environment": {
+    "numpy": "2.5.1",
+    "pillow": "12.3.0",
+    "python": "3.12.3",
+    "xarray": "2026.7.0"
+  },
+  "parameters": {
+    "2t": {
+      "block_resampling": [
+        {
+          "factor": 2,
+          "maximum": 21.6,
+          "mean": 10.730859191655803,
+          "method": "nearest",
+          "minimum": -9.5,
+          "shape": [
+            472,
+            650
+          ],
+          "valid_cells": 306800
+        },
+        {
+          "factor": 2,
+          "maximum": 21.200000000000003,
+          "mean": 10.728761571056062,
+          "method": "mean",
+          "minimum": -7.975,
+          "shape": [
+            472,
+            650
+          ],
+          "valid_cells": 306800
+        },
+        {
+          "factor": 2,
+          "maximum": 21.6,
+          "mean": 11.033644719687093,
+          "method": "max",
+          "minimum": -7.300000000000001,
+          "shape": [
+            472,
+            650
+          ],
+          "valid_cells": 306800
+        },
+        {
+          "factor": 4,
+          "maximum": 21.6,
+          "mean": 10.736142112125163,
+          "method": "nearest",
+          "minimum": -9.3,
+          "shape": [
+            236,
+            325
+          ],
+          "valid_cells": 76700
+        },
+        {
+          "factor": 4,
+          "maximum": 20.856250000000003,
+          "mean": 10.728761571056063,
+          "method": "mean",
+          "minimum": -6.78125,
+          "shape": [
+            236,
+            325
+          ],
+          "valid_cells": 76700
+        },
+        {
+          "factor": 4,
+          "maximum": 21.6,
+          "mean": 11.465113428943939,
+          "method": "max",
+          "minimum": -2.8000000000000003,
+          "shape": [
+            236,
+            325
+          ],
+          "valid_cells": 76700
+        },
+        {
+          "factor": 8,
+          "maximum": 21.6,
+          "mean": 10.739558485038712,
+          "method": "nearest",
+          "minimum": -6.7,
+          "shape": [
+            118,
+            162
+          ],
+          "valid_cells": 19116
+        },
+        {
+          "factor": 8,
+          "maximum": 19.659375,
+          "mean": 10.72730786710086,
+          "method": "mean",
+          "minimum": -2.3390625000000003,
+          "shape": [
+            118,
+            162
+          ],
+          "valid_cells": 19116
+        },
+        {
+          "factor": 8,
+          "maximum": 21.6,
+          "mean": 11.957940991839298,
+          "method": "max",
+          "minimum": 1.2000000000000002,
+          "shape": [
+            118,
+            162
+          ],
+          "valid_cells": 19116
+        }
+      ],
+      "decoded_dtype": "float64",
+      "description": "air temperature 2m above ground",
+      "native_grid_tile_pyramids": {
+        "float32_rgba_plus_mask": {
+          "four_level_total_png_bytes": 2072523,
+          "levels": [
+            {
+              "factor": 1,
+              "png_bytes": 1475418,
+              "png_file_count": 48,
+              "shape": [
+                945,
+                1300
+              ]
+            },
+            {
+              "factor": 2,
+              "png_bytes": 440842,
+              "png_file_count": 12,
+              "shape": [
+                472,
+                650
+              ]
+            },
+            {
+              "factor": 4,
+              "png_bytes": 122512,
+              "png_file_count": 4,
+              "shape": [
+                236,
+                325
+              ]
+            },
+            {
+              "factor": 8,
+              "png_bytes": 33751,
+              "png_file_count": 2,
+              "shape": [
+                118,
+                162
+              ]
+            }
+          ]
+        },
+        "uint16_practical_rgb": {
+          "four_level_total_png_bytes": 1117536,
+          "levels": [
+            {
+              "factor": 1,
+              "png_bytes": 775449,
+              "png_file_count": 24,
+              "shape": [
+                945,
+                1300
+              ]
+            },
+            {
+              "factor": 2,
+              "png_bytes": 251336,
+              "png_file_count": 6,
+              "shape": [
+                472,
+                650
+              ]
+            },
+            {
+              "factor": 4,
+              "png_bytes": 71130,
+              "png_file_count": 2,
+              "shape": [
+                236,
+                325
+              ]
+            },
+            {
+              "factor": 8,
+              "png_bytes": 19621,
+              "png_file_count": 1,
+              "shape": [
+                118,
+                162
+              ]
+            }
+          ]
+        },
+        "uint16_source_increment_rgb": {
+          "four_level_total_png_bytes": 1117536,
+          "levels": [
+            {
+              "factor": 1,
+              "png_bytes": 775449,
+              "png_file_count": 24,
+              "shape": [
+                945,
+                1300
+              ]
+            },
+            {
+              "factor": 2,
+              "png_bytes": 251336,
+              "png_file_count": 6,
+              "shape": [
+                472,
+                650
+              ]
+            },
+            {
+              "factor": 4,
+              "png_bytes": 71130,
+              "png_file_count": 2,
+              "shape": [
+                236,
+                325
+              ]
+            },
+            {
+              "factor": 8,
+              "png_bytes": 19621,
+              "png_file_count": 1,
+              "shape": [
+                118,
+                162
+              ]
+            }
+          ]
+        },
+        "uint8_practical_gray": {
+          "four_level_total_png_bytes": 583977,
+          "levels": [
+            {
+              "factor": 1,
+              "png_bytes": 402622,
+              "png_file_count": 24,
+              "shape": [
+                945,
+                1300
+              ]
+            },
+            {
+              "factor": 2,
+              "png_bytes": 132636,
+              "png_file_count": 6,
+              "shape": [
+                472,
+                650
+              ]
+            },
+            {
+              "factor": 4,
+              "png_bytes": 38182,
+              "png_file_count": 2,
+              "shape": [
+                236,
+                325
+              ]
+            },
+            {
+              "factor": 8,
+              "png_bytes": 10537,
+              "png_file_count": 1,
+              "shape": [
+                118,
+                162
+              ]
+            }
+          ]
+        }
+      },
+      "nodata_cells": 0,
+      "raw_dtype": "int16",
+      "sample_maximum": 21.6,
+      "sample_minimum": -9.5,
+      "shape": [
+        945,
+        1300
+      ],
+      "source_scale_factor": 0.1,
+      "unit": "degree Celsius",
+      "valid_cells": 1228500,
+      "variants": {
+        "float32_rgba_plus_mask": {
+          "bits_per_valid_value": 32,
+          "encode_and_png_ms": 325.2668200000244,
+          "errors_against_decoded_source": {
+            "max_absolute_error": 7.629394538355427e-07,
+            "max_error_divided_by_sample_range": 2.453181523586954e-08,
+            "mean_absolute_error": 2.2894700558804332e-07,
+            "nodata_cells": 0,
+            "p95_relative_error_for_abs_ge_10_steps": 4.435694499043853e-08,
+            "valid_cells": 1228500,
+            "validity_exact": true
+          },
+          "nodata": "separate 8-bit mask",
+          "png_bytes": 1550445,
+          "png_component_bytes": [
+            1547523,
+            2922
+          ],
+          "png_decode_and_numeric_decode_ms": 34.92571699985092,
+          "png_files": 2,
+          "textures": 2
+        },
+        "uint16_practical_rgb": {
+          "base": -9.5,
+          "bits_per_code": 16,
+          "encode_and_png_ms": 182.8468950000115,
+          "errors_against_decoded_source": {
+            "max_absolute_error": 7.629394538355427e-07,
+            "max_error_divided_by_sample_range": 2.453181523586954e-08,
+            "mean_absolute_error": 2.2894700558804332e-07,
+            "nodata_cells": 0,
+            "p95_relative_error_for_abs_ge_10_steps": 4.435694499043853e-08,
+            "valid_cells": 1228500,
+            "validity_exact": true
+          },
+          "nodata": "reserved code 0",
+          "png_bytes": 781648,
+          "png_component_bytes": [
+            781648
+          ],
+          "png_decode_and_numeric_decode_ms": 21.32410199988044,
+          "png_files": 1,
+          "step": 0.1,
+          "textures": 1
+        },
+        "uint16_source_increment_rgb": {
+          "base": -9.5,
+          "bits_per_code": 16,
+          "encode_and_png_ms": 178.5066770000867,
+          "errors_against_decoded_source": {
+            "max_absolute_error": 7.629394538355427e-07,
+            "max_error_divided_by_sample_range": 2.453181523586954e-08,
+            "mean_absolute_error": 2.2894700558804332e-07,
+            "nodata_cells": 0,
+            "p95_relative_error_for_abs_ge_10_steps": 4.435694499043853e-08,
+            "valid_cells": 1228500,
+            "validity_exact": true
+          },
+          "nodata": "reserved code 0",
+          "png_bytes": 781648,
+          "png_component_bytes": [
+            781648
+          ],
+          "png_decode_and_numeric_decode_ms": 20.78608300007545,
+          "png_files": 1,
+          "step": 0.1,
+          "textures": 1
+        },
+        "uint8_practical_gray": {
+          "base": -40.0,
+          "bits_per_code": 8,
+          "encode_and_png_ms": 94.63544300001558,
+          "errors_against_decoded_source": {
+            "max_absolute_error": 0.10000000000000142,
+            "max_error_divided_by_sample_range": 0.0032154340836013317,
+            "mean_absolute_error": 0.06000166870166879,
+            "nodata_cells": 0,
+            "p95_relative_error_for_abs_ge_10_steps": 0.013157894736842174,
+            "valid_cells": 1228500,
+            "validity_exact": true
+          },
+          "nodata": "reserved code 0",
+          "png_bytes": 403896,
+          "png_component_bytes": [
+            403896
+          ],
+          "png_decode_and_numeric_decode_ms": 9.483836000072188,
+          "png_files": 1,
+          "step": 0.25,
+          "textures": 1
+        }
+      }
+    },
+    "tcc": {
+      "block_resampling": [
+        {
+          "factor": 2,
+          "maximum": 100.0,
+          "mean": 61.914113428943935,
+          "method": "nearest",
+          "minimum": 0.0,
+          "shape": [
+            472,
+            650
+          ],
+          "valid_cells": 306800
+        },
+        {
+          "factor": 2,
+          "maximum": 100.0,
+          "mean": 61.93754644719687,
+          "method": "mean",
+          "minimum": 0.0,
+          "shape": [
+            472,
+            650
+          ],
+          "valid_cells": 306800
+        },
+        {
+          "factor": 2,
+          "maximum": 100.0,
+          "mean": 64.01745925684484,
+          "method": "max",
+          "minimum": 0.0,
+          "shape": [
+            472,
+            650
+          ],
+          "valid_cells": 306800
+        },
+        {
+          "factor": 4,
+          "maximum": 100.0,
+          "mean": 61.88095827900913,
+          "method": "nearest",
+          "minimum": 0.0,
+          "shape": [
+            236,
+            325
+          ],
+          "valid_cells": 76700
+        },
+        {
+          "factor": 4,
+          "maximum": 100.0,
+          "mean": 61.93754644719687,
+          "method": "mean",
+          "minimum": 0.0,
+          "shape": [
+            236,
+            325
+          ],
+          "valid_cells": 76700
+        },
+        {
+          "factor": 4,
+          "maximum": 100.0,
+          "mean": 67.01164928292047,
+          "method": "max",
+          "minimum": 0.0,
+          "shape": [
+            236,
+            325
+          ],
+          "valid_cells": 76700
+        },
+        {
+          "factor": 8,
+          "maximum": 100.0,
+          "mean": 61.825146474157776,
+          "method": "nearest",
+          "minimum": 0.0,
+          "shape": [
+            118,
+            162
+          ],
+          "valid_cells": 19116
+        },
+        {
+          "factor": 8,
+          "maximum": 100.0,
+          "mean": 61.886674611581924,
+          "method": "mean",
+          "minimum": 0.0,
+          "shape": [
+            118,
+            162
+          ],
+          "valid_cells": 19116
+        },
+        {
+          "factor": 8,
+          "maximum": 100.0,
+          "mean": 70.92519355513706,
+          "method": "max",
+          "minimum": 0.0,
+          "shape": [
+            118,
+            162
+          ],
+          "valid_cells": 19116
+        }
+      ],
+      "decoded_dtype": "float64",
+      "description": "total cloud cover",
+      "native_grid_tile_pyramids": {
+        "float32_rgba_plus_mask": {
+          "four_level_total_png_bytes": 1212888,
+          "levels": [
+            {
+              "factor": 1,
+              "png_bytes": 846318,
+              "png_file_count": 48,
+              "shape": [
+                945,
+                1300
+              ]
+            },
+            {
+              "factor": 2,
+              "png_bytes": 266780,
+              "png_file_count": 12,
+              "shape": [
+                472,
+                650
+              ]
+            },
+            {
+              "factor": 4,
+              "png_bytes": 77843,
+              "png_file_count": 4,
+              "shape": [
+                236,
+                325
+              ]
+            },
+            {
+              "factor": 8,
+              "png_bytes": 21947,
+              "png_file_count": 2,
+              "shape": [
+                118,
+                162
+              ]
+            }
+          ]
+        },
+        "uint16_practical_rgb": {
+          "four_level_total_png_bytes": 944701,
+          "levels": [
+            {
+              "factor": 1,
+              "png_bytes": 659393,
+              "png_file_count": 24,
+              "shape": [
+                945,
+                1300
+              ]
+            },
+            {
+              "factor": 2,
+              "png_bytes": 207804,
+              "png_file_count": 6,
+              "shape": [
+                472,
+                650
+              ]
+            },
+            {
+              "factor": 4,
+              "png_bytes": 60542,
+              "png_file_count": 2,
+              "shape": [
+                236,
+                325
+              ]
+            },
+            {
+              "factor": 8,
+              "png_bytes": 16962,
+              "png_file_count": 1,
+              "shape": [
+                118,
+                162
+              ]
+            }
+          ]
+        },
+        "uint16_source_increment_rgb": {
+          "four_level_total_png_bytes": 1271465,
+          "levels": [
+            {
+              "factor": 1,
+              "png_bytes": 891708,
+              "png_file_count": 24,
+              "shape": [
+                945,
+                1300
+              ]
+            },
+            {
+              "factor": 2,
+              "png_bytes": 275437,
+              "png_file_count": 6,
+              "shape": [
+                472,
+                650
+              ]
+            },
+            {
+              "factor": 4,
+              "png_bytes": 80958,
+              "png_file_count": 2,
+              "shape": [
+                236,
+                325
+              ]
+            },
+            {
+              "factor": 8,
+              "png_bytes": 23362,
+              "png_file_count": 1,
+              "shape": [
+                118,
+                162
+              ]
+            }
+          ]
+        },
+        "uint8_practical_gray": {
+          "four_level_total_png_bytes": 671163,
+          "levels": [
+            {
+              "factor": 1,
+              "png_bytes": 467778,
+              "png_file_count": 24,
+              "shape": [
+                945,
+                1300
+              ]
+            },
+            {
+              "factor": 2,
+              "png_bytes": 147756,
+              "png_file_count": 6,
+              "shape": [
+                472,
+                650
+              ]
+            },
+            {
+              "factor": 4,
+              "png_bytes": 43369,
+              "png_file_count": 2,
+              "shape": [
+                236,
+                325
+              ]
+            },
+            {
+              "factor": 8,
+              "png_bytes": 12260,
+              "png_file_count": 1,
+              "shape": [
+                118,
+                162
+              ]
+            }
+          ]
+        }
+      },
+      "nodata_cells": 0,
+      "raw_dtype": "int16",
+      "sample_maximum": 100.0,
+      "sample_minimum": 0.0,
+      "shape": [
+        945,
+        1300
+      ],
+      "source_scale_factor": 0.01,
+      "unit": "%",
+      "valid_cells": 1228500,
+      "variants": {
+        "float32_rgba_plus_mask": {
+          "bits_per_valid_value": 32,
+          "encode_and_png_ms": 169.00734800015016,
+          "errors_against_decoded_source": {
+            "max_absolute_error": 0.0,
+            "max_error_divided_by_sample_range": 0.0,
+            "mean_absolute_error": 0.0,
+            "nodata_cells": 0,
+            "p95_relative_error_for_abs_ge_10_steps": 0.0,
+            "valid_cells": 1228500,
+            "validity_exact": true
+          },
+          "nodata": "separate 8-bit mask",
+          "png_bytes": 855860,
+          "png_component_bytes": [
+            852938,
+            2922
+          ],
+          "png_decode_and_numeric_decode_ms": 22.28788899992651,
+          "png_files": 2,
+          "textures": 2
+        },
+        "uint16_practical_rgb": {
+          "base": 0.0,
+          "bits_per_code": 16,
+          "encode_and_png_ms": 145.47811500005992,
+          "errors_against_decoded_source": {
+            "max_absolute_error": 0.0,
+            "max_error_divided_by_sample_range": 0.0,
+            "mean_absolute_error": 0.0,
+            "nodata_cells": 0,
+            "p95_relative_error_for_abs_ge_10_steps": 0.0,
+            "valid_cells": 1228500,
+            "validity_exact": true
+          },
+          "nodata": "reserved code 0",
+          "png_bytes": 662254,
+          "png_component_bytes": [
+            662254
+          ],
+          "png_decode_and_numeric_decode_ms": 20.13726699988183,
+          "png_files": 1,
+          "step": 0.5,
+          "textures": 1
+        },
+        "uint16_source_increment_rgb": {
+          "base": 0.0,
+          "bits_per_code": 16,
+          "encode_and_png_ms": 188.10790499992436,
+          "errors_against_decoded_source": {
+            "max_absolute_error": 0.0,
+            "max_error_divided_by_sample_range": 0.0,
+            "mean_absolute_error": 0.0,
+            "nodata_cells": 0,
+            "p95_relative_error_for_abs_ge_10_steps": 0.0,
+            "valid_cells": 1228500,
+            "validity_exact": true
+          },
+          "nodata": "reserved code 0",
+          "png_bytes": 909503,
+          "png_component_bytes": [
+            909503
+          ],
+          "png_decode_and_numeric_decode_ms": 18.602968000095643,
+          "png_files": 1,
+          "step": 0.01,
+          "textures": 1
+        },
+        "uint8_practical_gray": {
+          "base": 0.0,
+          "bits_per_code": 8,
+          "encode_and_png_ms": 55.66461200010053,
+          "errors_against_decoded_source": {
+            "max_absolute_error": 0.0,
+            "max_error_divided_by_sample_range": 0.0,
+            "mean_absolute_error": 0.0,
+            "nodata_cells": 0,
+            "p95_relative_error_for_abs_ge_10_steps": 0.0,
+            "valid_cells": 1228500,
+            "validity_exact": true
+          },
+          "nodata": "reserved code 0",
+          "png_bytes": 468033,
+          "png_component_bytes": [
+            468033
+          ],
+          "png_decode_and_numeric_decode_ms": 9.727399999974295,
+          "png_files": 1,
+          "step": 0.5,
+          "textures": 1
+        }
+      }
+    },
+    "tp": {
+      "block_resampling": [
+        {
+          "factor": 2,
+          "maximum": 7.545,
+          "mean": 0.04024408409387222,
+          "method": "nearest",
+          "minimum": 0.0,
+          "shape": [
+            472,
+            650
+          ],
+          "valid_cells": 306800
+        },
+        {
+          "factor": 2,
+          "maximum": 6.97625,
+          "mean": 0.04027295876792699,
+          "method": "mean",
+          "minimum": 0.0,
+          "shape": [
+            472,
+            650
+          ],
+          "valid_cells": 306800
+        },
+        {
+          "factor": 2,
+          "maximum": 7.545,
+          "mean": 0.0450270371577575,
+          "method": "max",
+          "minimum": 0.0,
+          "shape": [
+            472,
+            650
+          ],
+          "valid_cells": 306800
+        },
+        {
+          "factor": 4,
+          "maximum": 6.769,
+          "mean": 0.04023265971316819,
+          "method": "nearest",
+          "minimum": 0.0,
+          "shape": [
+            236,
+            325
+          ],
+          "valid_cells": 76700
+        },
+        {
+          "factor": 4,
+          "maximum": 6.496125,
+          "mean": 0.040272958767926983,
+          "method": "mean",
+          "minimum": 0.0,
+          "shape": [
+            236,
+            325
+          ],
+          "valid_cells": 76700
+        },
+        {
+          "factor": 4,
+          "maximum": 7.545,
+          "mean": 0.05488033898305085,
+          "method": "max",
+          "minimum": 0.0,
+          "shape": [
+            236,
+            325
+          ],
+          "valid_cells": 76700
+        },
+        {
+          "factor": 8,
+          "maximum": 6.037,
+          "mean": 0.039953180581711656,
+          "method": "nearest",
+          "minimum": 0.0,
+          "shape": [
+            118,
+            162
+          ],
+          "valid_cells": 19116
+        },
+        {
+          "factor": 8,
+          "maximum": 5.705796875,
+          "mean": 0.04039679783950618,
+          "method": "mean",
+          "minimum": 0.0,
+          "shape": [
+            118,
+            162
+          ],
+          "valid_cells": 19116
+        },
+        {
+          "factor": 8,
+          "maximum": 7.545,
+          "mean": 0.07370004184975935,
+          "method": "max",
+          "minimum": 0.0,
+          "shape": [
+            118,
+            162
+          ],
+          "valid_cells": 19116
+        }
+      ],
+      "decoded_dtype": "float64",
+      "description": "total amount of liquid and solid precipitation in the last forecast interval",
+      "native_grid_tile_pyramids": {
+        "float32_rgba_plus_mask": {
+          "four_level_total_png_bytes": 763802,
+          "levels": [
+            {
+              "factor": 1,
+              "png_bytes": 552338,
+              "png_file_count": 48,
+              "shape": [
+                945,
+                1300
+              ]
+            },
+            {
+              "factor": 2,
+              "png_bytes": 156494,
+              "png_file_count": 12,
+              "shape": [
+                472,
+                650
+              ]
+            },
+            {
+              "factor": 4,
+              "png_bytes": 43054,
+              "png_file_count": 4,
+              "shape": [
+                236,
+                325
+              ]
+            },
+            {
+              "factor": 8,
+              "png_bytes": 11916,
+              "png_file_count": 2,
+              "shape": [
+                118,
+                162
+              ]
+            }
+          ]
+        },
+        "uint16_practical_rgb": {
+          "four_level_total_png_bytes": 175516,
+          "levels": [
+            {
+              "factor": 1,
+              "png_bytes": 115647,
+              "png_file_count": 24,
+              "shape": [
+                945,
+                1300
+              ]
+            },
+            {
+              "factor": 2,
+              "png_bytes": 41821,
+              "png_file_count": 6,
+              "shape": [
+                472,
+                650
+              ]
+            },
+            {
+              "factor": 4,
+              "png_bytes": 13742,
+              "png_file_count": 2,
+              "shape": [
+                236,
+                325
+              ]
+            },
+            {
+              "factor": 8,
+              "png_bytes": 4306,
+              "png_file_count": 1,
+              "shape": [
+                118,
+                162
+              ]
+            }
+          ]
+        },
+        "uint16_source_increment_rgb": {
+          "four_level_total_png_bytes": 328032,
+          "levels": [
+            {
+              "factor": 1,
+              "png_bytes": 228496,
+              "png_file_count": 24,
+              "shape": [
+                945,
+                1300
+              ]
+            },
+            {
+              "factor": 2,
+              "png_bytes": 72050,
+              "png_file_count": 6,
+              "shape": [
+                472,
+                650
+              ]
+            },
+            {
+              "factor": 4,
+              "png_bytes": 21320,
+              "png_file_count": 2,
+              "shape": [
+                236,
+                325
+              ]
+            },
+            {
+              "factor": 8,
+              "png_bytes": 6166,
+              "png_file_count": 1,
+              "shape": [
+                118,
+                162
+              ]
+            }
+          ]
+        },
+        "uint8_practical_gray": {
+          "four_level_total_png_bytes": 59605,
+          "levels": [
+            {
+              "factor": 1,
+              "png_bytes": 39493,
+              "png_file_count": 24,
+              "shape": [
+                945,
+                1300
+              ]
+            },
+            {
+              "factor": 2,
+              "png_bytes": 13679,
+              "png_file_count": 6,
+              "shape": [
+                472,
+                650
+              ]
+            },
+            {
+              "factor": 4,
+              "png_bytes": 4785,
+              "png_file_count": 2,
+              "shape": [
+                236,
+                325
+              ]
+            },
+            {
+              "factor": 8,
+              "png_bytes": 1648,
+              "png_file_count": 1,
+              "shape": [
+                118,
+                162
+              ]
+            }
+          ]
+        }
+      },
+      "nodata_cells": 0,
+      "raw_dtype": "int32",
+      "sample_maximum": 7.545,
+      "sample_minimum": 0.0,
+      "shape": [
+        945,
+        1300
+      ],
+      "source_scale_factor": 0.001,
+      "unit": "kg m-2",
+      "valid_cells": 1228500,
+      "variants": {
+        "float32_rgba_plus_mask": {
+          "bits_per_valid_value": 32,
+          "encode_and_png_ms": 50.87397200009036,
+          "errors_against_decoded_source": {
+            "max_absolute_error": 2.365112301561112e-07,
+            "max_error_divided_by_sample_range": 3.134675018636331e-08,
+            "mean_absolute_error": 8.652599889359641e-10,
+            "nodata_cells": 0,
+            "p95_relative_error_for_abs_ge_10_steps": 4.749745128457272e-08,
+            "valid_cells": 1228500,
+            "validity_exact": true
+          },
+          "nodata": "separate 8-bit mask",
+          "png_bytes": 559188,
+          "png_component_bytes": [
+            556266,
+            2922
+          ],
+          "png_decode_and_numeric_decode_ms": 19.547440999986065,
+          "png_files": 2,
+          "textures": 2
+        },
+        "uint16_practical_rgb": {
+          "base": 0.0,
+          "bits_per_code": 16,
+          "encode_and_png_ms": 36.685587999954805,
+          "errors_against_decoded_source": {
+            "max_absolute_error": 0.005000228881836044,
+            "max_error_divided_by_sample_range": 0.0006627208590902643,
+            "mean_absolute_error": 0.00036642580167363945,
+            "nodata_cells": 0,
+            "p95_relative_error_for_abs_ge_10_steps": 0.02739730109907183,
+            "valid_cells": 1228500,
+            "validity_exact": true
+          },
+          "nodata": "reserved code 0",
+          "png_bytes": 113136,
+          "png_component_bytes": [
+            113136
+          ],
+          "png_decode_and_numeric_decode_ms": 13.11590199998136,
+          "png_files": 1,
+          "step": 0.01,
+          "textures": 1
+        },
+        "uint16_source_increment_rgb": {
+          "base": 0.0,
+          "bits_per_code": 16,
+          "encode_and_png_ms": 49.51768999990236,
+          "errors_against_decoded_source": {
+            "max_absolute_error": 2.365112301561112e-07,
+            "max_error_divided_by_sample_range": 3.134675018636331e-08,
+            "mean_absolute_error": 8.652599889359641e-10,
+            "nodata_cells": 0,
+            "p95_relative_error_for_abs_ge_10_steps": 4.749745128457272e-08,
+            "valid_cells": 1228500,
+            "validity_exact": true
+          },
+          "nodata": "reserved code 0",
+          "png_bytes": 226670,
+          "png_component_bytes": [
+            226670
+          ],
+          "png_decode_and_numeric_decode_ms": 14.03429199990569,
+          "png_files": 1,
+          "step": 0.001,
+          "textures": 1
+        },
+        "uint8_practical_gray": {
+          "base": 0.0,
+          "bits_per_code": 8,
+          "encode_and_png_ms": 13.722919999963779,
+          "errors_against_decoded_source": {
+            "max_absolute_error": 0.05000019073486328,
+            "max_error_divided_by_sample_range": 0.0066269305148924165,
+            "mean_absolute_error": 0.002846069214955403,
+            "nodata_cells": 0,
+            "p95_relative_error_for_abs_ge_10_steps": 0.03871579210751461,
+            "valid_cells": 1228500,
+            "validity_exact": true
+          },
+          "nodata": "reserved code 0",
+          "png_bytes": 33782,
+          "png_component_bytes": [
+            33782
+          ],
+          "png_decode_and_numeric_decode_ms": 4.725542000187488,
+          "png_files": 1,
+          "step": 0.1,
+          "textures": 1
+        }
+      }
+    }
+  },
+  "scope": "One real native-grid NWP snapshot; no reprojection and no PMTiles container overhead.",
+  "source_file": "nwp-v2-20261028T10-full-2t-tp-tcc.nc",
+  "source_file_bytes": 2017608,
+  "source_sha256": "1f7e8ca887df8ab53813d782d3a6bccbf108664d3efd5fb2e630b21813242914"
+}

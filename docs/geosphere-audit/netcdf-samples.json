@@ -1,0 +1,688 @@
+{
+  "all_parameter_downloads": [
+    {
+      "at": "2026-10-28T10:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 182136,
+      "datapoint_count": "51920",
+      "file": "nwp-v2-1h-1km__all-parameters__2026-10-28T1000.nc",
+      "mode": "forecast",
+      "params": [
+        "10fg",
+        "10u",
+        "10v",
+        "2r",
+        "2t",
+        "cape",
+        "msl",
+        "pt",
+        "rain",
+        "sf",
+        "snowlmt",
+        "ssrd",
+        "sund",
+        "sy",
+        "tcc",
+        "tp"
+      ],
+      "rid": "nwp-v2-1h-1km",
+      "seconds": 2.618,
+      "sha256": "6515f06ac7244b411f6e3bd30f38ddf1ca656449bfe02032bb9653317946aced",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/nwp-v2-1h-1km?parameters=10fg&parameters=10u&parameters=10v&parameters=2r&parameters=2t&parameters=cape&parameters=msl&parameters=pt&parameters=rain&parameters=sf&parameters=snowlmt&parameters=ssrd&parameters=sund&parameters=sy&parameters=tcc&parameters=tp&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-10-28T10%3A00&end=2026-10-28T10%3A00&output_format=netcdf&forecast_offset=0"
+    },
+    {
+      "at": "2026-10-28T10:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 442670,
+      "datapoint_count": "136290",
+      "file": "ensemble-v2-1h-1km__all-parameters__2026-10-28T1000.nc",
+      "mode": "forecast",
+      "params": [
+        "10fg_p10",
+        "10fg_p50",
+        "10fg_p90",
+        "10u_p10",
+        "10u_p50",
+        "10u_p90",
+        "10v_p10",
+        "10v_p50",
+        "10v_p90",
+        "2r_p10",
+        "2r_p50",
+        "2r_p90",
+        "2t_p10",
+        "2t_p50",
+        "2t_p90",
+        "cape_p10",
+        "cape_p50",
+        "cape_p90",
+        "msl_p10",
+        "msl_p50",
+        "msl_p90",
+        "rain_p10",
+        "rain_p50",
+        "rain_p90",
+        "sf_p10",
+        "sf_p50",
+        "sf_p90",
+        "snowlmt_p10",
+        "snowlmt_p50",
+        "snowlmt_p90",
+        "ssrd_p10",
+        "ssrd_p50",
+        "ssrd_p90",
+        "sund_p10",
+        "sund_p50",
+        "sund_p90",
+        "tcc_p10",
+        "tcc_p50",
+        "tcc_p90",
+        "tp_p10",
+        "tp_p50",
+        "tp_p90"
+      ],
+      "rid": "ensemble-v2-1h-1km",
+      "seconds": 2.317,
+      "sha256": "74582965577bce372425c4437c33e74d62b5ba2db4e60407ee756649d157c476",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/ensemble-v2-1h-1km?parameters=10fg_p10&parameters=10fg_p50&parameters=10fg_p90&parameters=10u_p10&parameters=10u_p50&parameters=10u_p90&parameters=10v_p10&parameters=10v_p50&parameters=10v_p90&parameters=2r_p10&parameters=2r_p50&parameters=2r_p90&parameters=2t_p10&parameters=2t_p50&parameters=2t_p90&parameters=cape_p10&parameters=cape_p50&parameters=cape_p90&parameters=msl_p10&parameters=msl_p50&parameters=msl_p90&parameters=rain_p10&parameters=rain_p50&parameters=rain_p90&parameters=sf_p10&parameters=sf_p50&parameters=sf_p90&parameters=snowlmt_p10&parameters=snowlmt_p50&parameters=snowlmt_p90&parameters=ssrd_p10&parameters=ssrd_p50&parameters=ssrd_p90&parameters=sund_p10&parameters=sund_p50&parameters=sund_p90&parameters=tcc_p10&parameters=tcc_p50&parameters=tcc_p90&parameters=tp_p10&parameters=tp_p50&parameters=tp_p90&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-10-28T10%3A00&end=2026-10-28T10%3A00&output_format=netcdf&forecast_offset=0"
+    },
+    {
+      "at": "2026-10-28T15:15",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 130843,
+      "datapoint_count": "28768",
+      "file": "nowcast-v1-15min-1km__all-parameters__2026-10-28T1515.nc",
+      "mode": "forecast",
+      "params": [
+        "dd",
+        "ff",
+        "fx",
+        "pt",
+        "rh2m",
+        "rr",
+        "t2m",
+        "td"
+      ],
+      "rid": "nowcast-v1-15min-1km",
+      "seconds": 1.263,
+      "sha256": "66b06d556d135035665f5033f42d5b6ecf03b1e4baba0116f2ae4986ab444b8f",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/nowcast-v1-15min-1km?parameters=dd&parameters=ff&parameters=fx&parameters=pt&parameters=rh2m&parameters=rr&parameters=t2m&parameters=td&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-10-28T15%3A15&end=2026-10-28T15%3A15&output_format=netcdf&forecast_offset=0"
+    },
+    {
+      "at": "2026-10-28T15:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 136550,
+      "datapoint_count": "28768",
+      "file": "inca-v1-1h-1km__all-parameters__2026-10-28T1500.nc",
+      "mode": "historical",
+      "params": [
+        "GL",
+        "P0",
+        "RH2M",
+        "RR",
+        "T2M",
+        "TD2M",
+        "UU",
+        "VV"
+      ],
+      "rid": "inca-v1-1h-1km",
+      "seconds": 0.66,
+      "sha256": "fbcb4279f9d1e8e9f081933c6b702ad4c696ea6b1c4d9917e8d6f0bd9b670490",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/historical/inca-v1-1h-1km?parameters=GL&parameters=P0&parameters=RH2M&parameters=RR&parameters=T2M&parameters=TD2M&parameters=UU&parameters=VV&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-10-28T15%3A00&end=2026-10-28T15%3A00&output_format=netcdf"
+    },
+    {
+      "at": "2026-10-28T00:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 65714,
+      "datapoint_count": "1520",
+      "file": "chem-v2-1h-3km__all-parameters__2026-10-28T0000.nc",
+      "mode": "forecast",
+      "params": [
+        "no2surf",
+        "o3surf",
+        "pm10surf",
+        "pm25surf"
+      ],
+      "rid": "chem-v2-1h-3km",
+      "seconds": 1.354,
+      "sha256": "b5954aefbd129d35835c2a1c9f2b3210c80bd5cba9c388685fc0b7a98d4227fb",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/chem-v2-1h-3km?parameters=no2surf&parameters=o3surf&parameters=pm10surf&parameters=pm25surf&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-10-28T00%3A00&end=2026-10-28T00%3A00&output_format=netcdf&forecast_offset=0"
+    },
+    {
+      "at": "2026-10-28T00:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 63645,
+      "datapoint_count": "168",
+      "file": "chem-v2-1h-9km__all-parameters__2026-10-28T0000.nc",
+      "mode": "forecast",
+      "params": [
+        "no2surf",
+        "o3surf",
+        "pm10surf",
+        "pm25surf"
+      ],
+      "rid": "chem-v2-1h-9km",
+      "seconds": 3.1,
+      "sha256": "1e67e50b0dcd771320dd521beb7b7e92d0d46e154d6f3883fcd9ce3099e2c63e",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/chem-v2-1h-9km?parameters=no2surf&parameters=o3surf&parameters=pm10surf&parameters=pm25surf&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-10-28T00%3A00&end=2026-10-28T00%3A00&output_format=netcdf&forecast_offset=0"
+    },
+    {
+      "at": "2026-10-28T00:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 37528,
+      "datapoint_count": "380",
+      "file": "chem_aqi-v1-1d-3km__all-parameters__2026-10-28T0000.nc",
+      "mode": "forecast",
+      "params": [
+        "aqi"
+      ],
+      "rid": "chem_aqi-v1-1d-3km",
+      "seconds": 0.211,
+      "sha256": "4431f50ecd5f2c06b4b74224f80a56ab5e802f39f8f23fe61c0236b14bf4e675",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/chem_aqi-v1-1d-3km?parameters=aqi&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-10-28T00%3A00&end=2026-10-28T00%3A00&output_format=netcdf&forecast_offset=0"
+    },
+    {
+      "at": "2026-10-28T00:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 32253,
+      "datapoint_count": "8",
+      "file": "chem_dust-v1-1h-0p2deg__all-parameters__2026-10-28T0000.nc",
+      "mode": "forecast",
+      "params": [
+        "dust"
+      ],
+      "rid": "chem_dust-v1-1h-0p2deg",
+      "seconds": 0.462,
+      "sha256": "84e191df4b80728bb1eec6ad474adadb3209edae3a90c2e6e22772a525943e29",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/chem_dust-v1-1h-0p2deg?parameters=dust&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-10-28T00%3A00&end=2026-10-28T00%3A00&output_format=netcdf&forecast_offset=0"
+    },
+    {
+      "at": "2026-10-27T00:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 635436,
+      "datapoint_count": "1783320",
+      "file": "apolis-v2-1d-100m__all-parameters__2026-10-27T0000.nc",
+      "mode": "historical",
+      "params": [
+        "DIF",
+        "DIR_hori",
+        "DIR_real",
+        "RSSD",
+        "SSD"
+      ],
+      "rid": "apolis-v2-1d-100m",
+      "seconds": 1.855,
+      "sha256": "8b0a0d01843a93b89ee4426f0881f64be479bcb2d1b33d53f552d21d286c734b",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/historical/apolis-v2-1d-100m?parameters=DIF&parameters=DIR_hori&parameters=DIR_real&parameters=RSSD&parameters=SSD&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-10-27T00%3A00&end=2026-10-27T00%3A00&output_format=netcdf"
+    },
+    {
+      "at": "2026-10-27T00:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 55722,
+      "datapoint_count": "7192",
+      "file": "snowgrid_cl-v2-1d-1km__all-parameters__2026-10-27T0000.nc",
+      "mode": "historical",
+      "params": [
+        "snow_depth",
+        "swe_tot"
+      ],
+      "rid": "snowgrid_cl-v2-1d-1km",
+      "seconds": 0.323,
+      "sha256": "86cbd2c3d4f1a6e7eb5532a953854df31ac8b0be220d4ba587e0d55eea482abe",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/historical/snowgrid_cl-v2-1d-1km?parameters=snow_depth&parameters=swe_tot&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-10-27T00%3A00&end=2026-10-27T00%3A00&output_format=netcdf"
+    },
+    {
+      "at": "2026-10-27T00:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 138399,
+      "datapoint_count": "35960",
+      "file": "spartacus-v3-1d-1km__all-parameters__2026-10-27T0000.nc",
+      "mode": "historical",
+      "params": [
+        "RR",
+        "SA",
+        "TM",
+        "TM24",
+        "TM24a_1961_1990",
+        "TM24a_1991_2020",
+        "TMa_1961_1990",
+        "TMa_1991_2020",
+        "TN",
+        "TX"
+      ],
+      "rid": "spartacus-v3-1d-1km",
+      "seconds": 0.557,
+      "sha256": "742d130e05d33c86dc1062d656ea593e3fb7841d7d6fe425769be291da611e72",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/historical/spartacus-v3-1d-1km?parameters=RR&parameters=SA&parameters=TM&parameters=TM24&parameters=TM24a_1961_1990&parameters=TM24a_1991_2020&parameters=TMa_1961_1990&parameters=TMa_1991_2020&parameters=TN&parameters=TX&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-10-27T00%3A00&end=2026-10-27T00%3A00&output_format=netcdf"
+    },
+    {
+      "at": "2026-10-01T00:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 209679,
+      "datapoint_count": "64728",
+      "file": "spartacus-v3-1m-1km__all-parameters__2026-10-01T0000.nc",
+      "mode": "historical",
+      "params": [
+        "RR",
+        "RRa_1961_1990",
+        "RRa_1991_2020",
+        "SA",
+        "SAa_1961_1990",
+        "SAa_1991_2020",
+        "TM",
+        "TM24",
+        "TM24a_1961_1990",
+        "TM24a_1991_2020",
+        "TMa_1961_1990",
+        "TMa_1991_2020",
+        "TN",
+        "TNa_1961_1990",
+        "TNa_1991_2020",
+        "TX",
+        "TXa_1961_1990",
+        "TXa_1991_2020"
+      ],
+      "rid": "spartacus-v3-1m-1km",
+      "seconds": 1.117,
+      "sha256": "20f8f7250560d38108497d627dc5f52e610c22c95fada5aa1da059b4d8e72f5b",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/historical/spartacus-v3-1m-1km?parameters=RR&parameters=RRa_1961_1990&parameters=RRa_1991_2020&parameters=SA&parameters=SAa_1961_1990&parameters=SAa_1991_2020&parameters=TM&parameters=TM24&parameters=TM24a_1961_1990&parameters=TM24a_1991_2020&parameters=TMa_1961_1990&parameters=TMa_1991_2020&parameters=TN&parameters=TNa_1961_1990&parameters=TNa_1991_2020&parameters=TX&parameters=TXa_1961_1990&parameters=TXa_1991_2020&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-10-01T00%3A00&end=2026-10-01T00%3A00&output_format=netcdf"
+    },
+    {
+      "at": "2026-09-01T00:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 203712,
+      "datapoint_count": "64728",
+      "file": "spartacus-v3-1q-1km__all-parameters__2026-09-01T0000.nc",
+      "mode": "historical",
+      "params": [
+        "RR",
+        "RRa_1961_1990",
+        "RRa_1991_2020",
+        "SA",
+        "SAa_1961_1990",
+        "SAa_1991_2020",
+        "TM",
+        "TM24",
+        "TM24a_1961_1990",
+        "TM24a_1991_2020",
+        "TMa_1961_1990",
+        "TMa_1991_2020",
+        "TN",
+        "TNa_1961_1990",
+        "TNa_1991_2020",
+        "TX",
+        "TXa_1961_1990",
+        "TXa_1991_2020"
+      ],
+      "rid": "spartacus-v3-1q-1km",
+      "seconds": 1.253,
+      "sha256": "0d90c32ea7f1e5903bd771d0bea3f83c49b88405bb27ec1660a9df70e70ef2ad",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/historical/spartacus-v3-1q-1km?parameters=RR&parameters=RRa_1961_1990&parameters=RRa_1991_2020&parameters=SA&parameters=SAa_1961_1990&parameters=SAa_1991_2020&parameters=TM&parameters=TM24&parameters=TM24a_1961_1990&parameters=TM24a_1991_2020&parameters=TMa_1961_1990&parameters=TMa_1991_2020&parameters=TN&parameters=TNa_1961_1990&parameters=TNa_1991_2020&parameters=TX&parameters=TXa_1961_1990&parameters=TXa_1991_2020&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-09-01T00%3A00&end=2026-09-01T00%3A00&output_format=netcdf"
+    },
+    {
+      "at": "2026-01-01T00:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 201811,
+      "datapoint_count": "64728",
+      "file": "spartacus-v3-1y-1km__all-parameters__2026-01-01T0000.nc",
+      "mode": "historical",
+      "params": [
+        "RR",
+        "RRa_1961_1990",
+        "RRa_1991_2020",
+        "SA",
+        "SAa_1961_1990",
+        "SAa_1991_2020",
+        "TM",
+        "TM24",
+        "TM24a_1961_1990",
+        "TM24a_1991_2020",
+        "TMa_1961_1990",
+        "TMa_1991_2020",
+        "TN",
+        "TNa_1961_1990",
+        "TNa_1991_2020",
+        "TX",
+        "TXa_1961_1990",
+        "TXa_1991_2020"
+      ],
+      "rid": "spartacus-v3-1y-1km",
+      "seconds": 1.173,
+      "sha256": "d9cfccc72868d3830cdc742c3d139eba37aeeef8cc6d65419714eaaf0aa79c23",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/historical/spartacus-v3-1y-1km?parameters=RR&parameters=RRa_1961_1990&parameters=RRa_1991_2020&parameters=SA&parameters=SAa_1961_1990&parameters=SAa_1991_2020&parameters=TM&parameters=TM24&parameters=TM24a_1961_1990&parameters=TM24a_1991_2020&parameters=TMa_1961_1990&parameters=TMa_1991_2020&parameters=TN&parameters=TNa_1961_1990&parameters=TNa_1991_2020&parameters=TX&parameters=TXa_1961_1990&parameters=TXa_1991_2020&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-01-01T00%3A00&end=2026-01-01T00%3A00&output_format=netcdf"
+    },
+    {
+      "at": "2026-10-27T00:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 77514,
+      "datapoint_count": "14384",
+      "file": "winfore-v2-1d-1km__all-parameters__2026-10-27T0000.nc",
+      "mode": "historical",
+      "params": [
+        "ET0",
+        "SPEI30",
+        "SPEI365",
+        "SPEI90"
+      ],
+      "rid": "winfore-v2-1d-1km",
+      "seconds": 0.569,
+      "sha256": "a7cb0859d19828fb9b2e6825db017fa6f4150e0b0534747e5b1c800039dc934d",
+      "status": 200,
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/historical/winfore-v2-1d-1km?parameters=ET0&parameters=SPEI30&parameters=SPEI365&parameters=SPEI90&bbox=47.9%2C16.0%2C48.4%2C16.8&start=2026-10-27T00%3A00&end=2026-10-27T00%3A00&output_format=netcdf"
+    }
+  ],
+  "apolis_full_grid_quadrants": [
+    {
+      "bbox": "45.77174289436432,8.097400742863677,47.625184006898165,12.920198874127337",
+      "bytes": 6436663,
+      "datapoint_count": "7236843",
+      "file": "apolis-v2-1d-100m__full-quadrant-sw__2026-10-27T0000__DIF.nc",
+      "label": "sw",
+      "sha256": "29333de6ac6e6e8ec2c75e6c823eb12a4143741090318499965da66dbb5cdd50",
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/historical/apolis-v2-1d-100m?parameters=DIF&bbox=45.77174289436432%2C8.097400742863677%2C47.625184006898165%2C12.920198874127337&start=2026-10-27T00%3A00&end=2026-10-27T00%3A00&output_format=netcdf"
+    },
+    {
+      "bbox": "45.77174289436432,12.920198874127337,47.625184006898165,17.742997005390997",
+      "bytes": 5683827,
+      "datapoint_count": "7161714",
+      "file": "apolis-v2-1d-100m__full-quadrant-se__2026-10-27T0000__DIF.nc",
+      "label": "se",
+      "sha256": "a236e69f900483e23f9d1914f3e611891c997aee535424f0551234375dcef37d",
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/historical/apolis-v2-1d-100m?parameters=DIF&bbox=45.77174289436432%2C12.920198874127337%2C47.625184006898165%2C17.742997005390997&start=2026-10-27T00%3A00&end=2026-10-27T00%3A00&output_format=netcdf"
+    },
+    {
+      "bbox": "47.625184006898165,8.097400742863677,49.47862511943201,12.920198874127337",
+      "bytes": 5814088,
+      "datapoint_count": "7214120",
+      "file": "apolis-v2-1d-100m__full-quadrant-nw__2026-10-27T0000__DIF.nc",
+      "label": "nw",
+      "sha256": "2222c0678cd3513f78208f0a44dfd47aedbcceb0e3f8ddbb87ead01a20a163c1",
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/historical/apolis-v2-1d-100m?parameters=DIF&bbox=47.625184006898165%2C8.097400742863677%2C49.47862511943201%2C12.920198874127337&start=2026-10-27T00%3A00&end=2026-10-27T00%3A00&output_format=netcdf"
+    },
+    {
+      "bbox": "47.625184006898165,12.920198874127337,49.47862511943201,17.742997005390997",
+      "bytes": 5517548,
+      "datapoint_count": "7234110",
+      "file": "apolis-v2-1d-100m__full-quadrant-ne__2026-10-27T0000__DIF.nc",
+      "label": "ne",
+      "sha256": "db7b41dc4134e0a39eb8e48037583e45642e93c892044e7a15456e7533e4011a",
+      "url": "https://dataset.api.hub.geosphere.at/v1/grid/historical/apolis-v2-1d-100m?parameters=DIF&bbox=47.625184006898165%2C12.920198874127337%2C49.47862511943201%2C17.742997005390997&start=2026-10-27T00%3A00&end=2026-10-27T00%3A00&output_format=netcdf"
+    }
+  ],
+  "representative_downloads": [
+    {
+      "at": "2026-10-28T10:00",
+      "bbox": "43.002,5.0317,51.498000000000324,22.56819999999951",
+      "bytes": 1929286,
+      "datapoint_count": "3685500",
+      "file": "ensemble-v2-1h-1km__2026-10-28T1000__2t_p50-tp_p50-tcc_p50.nc",
+      "mode": "forecast",
+      "params": [
+        "2t_p50",
+        "tp_p50",
+        "tcc_p50"
+      ],
+      "rid": "ensemble-v2-1h-1km",
+      "seconds": 3.37,
+      "sha256": "67b0acd37866ec111719535e8ff9cfd344a0c0ab89ef46a1cc820b553be3898b",
+      "status": 200
+    },
+    {
+      "at": "2026-10-28T15:15",
+      "bbox": "45.50288351657135,8.098133748352293,49.47817568460958,17.742270413233744",
+      "bytes": 1519225,
+      "datapoint_count": "906393",
+      "file": "nowcast-v1-15min-1km__2026-10-28T1515__t2m-rr-rh2m.nc",
+      "mode": "forecast",
+      "params": [
+        "t2m",
+        "rr",
+        "rh2m"
+      ],
+      "rid": "nowcast-v1-15min-1km",
+      "seconds": 1.611,
+      "sha256": "14c4723b1a531d1b10304f1b66db70cac4dcff1b7a17bb5647977cd70f7f9db6",
+      "status": 200
+    },
+    {
+      "at": "2026-10-28T00:00",
+      "bbox": "40.90548512501946,2.8988549981092184,53.74183462389211,23.701145383360583",
+      "bytes": 1601783,
+      "datapoint_count": "810000",
+      "file": "chem-v2-1h-3km__2026-10-28T0000__no2surf-o3surf-pm10surf-pm25surf.nc",
+      "mode": "forecast",
+      "params": [
+        "no2surf",
+        "o3surf",
+        "pm10surf",
+        "pm25surf"
+      ],
+      "rid": "chem-v2-1h-3km",
+      "seconds": 1.962,
+      "sha256": "86f2a4caf5abe688d2458ecaf640859cd290041c4f9058d968ff55dce10614dd",
+      "status": 200
+    },
+    {
+      "at": "2026-10-28T00:00",
+      "bbox": "15.52074014369195,-53.458125621322004,74.33989521398574,80.05812600279181",
+      "bytes": 2436510,
+      "datapoint_count": "462400",
+      "file": "chem-v2-1h-9km__2026-10-28T0000__pm10surf.nc",
+      "mode": "forecast",
+      "params": [
+        "pm10surf"
+      ],
+      "rid": "chem-v2-1h-9km",
+      "seconds": 1.687,
+      "sha256": "9ac8758af7439643ddb14df227fb82e8616d874bbe97bea3b90cc9b22cef6f43",
+      "status": 200
+    },
+    {
+      "at": "2026-10-28T00:00",
+      "bbox": "40.90548512501946,2.8988549981092184,53.74183462389211,23.701145383360583",
+      "bytes": 650508,
+      "datapoint_count": "202500",
+      "file": "chem_aqi-v1-1d-3km__2026-10-28T0000__aqi.nc",
+      "mode": "forecast",
+      "params": [
+        "aqi"
+      ],
+      "rid": "chem_aqi-v1-1d-3km",
+      "seconds": 0.423,
+      "sha256": "ec4587b930ebc6e6b49bbb04b9c956b9961bcf42c0da9533a123340e8f2f8aa2",
+      "status": 200
+    },
+    {
+      "at": "2026-10-28T00:00",
+      "bbox": "0.20000076,-24.799988,64.80000076,64.80001199999968",
+      "bytes": 226182,
+      "datapoint_count": "145476",
+      "file": "chem_dust-v1-1h-0p2deg__2026-10-28T0000__dust.nc",
+      "mode": "forecast",
+      "params": [
+        "dust"
+      ],
+      "rid": "chem_dust-v1-1h-0p2deg",
+      "seconds": 0.534,
+      "sha256": "6a21d631e540787e05ab40880157ff18c42183f311430774d75db9db26d18e6c",
+      "status": 200
+    },
+    {
+      "at": "2026-10-28T15:00",
+      "bbox": "45.77222010581118,8.098133748352293,49.47817568460958,17.742270413233744",
+      "bytes": 2135987,
+      "datapoint_count": "1405505",
+      "file": "inca-v1-1h-1km__2026-10-28T1500__T2M-RR-RH2M-UU-VV.nc",
+      "mode": "historical",
+      "params": [
+        "T2M",
+        "RR",
+        "RH2M",
+        "UU",
+        "VV"
+      ],
+      "rid": "inca-v1-1h-1km",
+      "seconds": 9.427,
+      "sha256": "06fc1e253c226444394d97525a8fad2594b0757d1dae833b9264470ebf12b499",
+      "status": 200
+    },
+    {
+      "at": "2026-10-27T00:00",
+      "bbox": "46.16132856869247,9.393909734939893,49.177527691779716,17.382180045432914",
+      "bytes": 533082,
+      "datapoint_count": "384272",
+      "file": "snowgrid_cl-v2-1d-1km__2026-10-27T0000__snow_depth-swe_tot.nc",
+      "mode": "historical",
+      "params": [
+        "snow_depth",
+        "swe_tot"
+      ],
+      "rid": "snowgrid_cl-v2-1d-1km",
+      "seconds": 1.397,
+      "sha256": "754eb0b50ea052de6da98483247f5dae5eaf3860ea3f7bacaa297c8f56ec4a5b",
+      "status": 200
+    },
+    {
+      "at": "2026-10-27T00:00",
+      "bbox": "46.16132856869247,9.393909734939893,49.177527691779716,17.382180045432914",
+      "bytes": 990237,
+      "datapoint_count": "1152816",
+      "file": "spartacus-v3-1d-1km__2026-10-27T0000__RR-SA-TM-TM24-TN-TX.nc",
+      "mode": "historical",
+      "params": [
+        "RR",
+        "SA",
+        "TM",
+        "TM24",
+        "TN",
+        "TX"
+      ],
+      "rid": "spartacus-v3-1d-1km",
+      "seconds": 1.854,
+      "sha256": "e242a9c7136fad3fd694f72ed76be7d3804a30ab393866ae8075155ffacc48a6",
+      "status": 200
+    },
+    {
+      "at": "2026-10-01T00:00",
+      "bbox": "46.16132856869247,9.393909734939893,49.177527691779716,17.382180045432914",
+      "bytes": 908706,
+      "datapoint_count": "768544",
+      "file": "spartacus-v3-1m-1km__2026-10-01T0000__RR-TM-TN-TX.nc",
+      "mode": "historical",
+      "params": [
+        "RR",
+        "TM",
+        "TN",
+        "TX"
+      ],
+      "rid": "spartacus-v3-1m-1km",
+      "seconds": 0.666,
+      "sha256": "dae126700787c47e3e23a2997e29fa35f9da8ea17f80b9ec10985310c2846e94",
+      "status": 200
+    },
+    {
+      "at": "2026-09-01T00:00",
+      "bbox": "46.16132856869247,9.393909734939893,49.177527691779716,17.382180045432914",
+      "bytes": 719656,
+      "datapoint_count": "384272",
+      "file": "spartacus-v3-1q-1km__2026-09-01T0000__RR-TM.nc",
+      "mode": "historical",
+      "params": [
+        "RR",
+        "TM"
+      ],
+      "rid": "spartacus-v3-1q-1km",
+      "seconds": 0.503,
+      "sha256": "b3e660df8d0ade717c877a7b6ff1987f208660aa52f5b82ba4a59d6f0fa924d7",
+      "status": 200
+    },
+    {
+      "at": "2026-01-01T00:00",
+      "bbox": "46.16132856869247,9.393909734939893,49.177527691779716,17.382180045432914",
+      "bytes": 749041,
+      "datapoint_count": "384272",
+      "file": "spartacus-v3-1y-1km__2026-01-01T0000__RR-TM.nc",
+      "mode": "historical",
+      "params": [
+        "RR",
+        "TM"
+      ],
+      "rid": "spartacus-v3-1y-1km",
+      "seconds": 0.571,
+      "sha256": "7e0d74bd20fd171e8848d11680bf1fbbdcb600b4c25e4104e449802d2b536714",
+      "status": 200
+    },
+    {
+      "at": "2026-10-27T00:00",
+      "bbox": "46.16132856869247,9.393909734939893,49.177527691779716,17.382180045432914",
+      "bytes": 616581,
+      "datapoint_count": "768544",
+      "file": "winfore-v2-1d-1km__2026-10-27T0000__ET0-SPEI30-SPEI90-SPEI365.nc",
+      "mode": "historical",
+      "params": [
+        "ET0",
+        "SPEI30",
+        "SPEI90",
+        "SPEI365"
+      ],
+      "rid": "winfore-v2-1d-1km",
+      "seconds": 2.496,
+      "sha256": "5cf2354142191a35e423cceb29eed5f52cd6aca4f64d4657a70e14d6483c9c5b",
+      "status": 200
+    },
+    {
+      "at": "2026-10-27T00:00",
+      "bbox": "47.9,16.0,48.4,16.8",
+      "bytes": 635436,
+      "datapoint_count": "1783320",
+      "file": "apolis-v2-1d-100m__2026-10-27T0000__DIF-DIR_hori-DIR_real-RSSD-SSD.nc",
+      "mode": "historical",
+      "params": [
+        "DIF",
+        "DIR_hori",
+        "DIR_real",
+        "RSSD",
+        "SSD"
+      ],
+      "rid": "apolis-v2-1d-100m",
+      "seconds": 2.641,
+      "sha256": "8b0a0d01843a93b89ee4426f0881f64be479bcb2d1b33d53f552d21d286c734b",
+      "status": 200
+    },
+    {
+      "at": "2026-10-28T15:00",
+      "bbox": "45.50288351657135,8.098133748352293,49.47817568460958,17.742270413233744",
+      "bytes": 2456494,
+      "datapoint_count": "2417048",
+      "file": "inca-v2-1h-1km__all-parameters__2026-10-28T1500.nc",
+      "mode": "historical",
+      "params": [
+        "10u",
+        "10v",
+        "2d",
+        "2r",
+        "2t",
+        "msl",
+        "ssrd",
+        "tp"
+      ],
+      "rid": "inca-v2-1h-1km",
+      "sha256": "84d6c7dd11fac7d6849c74be3d4bd3048d7bd086206cbc56796cfed4f25120f5",
+      "status": 200
+    }
+  ]
+}

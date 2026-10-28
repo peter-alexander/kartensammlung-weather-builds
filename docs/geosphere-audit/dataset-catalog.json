@@ -1,0 +1,2408 @@
+[
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/nwp-v2-1h-1km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/nwp-v2-1h-1km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/forecast/nwp-v2-1h-1km"
+    },
+    "available_forecast_reftimes": [
+      "2026-10-28T09:00+00:00",
+      "2026-10-28T06:00+00:00",
+      "2026-10-28T03:00+00:00",
+      "2026-10-28T00:00+00:00",
+      "2026-10-27T21:00+00:00",
+      "2026-10-27T18:00+00:00"
+    ],
+    "bbox_centers_south_west_north_east": [
+      43.002,
+      5.0317,
+      51.498000000000324,
+      22.56819999999951
+    ],
+    "bbox_outer_south_west_north_east": [
+      42.9975,
+      5.02495,
+      51.502500000000325,
+      22.57494999999951
+    ],
+    "crs": "EPSG:4326",
+    "dataset_id": "nwp-v2-1h-1km",
+    "dataset_status": "active",
+    "description": {
+      "de": "Dieser Datensatz enthält den deterministischen Kontrolllauf des C-LAEF AlpeAdria (Convection-Permitting Limited-Area Ensemble Forecasting for the AlpeAdria region) Ensemblesystems, der auf einem nativen Gitter mit einer Auflösung von einem Kilometer basiert. Der Datensatz liefert meteorologische Vorhersagen für den erweiterten Alpenraum, wird alle drei Stunden neu berechnet und umfasst einen Vorhersagezeitraum von 60 Stunden. Die Orografie des Modells ist unter [diesem Link](https://public.hub.geosphere.at/public/resources/misc/nwp_oro-v2-1km.nc) abrufbar.",
+      "en": "This dataset contains the deterministic control member of the C-LAEF AlpeAdria (Convection-Permitting Limited-Area Ensemble Forecasting for the AlpeAdria region) ensembles. This model is based on a native grid with a resolution of one kilometre. The dataset provides meteorological forecasts for the extended Alpine region and is updated every three hours. The model's orography is available at [this link](https://public.hub.geosphere.at/public/resources/misc/nwp_oro-v2-1km.nc)."
+    },
+    "doi": "https://doi.org/10.60669/rv80-9d61",
+    "end_time": null,
+    "forecast_length_count": 61,
+    "frequency_api": "1H",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      945,
+      1300
+    ],
+    "issued": "2026-08-24T00:00:00",
+    "last_forecast_reftime": "2026-10-28T09:00+00:00",
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "forecast",
+    "modified": "2026-10-28T13:12:44",
+    "parameter_count": 16,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "Y",
+          "dtype": "float64",
+          "first": 47.90700000000019,
+          "last": 48.39300000000021,
+          "max": 48.39300000000021,
+          "min": 47.90700000000019,
+          "shape": [
+            55
+          ],
+          "standard_name": "latitude",
+          "step_max": 0.009000000000000341,
+          "step_min": 0.009000000000000341,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "X",
+          "dtype": "float64",
+          "first": 16.007199999999695,
+          "last": 16.790199999999672,
+          "max": 16.790199999999672,
+          "min": 16.007199999999695,
+          "shape": [
+            59
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.013500000000000512,
+          "step_min": 0.013499999999996959,
+          "units": "degrees_east"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "10fg",
+        "10u",
+        "10v",
+        "2r",
+        "2t",
+        "cape",
+        "msl",
+        "pt",
+        "rain",
+        "sf",
+        "snowlmt",
+        "ssrd",
+        "sund",
+        "sy",
+        "tcc",
+        "tp"
+      ],
+      "dimensions": {
+        "lat": 55,
+        "lon": 59,
+        "time": 1
+      },
+      "global_crs": "EPSG:4326",
+      "grid_mapping": "latitude_longitude",
+      "resource_id": "nwp-v2-1h-1km",
+      "sample_file": "nwp-v2-1h-1km__all-parameters__2026-10-28T1000.nc",
+      "spatial_resolution": "[0.0135 0.009 ]",
+      "spatial_resolution_unit": "deg"
+    },
+    "spatial_resolution": [
+      0.0135,
+      0.009
+    ],
+    "spatial_resolution_unit": "deg",
+    "start_time": null,
+    "temporal_resolution_portal": "PT1H",
+    "title": {
+      "de": "Hochauflösendes Wettermodell für Österreich (C-LAEF AlpeAdria deterministisch)",
+      "en": "High-resolution weather model for Austria (C-LAEF AlpeAdria deterministic)"
+    },
+    "update_frequency_portal": "PT3H",
+    "version": "2"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/ensemble-v2-1h-1km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/ensemble-v2-1h-1km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/forecast/ensemble-v2-1h-1km"
+    },
+    "available_forecast_reftimes": [
+      "2026-10-28T09:00+00:00",
+      "2026-10-28T06:00+00:00",
+      "2026-10-28T03:00+00:00",
+      "2026-10-28T00:00+00:00"
+    ],
+    "bbox_centers_south_west_north_east": [
+      43.002,
+      5.0317,
+      51.498000000000324,
+      22.56819999999951
+    ],
+    "bbox_outer_south_west_north_east": [
+      42.9975,
+      5.02495,
+      51.502500000000325,
+      22.57494999999951
+    ],
+    "crs": "EPSG:4326",
+    "dataset_id": "ensemble-v2-1h-1km",
+    "dataset_status": "active",
+    "description": {
+      "de": "Dieser Datensatz enthält die Ensemble-Daten und dessen Statistiken des Ensemblesystems C-LAEF AlpeAdria (Convection-Permitting Limited-Area Ensemble Forecasting for the AlpeAdria region), die auf einem nativen Gitter mit einer Auflösung von einem Kilometer basieren. Der Datensatz basiert auf 17 Modelläufen (16 Ensemblemember und ein Kontrolllauf), aus denen die Perzentile 10, 50 und 90 berechnet werden, um die Unsicherheit der Vorhersagen zu quantifizieren. Über die API sind ausschließlich die Ensemble-Statistiken verfügbar. Die Orografie des Modells ist unter [diesem Link](https://public.hub.geosphere.at/public/resources/misc/nwp_oro-v2-1km.nc) abrufbar.",
+      "en": "This dataset contains the ensemble data and associated statistics from the C-LAEF AlpeAdria (Convection-Permitting Limited-Area Ensemble Forecasting for the AlpeAdria region), which is based on a native grid with a resolution of one kilometer. The dataset is based on 17 model runs (16 ensemble members and one control run) from which the 10th, 50th and 90th percentiles are calculated in order to quantify the uncertainty of the forecasts. The model's orography is available at [this link](https://public.hub.geosphere.at/public/resources/misc/nwp_oro-v2-1km.nc)."
+    },
+    "doi": "https://doi.org/10.60669/f21y-5007",
+    "end_time": null,
+    "forecast_length_count": 61,
+    "frequency_api": "1H",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      945,
+      1300
+    ],
+    "issued": "2026-08-24T00:00:00",
+    "last_forecast_reftime": "2026-10-28T09:00+00:00",
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "forecast",
+    "modified": "2026-10-28T14:36:48",
+    "parameter_count": 42,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "Y",
+          "dtype": "float64",
+          "first": 47.90700000000019,
+          "last": 48.39300000000021,
+          "max": 48.39300000000021,
+          "min": 47.90700000000019,
+          "shape": [
+            55
+          ],
+          "standard_name": "latitude",
+          "step_max": 0.009000000000000341,
+          "step_min": 0.009000000000000341,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "X",
+          "dtype": "float64",
+          "first": 16.007199999999695,
+          "last": 16.790199999999672,
+          "max": 16.790199999999672,
+          "min": 16.007199999999695,
+          "shape": [
+            59
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.013500000000000512,
+          "step_min": 0.013499999999996959,
+          "units": "degrees_east"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "10fg_p10",
+        "10fg_p50",
+        "10fg_p90",
+        "10u_p10",
+        "10u_p50",
+        "10u_p90",
+        "10v_p10",
+        "10v_p50",
+        "10v_p90",
+        "2r_p10",
+        "2r_p50",
+        "2r_p90",
+        "2t_p10",
+        "2t_p50",
+        "2t_p90",
+        "cape_p10",
+        "cape_p50",
+        "cape_p90",
+        "msl_p10",
+        "msl_p50",
+        "msl_p90",
+        "rain_p10",
+        "rain_p50",
+        "rain_p90",
+        "sf_p10",
+        "sf_p50",
+        "sf_p90",
+        "snowlmt_p10",
+        "snowlmt_p50",
+        "snowlmt_p90",
+        "ssrd_p10",
+        "ssrd_p50",
+        "ssrd_p90",
+        "sund_p10",
+        "sund_p50",
+        "sund_p90",
+        "tcc_p10",
+        "tcc_p50",
+        "tcc_p90",
+        "tp_p10",
+        "tp_p50",
+        "tp_p90"
+      ],
+      "dimensions": {
+        "lat": 55,
+        "lon": 59,
+        "time": 1
+      },
+      "global_crs": "EPSG:4326",
+      "grid_mapping": "latitude_longitude",
+      "resource_id": "ensemble-v2-1h-1km",
+      "sample_file": "ensemble-v2-1h-1km__all-parameters__2026-10-28T1000.nc",
+      "spatial_resolution": "[0.0135 0.009 ]",
+      "spatial_resolution_unit": "deg"
+    },
+    "spatial_resolution": [
+      0.0135,
+      0.009
+    ],
+    "spatial_resolution_unit": "deg",
+    "start_time": null,
+    "temporal_resolution_portal": "PT1H",
+    "title": {
+      "de": "Ensemblevorhersage für Österreich (C-LAEF AlpeAdria)",
+      "en": "Ensemble forecast for Austria (C-LAEF AlpeAdria)"
+    },
+    "update_frequency_portal": "PT3H",
+    "version": "2"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/nowcast-v1-15min-1km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/nowcast-v1-15min-1km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/forecast/nowcast-v1-15min-1km"
+    },
+    "available_forecast_reftimes": [
+      "2026-10-28T15:00+00:00",
+      "2026-10-28T14:45+00:00",
+      "2026-10-28T14:30+00:00",
+      "2026-10-28T14:15+00:00",
+      "2026-10-28T14:00+00:00",
+      "2026-10-28T13:45+00:00"
+    ],
+    "bbox_centers_south_west_north_east": [
+      45.50288351657135,
+      8.098133748352293,
+      49.47817568460958,
+      17.742270413233744
+    ],
+    "bbox_outer_south_west_north_east": [
+      45.49811305905748,
+      8.09080314984374,
+      49.48267002420558,
+      17.74953688061394
+    ],
+    "crs": "EPSG:31287",
+    "dataset_id": "nowcast-v1-15min-1km",
+    "dataset_status": "active",
+    "description": {
+      "de": "Die Kurzfristvorhersagen basieren auf dem Analyse- und Nowcastingsystem INCA. INCA verwendet Datenquellen wie Stationsbeobachtungen, Fernerkundungsdaten, numerische Wettervorhersagemodelle und ein hochaufgelöstes Geländemodell um eine möglichst gute Analyse des Jetztzustands der (bodennahen) Atmosphäre sowie kurzfristigen Vorhersage zu erstellen. Die Kombination dieser Datenquellen kann am besten und einfachsten als Korrektur eines gegitterten Hintergrundfeldes mit Beobachtungsdaten interpretiert werden. Die in diesem Datensatz enthaltenen Vorhersagen haben eine räumliche Auflösung von 1 km x 1 km und eine zeitliche Auflösung von 15 Minuten bei einem Vorhersagehorizont von 3 Stunden. Die Orografie des Modells ist unter [diesem Link](https://public.hub.geosphere.at/public/resources/misc/INCA_NOWCASTING_DEM.nc) abrufbar.",
+      "en": "The short-term forecasts are based on the INCA analysis and nowcasting system. The INCA analysis and nowcasting system uses all available data sources, including station observations, remote sensing data, numerical weather prediction models and a high-resolution terrain model, to produce the most accurate analysis of the current state of the near-surface atmosphere. These data sources can most easily be interpreted as a correction of a gridded background field with observation data. INCA is used for flood warning and forecasting, as well as providing the basis for web portals with spatially and temporally detailed meteorological information. This dataset contains forecasts with a spatial resolution of 1 km x 1 km, a temporal resolution of 15 minutes, and a forecast horizon of 3 hours. The model's orography is available via [this link](https://public.hub.geosphere.at/public/resources/misc/INCA_NOWCASTING_DEM.nc)."
+    },
+    "doi": "https://doi.org/10.60669/ahad-4y43",
+    "end_time": null,
+    "forecast_length_count": 13,
+    "frequency_api": "15min",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      431,
+      701
+    ],
+    "issued": "2023-02-24T00:00:00",
+    "last_forecast_reftime": "2026-10-28T15:00+00:00",
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "forecast",
+    "modified": "2026-10-28T15:17:32",
+    "parameter_count": 8,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 47.90104675292969,
+          "last": 48.3917350769043,
+          "max": 48.41350555419922,
+          "min": 47.879486083984375,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "latitude",
+          "step_max": -0.00030517578125,
+          "step_min": -0.00040435791015625,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 15.982101440429688,
+          "last": 16.83169937133789,
+          "max": 16.83169937133789,
+          "min": 15.982101440429688,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.0135040283203125,
+          "step_min": 0.01335906982421875,
+          "units": "degrees_east"
+        },
+        "x": {
+          "axis": "X",
+          "dtype": "int32",
+          "first": 598000.0,
+          "last": 659000.0,
+          "max": 659000.0,
+          "min": 598000.0,
+          "shape": [
+            62
+          ],
+          "standard_name": "projection_x_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        },
+        "y": {
+          "axis": "Y",
+          "dtype": "int32",
+          "first": 448000.0,
+          "last": 505000.0,
+          "max": 505000.0,
+          "min": 448000.0,
+          "shape": [
+            58
+          ],
+          "standard_name": "projection_y_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "dd",
+        "ff",
+        "fx",
+        "pt",
+        "rh2m",
+        "rr",
+        "t2m",
+        "td"
+      ],
+      "dimensions": {
+        "time": 1,
+        "x": 62,
+        "y": 58
+      },
+      "global_crs": "EPSG:31287",
+      "grid_mapping": "lambert_conformal_conic",
+      "resource_id": "nowcast-v1-15min-1km",
+      "sample_file": "nowcast-v1-15min-1km__all-parameters__2026-10-28T1515.nc",
+      "spatial_resolution": "1000",
+      "spatial_resolution_unit": null
+    },
+    "spatial_resolution": [
+      1000,
+      1000
+    ],
+    "spatial_resolution_unit": "m",
+    "start_time": null,
+    "temporal_resolution_portal": "PT15M",
+    "title": {
+      "de": "Kurzfristwettervorhersagen für Österreich",
+      "en": "Short-Term Weather Forecasts for Austria"
+    },
+    "update_frequency_portal": "PT15M",
+    "version": "1"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/historical/inca-v2-1h-1km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/historical/inca-v2-1h-1km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/historical/inca-v2-1h-1km"
+    },
+    "available_forecast_reftimes": null,
+    "bbox_centers_south_west_north_east": [
+      45.50288351657135,
+      8.098133748352293,
+      49.47817568460958,
+      17.742270413233744
+    ],
+    "bbox_outer_south_west_north_east": [
+      45.49811305905748,
+      8.09080314984374,
+      49.48267002420558,
+      17.74953688061394
+    ],
+    "crs": "EPSG:31287",
+    "dataset_id": "inca-v2-1h-1km",
+    "dataset_status": "active",
+    "description": {
+      "de": "Das Analyse- und Nowcastingsystem INCA verwendet alle verfügbaren Datenquellen wie Stationsbeobachtungen, Fernerkundungsdaten, numerische Wettervorhersagemodelle und ein hochaufgelöstes Geländemodell um eine möglichst gute Analyse des Jetztzustands der (bodennahen) Atmosphäre zu erstellen. Die Kombination dieser Datenquellen kann am besten und einfachsten als Korrektur eines gegitterten Hintergrundfeldes mit Beobachtungsdaten interpretiert werden. INCA wird unter anderem in der Hochwasserwarnung und prognose sowie als Basis für Internetportale mit räumlich und zeitlich detaillierter meteorologischer Information verwendet. Die in diesem Datensatz enthaltenen Analysen haben eine räumliche Auflösung von 1 km x 1 km und eine zeitliche Auflösung von 1 Stunde. Sie weisen von allen INCA-Produkten die größte Dichte an Beobachtungsdaten auf.",
+      "en": "The INCA analysis and nowcasting system uses all available data sources, including station observations, remote sensing data, numerical weather prediction models and a high-resolution terrain model, to produce the most accurate analysis of the current state of the near-surface atmosphere. These data sources can most easily be interpreted as a correction of a gridded background field with observation data. INCA is used for flood warning and forecasting, as well as providing the basis for web portals with spatially and temporally detailed meteorological information. The analyses in this dataset have a spatial resolution of 1 km x 1 km and a temporal resolution of 1 hour. The model's orography is available for bulk download."
+    },
+    "doi": "https://doi.org/10.60669/nq0z-5v47",
+    "end_time": "2026-10-28T15:00+00:00",
+    "forecast_length_count": null,
+    "frequency_api": "1h",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      431,
+      701
+    ],
+    "issued": "2026-10-05T00:00:00",
+    "last_forecast_reftime": null,
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "historical",
+    "modified": "2026-10-28T15:45:54",
+    "parameter_count": 8,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 45.50288391113281,
+          "last": 49.396671295166016,
+          "max": 49.47817611694336,
+          "min": 45.50288391113281,
+          "shape": [
+            431,
+            701
+          ],
+          "standard_name": "latitude",
+          "step_max": 0.000606536865234375,
+          "step_min": -0.00051116943359375,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 8.468643188476562,
+          "last": 17.74226951599121,
+          "max": 17.74226951599121,
+          "min": 8.09813404083252,
+          "shape": [
+            431,
+            701
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.013795852661132812,
+          "step_min": 0.012766838073730469,
+          "units": "degrees_east"
+        },
+        "x": {
+          "axis": "X",
+          "dtype": "int32",
+          "first": 20000.0,
+          "last": 720000.0,
+          "max": 720000.0,
+          "min": 20000.0,
+          "shape": [
+            701
+          ],
+          "standard_name": "projection_x_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        },
+        "y": {
+          "axis": "Y",
+          "dtype": "int32",
+          "first": 190000.0,
+          "last": 620000.0,
+          "max": 620000.0,
+          "min": 190000.0,
+          "shape": [
+            431
+          ],
+          "standard_name": "projection_y_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "10u",
+        "10v",
+        "2d",
+        "2r",
+        "2t",
+        "msl",
+        "ssrd",
+        "tp"
+      ],
+      "dimensions": {
+        "time": 1,
+        "x": 701,
+        "y": 431
+      },
+      "global_crs": "EPSG:31287",
+      "grid_mapping": "lambert_conformal_conic",
+      "resource_id": "inca-v2-1h-1km",
+      "sample_file": "inca-v2-1h-1km__all-parameters__2026-10-28T1500.nc",
+      "spatial_resolution": "1000",
+      "spatial_resolution_unit": null
+    },
+    "spatial_resolution": [
+      1000,
+      1000
+    ],
+    "spatial_resolution_unit": "m",
+    "start_time": "2026-10-01T00:00+00:00",
+    "temporal_resolution_portal": "PT1H",
+    "title": {
+      "de": "INCA-v2 (1 h): Meteorologische Analysetagesdaten für Österreich",
+      "en": "INCA-v2 (1 h): Meteorological daily analysis data for Austria"
+    },
+    "update_frequency_portal": "PT1H",
+    "version": "2"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/historical/inca-v1-1h-1km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/historical/inca-v1-1h-1km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/historical/inca-v1-1h-1km"
+    },
+    "available_forecast_reftimes": null,
+    "bbox_centers_south_west_north_east": [
+      45.77222010581118,
+      8.098133748352293,
+      49.47817568460958,
+      17.742270413233744
+    ],
+    "bbox_outer_south_west_north_east": [
+      45.76744784846555,
+      8.09080314984374,
+      49.48267002420558,
+      17.74953688061394
+    ],
+    "crs": "EPSG:31287",
+    "dataset_id": "inca-v1-1h-1km",
+    "dataset_status": "archived",
+    "description": {
+      "de": "Das Analyse- und Nowcastingsystem INCA verwendet alle verfügbaren Datenquellen – Stationsbeobachtungen, Fernerkundungsdaten, numerische Wettervorhersagemodelle und ein hochaufgelöstes Geländemodell – um eine möglichst gute Analyse des Jetztzustands der (bodennahen) Atmosphäre zu erstellen. Die Kombination dieser Datenquellen kann am besten und einfachsten als Korrektur eines gegitterten Hintergrundfeldes mit Beobachtungsdaten interpretiert werden. INCA wird unter anderem in der Hochwasserwarnung und –prognose sowie als Basis für Internetportale mit räumlich und zeitlich detaillierter meteorologischer Information verwendet. Die in diesem Datensatz enthaltenen Analysen haben eine räumliche Auflösung von 1 km x 1 km und eine zeitliche Auflösung von 1 Stunde. Die Orographie des Modells ist via Bulk-Download abrufbar.",
+      "en": "The INCA analysis and nowcasting system uses all available data sources, including station observations, remote sensing data, numerical weather prediction models and a high-resolution terrain model, to produce the most accurate analysis of the current state of the near-surface atmosphere. These data sources can most easily be interpreted as a correction of a gridded background field with observation data. INCA is used for flood warning and forecasting, as well as providing the basis for web portals with spatially and temporally detailed meteorological information. The analyses in this dataset have a spatial resolution of 1 km x 1 km and a temporal resolution of 1 hour. The model's orography is available for bulk download."
+    },
+    "doi": "https://doi.org/10.60669/6akt-5p05",
+    "end_time": "2026-10-28T15:00+00:00",
+    "forecast_length_count": null,
+    "frequency_api": "1H",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      401,
+      701
+    ],
+    "issued": "2021-05-15T00:00:00",
+    "last_forecast_reftime": null,
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "historical",
+    "modified": "2026-10-28T14:37:34",
+    "parameter_count": 8,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 47.90104675292969,
+          "last": 48.3917350769043,
+          "max": 48.41350555419922,
+          "min": 47.879486083984375,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "latitude",
+          "step_max": -0.00030517578125,
+          "step_min": -0.00040435791015625,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 15.982101440429688,
+          "last": 16.83169937133789,
+          "max": 16.83169937133789,
+          "min": 15.982101440429688,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.0135040283203125,
+          "step_min": 0.01335906982421875,
+          "units": "degrees_east"
+        },
+        "x": {
+          "axis": "X",
+          "dtype": "int32",
+          "first": 598000.0,
+          "last": 659000.0,
+          "max": 659000.0,
+          "min": 598000.0,
+          "shape": [
+            62
+          ],
+          "standard_name": "projection_x_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        },
+        "y": {
+          "axis": "Y",
+          "dtype": "int32",
+          "first": 448000.0,
+          "last": 505000.0,
+          "max": 505000.0,
+          "min": 448000.0,
+          "shape": [
+            58
+          ],
+          "standard_name": "projection_y_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "GL",
+        "P0",
+        "RH2M",
+        "RR",
+        "T2M",
+        "TD2M",
+        "UU",
+        "VV"
+      ],
+      "dimensions": {
+        "time": 1,
+        "x": 62,
+        "y": 58
+      },
+      "global_crs": "EPSG:31287",
+      "grid_mapping": "lambert_conformal_conic",
+      "resource_id": "inca-v1-1h-1km",
+      "sample_file": "inca-v1-1h-1km__all-parameters__2026-10-28T1500.nc",
+      "spatial_resolution": "1000",
+      "spatial_resolution_unit": null
+    },
+    "spatial_resolution": [
+      1000,
+      1000
+    ],
+    "spatial_resolution_unit": "m",
+    "start_time": "2011-03-15T00:00+00:00",
+    "temporal_resolution_portal": "PT1H",
+    "title": {
+      "de": "INCA-v1 (1 h): Meteorologische Analysedaten für Österreich",
+      "en": "INCA-v1 (1 h): Meteorological analysis data for Austria"
+    },
+    "update_frequency_portal": "PT1H",
+    "version": "1"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/chem-v2-1h-3km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/chem-v2-1h-3km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/forecast/chem-v2-1h-3km"
+    },
+    "available_forecast_reftimes": [
+      "2026-10-28T00:00+00:00",
+      "2026-10-27T00:00+00:00",
+      "2026-10-26T00:00+00:00",
+      "2026-10-25T00:00+00:00",
+      "2026-10-24T00:00+00:00",
+      "2026-10-23T00:00+00:00"
+    ],
+    "bbox_centers_south_west_north_east": [
+      40.90548512501946,
+      2.8988549981092184,
+      53.74183462389211,
+      23.701145383360583
+    ],
+    "bbox_outer_south_west_north_east": [
+      40.89018342157226,
+      2.8729505195381027,
+      53.755644869098944,
+      23.7270498619317
+    ],
+    "crs": "PROJCS[\"undefined\",GEOGCS[\"undefined\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"standard_parallel_1\",30],PARAMETER[\"standard_parallel_2\",60],PARAMETER[\"latitude_of_origin\",47.5000076293945],PARAMETER[\"central_meridian\",13.3000001907349],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "dataset_id": "chem-v2-1h-3km",
+    "dataset_status": "active",
+    "description": {
+      "de": "Die Schadstoffvorhersagen basieren auf dem online gekoppelten chemischen Transportmodell WRF-Chem, welches täglich Vorhersagen der wichtigsten Schadstoffe wie z. B. bodennahes Ozon und Feinstaub für die nächsten 3 Tage liefert. Für die Schadstoffvorhersagen werden die meteorologischen Anfangs- und Randbedingungen aus dem IFS-Modell (Integrated Forecasting System) des Europäisches Zentrum für mittelfristige Wettervorhersage (ECMWF) extrahiert. Die anthropogenen Emissionen stammen aus dem CAMS-Emissionskataster. Dieses Modellgebiet (Gitterauflösung: 3 x 3 km) umfasst Mitteleuropa.",
+      "en": "The air pollution forecasts are based on the online coupled chemical transport model, WRF-Chem. This model provides daily forecasts of key pollutants, such as ground-level ozone and particulate matter, for the next three days. The initial and boundary conditions for the pollutant forecasts are extracted from the Integrated Forecasting System (IFS) model of the European Centre for Medium-Range Weather Forecasts (ECMWF). Anthropogenic emissions are derived from the CAMS emissions cadastre. The model area (grid resolution: 3 x 3 km) covers Central Europe."
+    },
+    "doi": "https://doi.org/10.60669/1860-g785",
+    "end_time": null,
+    "forecast_length_count": 73,
+    "frequency_api": "1H",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      450,
+      450
+    ],
+    "issued": "2025-01-22T00:00:00",
+    "last_forecast_reftime": "2026-10-28T00:00+00:00",
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "forecast",
+    "modified": "2026-10-28T03:26:53",
+    "parameter_count": 4,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 47.90266036987305,
+          "last": 48.38423156738281,
+          "max": 48.40476608276367,
+          "min": 47.8823127746582,
+          "shape": [
+            19,
+            20
+          ],
+          "standard_name": "latitude",
+          "step_max": -0.00093841552734375,
+          "step_min": -0.00121307373046875,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 15.97833251953125,
+          "last": 16.799062728881836,
+          "max": 16.799062728881836,
+          "min": 15.97833251953125,
+          "shape": [
+            19,
+            20
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.04188346862792969,
+          "step_min": 0.041461944580078125,
+          "units": "degrees_east"
+        },
+        "x": {
+          "axis": "X",
+          "dtype": "float64",
+          "first": 193500.0,
+          "last": 250500.0,
+          "max": 250500.0,
+          "min": 193500.0,
+          "shape": [
+            20
+          ],
+          "standard_name": "projection_x_coordinate",
+          "step_max": 3000.0,
+          "step_min": 3000.0,
+          "units": "m"
+        },
+        "y": {
+          "axis": "Y",
+          "dtype": "float64",
+          "first": 46500.0,
+          "last": 100500.0,
+          "max": 100500.0,
+          "min": 46500.0,
+          "shape": [
+            19
+          ],
+          "standard_name": "projection_y_coordinate",
+          "step_max": 3000.0,
+          "step_min": 3000.0,
+          "units": "m"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "no2surf",
+        "o3surf",
+        "pm10surf",
+        "pm25surf"
+      ],
+      "dimensions": {
+        "time": 1,
+        "x": 20,
+        "y": 19
+      },
+      "global_crs": "PROJCS[\"undefined\",GEOGCS[\"undefined\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"standard_parallel_1\",30],PARAMETER[\"standard_parallel_2\",60],PARAMETER[\"latitude_of_origin\",47.5000076293945],PARAMETER[\"central_meridian\",13.3000001907349],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "grid_mapping": "lambert_conformal_conic",
+      "resource_id": "chem-v2-1h-3km",
+      "sample_file": "chem-v2-1h-3km__all-parameters__2026-10-28T0000.nc",
+      "spatial_resolution": "3000",
+      "spatial_resolution_unit": null
+    },
+    "spatial_resolution": [
+      3000,
+      3000
+    ],
+    "spatial_resolution_unit": "m",
+    "start_time": null,
+    "temporal_resolution_portal": "PT1H",
+    "title": {
+      "de": "Schadstoffvorhersage für Mitteleuropa",
+      "en": "Pollutant Forecast for Central Europe"
+    },
+    "update_frequency_portal": "P1D",
+    "version": "2"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/chem-v2-1h-9km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/chem-v2-1h-9km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/forecast/chem-v2-1h-9km"
+    },
+    "available_forecast_reftimes": [
+      "2026-10-28T00:00+00:00",
+      "2026-10-27T00:00+00:00",
+      "2026-10-26T00:00+00:00",
+      "2026-10-25T00:00+00:00",
+      "2026-10-24T00:00+00:00",
+      "2026-10-23T00:00+00:00"
+    ],
+    "bbox_centers_south_west_north_east": [
+      15.52074014369195,
+      -53.458125621322004,
+      74.33989521398574,
+      80.05812600279181
+    ],
+    "bbox_outer_south_west_north_east": [
+      15.473493438126722,
+      -53.58145197712511,
+      74.37497394543546,
+      80.18145235859491
+    ],
+    "crs": "PROJCS[\"undefined\",GEOGCS[\"undefined\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"standard_parallel_1\",30],PARAMETER[\"standard_parallel_2\",60],PARAMETER[\"latitude_of_origin\",47.5000076293945],PARAMETER[\"central_meridian\",13.3000001907349],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "dataset_id": "chem-v2-1h-9km",
+    "dataset_status": "active",
+    "description": {
+      "de": "Die Schadstoffvorhersagen basieren auf dem online gekoppelten chemischen Transportmodell WRF-Chem, welches täglich Vorhersagen der wichtigsten Schadstoffe wie z. B. bodennahes Ozon und Feinstaub für die nächsten 3 Tage liefert. Für die Schadstoffvorhersagen werden die meteorologischen Anfangs- und Randbedingungen aus dem IFS-Modell (Integrated Forecasting System) des Europäisches Zentrum für mittelfristige Wettervorhersage (ECMWF) extrahiert. Die anthropogenen Emissionen stammen aus dem CAMS-Emissionskataster. Das äußere Modellgebiet erstreckt sich über Europa und sowie Teile von Nordafrika und Russland bei einer Gitterauflösung von 9 x 9 km.",
+      "en": "The air pollution forecasts are based on the online coupled chemical transport model, WRF-Chem. This model provides daily forecasts of key pollutants, such as ground-level ozone and particulate matter, for the next three days. The initial and boundary conditions for the pollutant forecasts are extracted from the Integrated Forecasting System (IFS) model of the European Centre for Medium-Range Weather Forecasts (ECMWF). Anthropogenic emissions are derived from the CAMS emissions  cadastre. The outer model domain covers Europe, as well as parts of North Africa and Russia, with a grid resolution of 9 x 9 km."
+    },
+    "doi": "https://doi.org/10.60669/f4q8-5j13",
+    "end_time": null,
+    "forecast_length_count": 73,
+    "frequency_api": "1H",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      680,
+      680
+    ],
+    "issued": "2025-01-22T00:00:00",
+    "last_forecast_reftime": "2026-10-28T00:00+00:00",
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "forecast",
+    "modified": "2026-10-28T03:26:53",
+    "parameter_count": 4,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 47.93056106567383,
+          "last": 48.32968521118164,
+          "max": 48.3489875793457,
+          "min": 47.91140365600586,
+          "shape": [
+            6,
+            7
+          ],
+          "standard_name": "latitude",
+          "step_max": -0.002864837646484375,
+          "step_min": -0.00354766845703125,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 15.979722023010254,
+          "last": 16.753597259521484,
+          "max": 16.753597259521484,
+          "min": 15.979722023010254,
+          "shape": [
+            6,
+            7
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.12551498413085938,
+          "step_min": 0.1244659423828125,
+          "units": "degrees_east"
+        },
+        "x": {
+          "axis": "X",
+          "dtype": "float64",
+          "first": 193500.0,
+          "last": 247500.0,
+          "max": 247500.0,
+          "min": 193500.0,
+          "shape": [
+            7
+          ],
+          "standard_name": "projection_x_coordinate",
+          "step_max": 9000.0,
+          "step_min": 9000.0,
+          "units": "m"
+        },
+        "y": {
+          "axis": "Y",
+          "dtype": "float64",
+          "first": 49500.0,
+          "last": 94500.0,
+          "max": 94500.0,
+          "min": 49500.0,
+          "shape": [
+            6
+          ],
+          "standard_name": "projection_y_coordinate",
+          "step_max": 9000.0,
+          "step_min": 9000.0,
+          "units": "m"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "no2surf",
+        "o3surf",
+        "pm10surf",
+        "pm25surf"
+      ],
+      "dimensions": {
+        "time": 1,
+        "x": 7,
+        "y": 6
+      },
+      "global_crs": "PROJCS[\"undefined\",GEOGCS[\"undefined\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"standard_parallel_1\",30],PARAMETER[\"standard_parallel_2\",60],PARAMETER[\"latitude_of_origin\",47.5000076293945],PARAMETER[\"central_meridian\",13.3000001907349],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "grid_mapping": "lambert_conformal_conic",
+      "resource_id": "chem-v2-1h-9km",
+      "sample_file": "chem-v2-1h-9km__all-parameters__2026-10-28T0000.nc",
+      "spatial_resolution": "9000",
+      "spatial_resolution_unit": null
+    },
+    "spatial_resolution": [
+      9000,
+      9000
+    ],
+    "spatial_resolution_unit": "m",
+    "start_time": null,
+    "temporal_resolution_portal": "PT1H",
+    "title": {
+      "de": "Schadstoffvorhersage für Europa",
+      "en": "Pollutant Forecast for Europe"
+    },
+    "update_frequency_portal": "P1D",
+    "version": "2"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/chem_aqi-v1-1d-3km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/chem_aqi-v1-1d-3km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/forecast/chem_aqi-v1-1d-3km"
+    },
+    "available_forecast_reftimes": [
+      "2026-10-28T00:00+00:00",
+      "2026-10-27T00:00+00:00",
+      "2026-10-26T00:00+00:00",
+      "2026-10-25T00:00+00:00",
+      "2026-10-24T00:00+00:00",
+      "2026-10-23T00:00+00:00"
+    ],
+    "bbox_centers_south_west_north_east": [
+      40.90548512501946,
+      2.8988549981092184,
+      53.74183462389211,
+      23.701145383360583
+    ],
+    "bbox_outer_south_west_north_east": [
+      40.89018342157226,
+      2.8729505195381027,
+      53.755644869098944,
+      23.7270498619317
+    ],
+    "crs": "PROJCS[\"undefined\",GEOGCS[\"undefined\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"standard_parallel_1\",30],PARAMETER[\"standard_parallel_2\",60],PARAMETER[\"latitude_of_origin\",47.5000076293945],PARAMETER[\"central_meridian\",13.3000001907349],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "dataset_id": "chem_aqi-v1-1d-3km",
+    "dataset_status": "active",
+    "description": {
+      "de": "Der Luftqualitätsindex (Air Quality Index – AQI) ist ein Indikator für die Schadstoffbelastung und kann als Maß für die Auswirkungen auf die menschliche Gesundheit angesehen werden. Die Vorhersagen basieren auf Simulationen mit dem Modell WRF-Chem (Gitterauflösung: 3 x 3 km). In die Berechnung des Luftqualitätsindex gehen vorhergesagte Konzentrationen verschiedener Schadstoffe (Ozon, Stickstoffdioxid, Feinstaub) ein. Die Kategorien reichen von „sehr gut“ bis „extrem schlecht“ und entsprechen jenen des Luftqualitätsindex der Europäischen Umweltagentur [(EEA)](https://www.eea.europa.eu/en/analysis/maps-and-charts/index).",
+      "en": "The Air Quality Index (AQI) is an indicator of pollutant levels and can be considered a measure of the impact on human health. The forecasts are based on simulations using the WRF-Chem model (grid resolution: 3 x 3 km). The calculation of the Air Quality Index incorporates predicted concentrations of various pollutants (ozone, nitrogen dioxide, particulate matter). The categories range from “very good” to “extremely poor” and correspond to those of the Air Quality Index of the European Environment Agency [(EEA)](https://www.eea.europa.eu/en/analysis/maps-and-charts/index)."
+    },
+    "doi": "https://doi.org/10.60669/9vem-kg63",
+    "end_time": null,
+    "forecast_length_count": 3,
+    "frequency_api": "1D",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      450,
+      450
+    ],
+    "issued": "2026-06-08T03:55:27",
+    "last_forecast_reftime": "2026-10-28T00:00+00:00",
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "forecast",
+    "modified": "2026-10-28T03:56:14",
+    "parameter_count": 1,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 47.90266036987305,
+          "last": 48.38423156738281,
+          "max": 48.40476608276367,
+          "min": 47.8823127746582,
+          "shape": [
+            19,
+            20
+          ],
+          "standard_name": "latitude",
+          "step_max": -0.00093841552734375,
+          "step_min": -0.00121307373046875,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 15.97833251953125,
+          "last": 16.799062728881836,
+          "max": 16.799062728881836,
+          "min": 15.97833251953125,
+          "shape": [
+            19,
+            20
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.04188346862792969,
+          "step_min": 0.041461944580078125,
+          "units": "degrees_east"
+        },
+        "x": {
+          "axis": "X",
+          "dtype": "float64",
+          "first": 193500.0,
+          "last": 250500.0,
+          "max": 250500.0,
+          "min": 193500.0,
+          "shape": [
+            20
+          ],
+          "standard_name": "projection_x_coordinate",
+          "step_max": 3000.0,
+          "step_min": 3000.0,
+          "units": "m"
+        },
+        "y": {
+          "axis": "Y",
+          "dtype": "float64",
+          "first": 46500.0,
+          "last": 100500.0,
+          "max": 100500.0,
+          "min": 46500.0,
+          "shape": [
+            19
+          ],
+          "standard_name": "projection_y_coordinate",
+          "step_max": 3000.0,
+          "step_min": 3000.0,
+          "units": "m"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "aqi"
+      ],
+      "dimensions": {
+        "time": 1,
+        "x": 20,
+        "y": 19
+      },
+      "global_crs": "PROJCS[\"undefined\",GEOGCS[\"undefined\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"standard_parallel_1\",30],PARAMETER[\"standard_parallel_2\",60],PARAMETER[\"latitude_of_origin\",47.5000076293945],PARAMETER[\"central_meridian\",13.3000001907349],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "grid_mapping": "lambert_conformal_conic",
+      "resource_id": "chem_aqi-v1-1d-3km",
+      "sample_file": "chem_aqi-v1-1d-3km__all-parameters__2026-10-28T0000.nc",
+      "spatial_resolution": "3000",
+      "spatial_resolution_unit": null
+    },
+    "spatial_resolution": [
+      3000,
+      3000
+    ],
+    "spatial_resolution_unit": "m",
+    "start_time": null,
+    "temporal_resolution_portal": "P1D",
+    "title": {
+      "de": "Luftqualitätsindex für Österreich",
+      "en": "Air Quality Index for Austria"
+    },
+    "update_frequency_portal": "P1D",
+    "version": "1"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/chem_dust-v1-1h-0p2deg",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/chem_dust-v1-1h-0p2deg/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/forecast/chem_dust-v1-1h-0p2deg"
+    },
+    "available_forecast_reftimes": [
+      "2026-10-28T00:00+00:00",
+      "2026-10-27T00:00+00:00",
+      "2026-10-26T00:00+00:00",
+      "2026-10-25T00:00+00:00",
+      "2026-10-24T00:00+00:00",
+      "2026-10-23T00:00+00:00"
+    ],
+    "bbox_centers_south_west_north_east": [
+      0.20000076,
+      -24.799988,
+      64.80000076,
+      64.80001199999968
+    ],
+    "bbox_outer_south_west_north_east": [
+      0.10000076,
+      -24.899988,
+      64.90000076,
+      64.90001199999968
+    ],
+    "crs": "EPSG:4326",
+    "dataset_id": "chem_dust-v1-1h-0p2deg",
+    "dataset_status": "active",
+    "description": {
+      "de": "Das Modell WRF-Chem wird für die Vorhersage des Wüstenstaubtransports verwendet. Die Modelldomäne erstreckt sich vom Äquator bis Skandinavien (Gitterauflösung: 0,2° x 0,2°). Seit 2022 werden die Vorhersagen auch von der durch die Weltorganisation für Meteorologie (WMO) gegründeten Initiative „Sand and Dust Storm Warning Advisory and Assessment System“ [(SDS-WAS)](https://community.wmo.int/en/activity-areas/gaw/science-for-services/sds-was) zur Verfügung gestellt. Die Prognosen aller an der Initiative teilnehmenden Modelle sowie deren Evaluierung mit Messdaten sind auf der Webseite des spanischen Wetterdienstes [(AEMET)](https://dust.aemet.es/) zu finden.",
+      "en": "The WRF-Chem model is used for forecasting desert dust transport. The model domain extends from the equator to Scandinavia (grid resolution: 0.2° x 0.2°). Since 2022, the forecasts have also been provided by the “Sand and Dust Storm Warning Advisory and Assessment System” [(SDS-WAS)](https://community.wmo.int/en/activity-areas/gaw/science-for-services/sds-was), an initiative established by the World Meteorological Organization. The forecasts from all models participating in the initiative, as well as their evaluation against observational data, can be found on the website of the Spanish Meteorological Service [(AEMET)](https://dust.aemet.es/)"
+    },
+    "doi": "https://doi.org/10.60669/metr-z617",
+    "end_time": null,
+    "forecast_length_count": 121,
+    "frequency_api": "1h",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      324,
+      449
+    ],
+    "issued": "2026-06-08T03:55:27",
+    "last_forecast_reftime": "2026-10-28T00:00+00:00",
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "forecast",
+    "modified": "2026-10-28T04:25:46",
+    "parameter_count": 1,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "Y",
+          "dtype": "float64",
+          "first": 48.000000760000006,
+          "last": 48.20000076,
+          "max": 48.20000076,
+          "min": 48.000000760000006,
+          "shape": [
+            2
+          ],
+          "standard_name": "latitude",
+          "step_max": 0.19999999999999574,
+          "step_min": 0.19999999999999574,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "X",
+          "dtype": "float64",
+          "first": 16.000011999999856,
+          "last": 16.60001199999985,
+          "max": 16.60001199999985,
+          "min": 16.000011999999856,
+          "shape": [
+            4
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.20000000000000284,
+          "step_min": 0.19999999999999574,
+          "units": "degrees_east"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "dust"
+      ],
+      "dimensions": {
+        "lat": 2,
+        "lon": 4,
+        "time": 1
+      },
+      "global_crs": "EPSG:4326",
+      "grid_mapping": "latitude_longitude",
+      "resource_id": "chem_dust-v1-1h-0p2deg",
+      "sample_file": "chem_dust-v1-1h-0p2deg__all-parameters__2026-10-28T0000.nc",
+      "spatial_resolution": 0.2,
+      "spatial_resolution_unit": "deg"
+    },
+    "spatial_resolution": [
+      0.2,
+      0.2
+    ],
+    "spatial_resolution_unit": "deg",
+    "start_time": null,
+    "temporal_resolution_portal": "PT1H",
+    "title": {
+      "de": "Wüstenstaubvorhersage für Europa",
+      "en": "Desert dust forecast for Europe"
+    },
+    "update_frequency_portal": "P1D",
+    "version": "1"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/historical/apolis-v2-1d-100m",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/historical/apolis-v2-1d-100m/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/historical/apolis-v2-1d-100m"
+    },
+    "available_forecast_reftimes": null,
+    "bbox_centers_south_west_north_east": [
+      45.77222010581118,
+      8.098133748352293,
+      49.47817568460958,
+      17.742270413233744
+    ],
+    "bbox_outer_south_west_north_east": [
+      45.77174289436432,
+      8.097400742863677,
+      49.47862511943201,
+      17.742997005390997
+    ],
+    "crs": "EPSG:31287",
+    "dataset_id": "apolis-v2-1d-100m",
+    "dataset_status": "active",
+    "description": {
+      "de": "Der Datensatz wird durch das Strahlungsmodell STRAHLGRID der GeoSphere Austria erzeugt. Dieser umfasst verschiedene Strahlungsgrößen, darunter die Sonnenscheindauer sowie die bodennahen kurzwelligen Strahlungskomponenten wie Direkt- und Diffusstrahlung, jeweils auf realer und horizontaler Fläche. Die Summe dieser beiden Komponenten ergibt die Globalstrahlung. Das Modell berücksichtigt dabei atmosphärische Trübung, Bewölkung und Horizontabschattungen. Die Tagessummen der Strahlungsgrößen werden auf einem 100x100m Gitter für ganz Österreich berechnet. Der Datensatz wird täglich erweitert.",
+      "en": "The data set is generated by GeoSphere Austria's STRAHLGRID radiation model. It covers various radiation variables, including sunshine duration and near-surface short-wave radiation components such as direct and diffuse radiation, on both real and horizontal surface. The sum of these two components yields global radiation. The model takes into account atmospheric turbidity, cloud cover, and horizon shading. The daily totals of the radiation variables are calculated on a 100x100m grid for the whole of Austria. The data set is updated daily."
+    },
+    "doi": "https://doi.org/10.60669/j9t2-9e24",
+    "end_time": "2026-10-27T00:00+00:00",
+    "forecast_length_count": null,
+    "frequency_api": "1D",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      4001,
+      7001
+    ],
+    "issued": "2026-05-04T23:00:00",
+    "last_forecast_reftime": null,
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "historical",
+    "modified": "2026-10-28T09:07:29",
+    "parameter_count": 5,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 47.90163803100586,
+          "last": 48.39933776855469,
+          "max": 48.42129135131836,
+          "min": 47.87989807128906,
+          "shape": [
+            579,
+            616
+          ],
+          "standard_name": "latitude",
+          "step_max": -3.0517578125e-05,
+          "step_min": -4.1961669921875e-05,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 15.976219177246094,
+          "last": 16.833036422729492,
+          "max": 16.833036422729492,
+          "min": 15.976219177246094,
+          "shape": [
+            579,
+            616
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.0013523101806640625,
+          "step_min": 0.00133514404296875,
+          "units": "degrees_east"
+        },
+        "x": {
+          "axis": "X",
+          "dtype": "int32",
+          "first": 597500.0,
+          "last": 659000.0,
+          "max": 659000.0,
+          "min": 597500.0,
+          "shape": [
+            616
+          ],
+          "standard_name": "projection_x_coordinate",
+          "step_max": 100.0,
+          "step_min": 100.0,
+          "units": "m"
+        },
+        "y": {
+          "axis": "Y",
+          "dtype": "int32",
+          "first": 448000.0,
+          "last": 505800.0,
+          "max": 505800.0,
+          "min": 448000.0,
+          "shape": [
+            579
+          ],
+          "standard_name": "projection_y_coordinate",
+          "step_max": 100.0,
+          "step_min": 100.0,
+          "units": "m"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "DIF",
+        "DIR_hori",
+        "DIR_real",
+        "RSSD",
+        "SSD"
+      ],
+      "dimensions": {
+        "time": 1,
+        "x": 616,
+        "y": 579
+      },
+      "global_crs": "EPSG:31287",
+      "grid_mapping": "lambert_conformal_conic",
+      "resource_id": "apolis-v2-1d-100m",
+      "sample_file": "apolis-v2-1d-100m__all-parameters__2026-10-27T0000.nc",
+      "spatial_resolution": "100",
+      "spatial_resolution_unit": null
+    },
+    "spatial_resolution": [
+      100,
+      100
+    ],
+    "spatial_resolution_unit": "m",
+    "start_time": "2012-06-11T00:00+00:00",
+    "temporal_resolution_portal": "P1D",
+    "title": {
+      "de": "APOLIS-v2: Solarstrahlung Tagesdaten für Österreich",
+      "en": "APOLIS-v2: Daily data for solar radiation for Austria"
+    },
+    "update_frequency_portal": "P1D",
+    "version": "2"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/historical/snowgrid_cl-v2-1d-1km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/historical/snowgrid_cl-v2-1d-1km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/historical/snowgrid_cl-v2-1d-1km"
+    },
+    "available_forecast_reftimes": null,
+    "bbox_centers_south_west_north_east": [
+      46.16132856869247,
+      9.393909734939893,
+      49.177527691779716,
+      17.382180045432914
+    ],
+    "bbox_outer_south_west_north_east": [
+      46.15661379652522,
+      9.386722653137136,
+      49.18202316439182,
+      17.389375741207555
+    ],
+    "crs": "EPSG:3416",
+    "dataset_id": "snowgrid_cl-v2-1d-1km",
+    "dataset_status": "active",
+    "description": {
+      "de": "SNOWGRID-CL (SNOWGRID Climate Version) liefert Analysen von Schneehöhe, Schneewasserwert (SWE) auf einem österreichweiten 1x1km-Gitter.",
+      "en": "SNOWGRID-CL (SNOWGRID Climate Version) liefert Analysen von Schneehöhe, Schneewasserwert (SWE) auf einem österreichweiten 1x1km-Gitter."
+    },
+    "doi": "https://doi.org/10.60669/fsxx-6977",
+    "end_time": "2026-10-27T00:00+00:00",
+    "forecast_length_count": null,
+    "frequency_api": "1D",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      329,
+      584
+    ],
+    "issued": "2022-11-01T00:00:00",
+    "last_forecast_reftime": null,
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "historical",
+    "modified": "2026-10-28T09:09:51",
+    "parameter_count": 2,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 47.906131744384766,
+          "last": 48.39684295654297,
+          "max": 48.41859436035156,
+          "min": 47.88459014892578,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "latitude",
+          "step_max": -0.00030517578125,
+          "step_min": -0.00040435791015625,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 15.976447105407715,
+          "last": 16.826107025146484,
+          "max": 16.826107025146484,
+          "min": 15.976447105407715,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.013505935668945312,
+          "step_min": 0.013360977172851562,
+          "units": "degrees_east"
+        },
+        "x": {
+          "axis": "X",
+          "dtype": "int32",
+          "first": 597500.0,
+          "last": 658500.0,
+          "max": 658500.0,
+          "min": 597500.0,
+          "shape": [
+            62
+          ],
+          "standard_name": "projection_x_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        },
+        "y": {
+          "axis": "Y",
+          "dtype": "int32",
+          "first": 448500.0,
+          "last": 505500.0,
+          "max": 505500.0,
+          "min": 448500.0,
+          "shape": [
+            58
+          ],
+          "standard_name": "projection_y_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "snow_depth",
+        "swe_tot"
+      ],
+      "dimensions": {
+        "time": 1,
+        "x": 62,
+        "y": 58
+      },
+      "global_crs": "EPSG:3416",
+      "grid_mapping": "lambert_conformal_conic",
+      "resource_id": "snowgrid_cl-v2-1d-1km",
+      "sample_file": "snowgrid_cl-v2-1d-1km__all-parameters__2026-10-27T0000.nc",
+      "spatial_resolution": "1000",
+      "spatial_resolution_unit": null
+    },
+    "spatial_resolution": [
+      1000,
+      1000
+    ],
+    "spatial_resolution_unit": "m",
+    "start_time": "1961-01-01T00:00+00:00",
+    "temporal_resolution_portal": "P1D",
+    "title": {
+      "de": "SNOWGRID Klima v2.1",
+      "en": "SNOWGRID Klima v2.1"
+    },
+    "update_frequency_portal": "P1D",
+    "version": "2.1"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/historical/spartacus-v3-1d-1km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/historical/spartacus-v3-1d-1km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/historical/spartacus-v3-1d-1km"
+    },
+    "available_forecast_reftimes": null,
+    "bbox_centers_south_west_north_east": [
+      46.16132856869247,
+      9.393909734939893,
+      49.177527691779716,
+      17.382180045432914
+    ],
+    "bbox_outer_south_west_north_east": [
+      46.15661379652522,
+      9.386722653137136,
+      49.18202316439182,
+      17.389375741207555
+    ],
+    "crs": "EPSG:3416",
+    "dataset_id": "spartacus-v3-1d-1km",
+    "dataset_status": "active",
+    "description": {
+      "de": "Der gegitterte Datensatz beschreibt die räumliche Verteilung von beobachteter Lufttemperatur (Minimumtemperatur (TN), Maximumtemperatur (TX) und zwei Varianten der Mitteltemperatur (TM, TM24)), Niederschlag (RR) und absoluter Sonnenscheindauer (SA) von Tag zu Tag seit 1961 in Kilometerauflösung über Österreich. Für die Mitteltemperatur stehen neben den absoluten Werten auch Anomalien in Bezug auf zwei Normalperioden (1961-1990 und 1991-2020) zur Verfügung. Der Datensatz wird täglich operationell erweitert.",
+      "en": "This gridded data set describes the spatial distribution of observed daily air temperature (minimum (TN), maximum (TX) and two types of mean (TM, TM24)), precipitation (RR) and sunshine duration (SA) over Austria since 1961 at 1-km resolution. For the mean temperature, anomalies relative to two reference periods (1961-1990 and 1991-2020) are also provided. The data set is updated daily."
+    },
+    "doi": "https://doi.org/10.60669/5cqg-p427",
+    "end_time": "2026-10-27T00:00+00:00",
+    "forecast_length_count": null,
+    "frequency_api": "1D",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      329,
+      584
+    ],
+    "issued": "2026-07-05T22:00:00",
+    "last_forecast_reftime": null,
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "historical",
+    "modified": "2026-10-28T09:50:57",
+    "parameter_count": 10,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 47.906131744384766,
+          "last": 48.39684295654297,
+          "max": 48.41859436035156,
+          "min": 47.88459014892578,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "latitude",
+          "step_max": -0.00030517578125,
+          "step_min": -0.00040435791015625,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 15.976447105407715,
+          "last": 16.826107025146484,
+          "max": 16.826107025146484,
+          "min": 15.976447105407715,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.013505935668945312,
+          "step_min": 0.013360977172851562,
+          "units": "degrees_east"
+        },
+        "x": {
+          "axis": "X",
+          "dtype": "float64",
+          "first": 597500.0,
+          "last": 658500.0,
+          "max": 658500.0,
+          "min": 597500.0,
+          "shape": [
+            62
+          ],
+          "standard_name": "projection_x_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        },
+        "y": {
+          "axis": "Y",
+          "dtype": "float64",
+          "first": 448500.0,
+          "last": 505500.0,
+          "max": 505500.0,
+          "min": 448500.0,
+          "shape": [
+            58
+          ],
+          "standard_name": "projection_y_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "RR",
+        "SA",
+        "TM",
+        "TM24",
+        "TM24a_1961_1990",
+        "TM24a_1991_2020",
+        "TMa_1961_1990",
+        "TMa_1991_2020",
+        "TN",
+        "TX"
+      ],
+      "dimensions": {
+        "time": 1,
+        "x": 62,
+        "y": 58
+      },
+      "global_crs": "EPSG:3416",
+      "grid_mapping": "lambert_conformal_conic",
+      "resource_id": "spartacus-v3-1d-1km",
+      "sample_file": "spartacus-v3-1d-1km__all-parameters__2026-10-27T0000.nc",
+      "spatial_resolution": "1000",
+      "spatial_resolution_unit": null
+    },
+    "spatial_resolution": [
+      1000,
+      1000
+    ],
+    "spatial_resolution_unit": "m",
+    "start_time": "1961-01-01T00:00+00:00",
+    "temporal_resolution_portal": "P1D",
+    "title": {
+      "de": "SPARTACUS-v3 (1 d): Klimatologische Tagesdaten für Österreich",
+      "en": "SPARTACUS-v3 (1 d): Daily climate data for Austria"
+    },
+    "update_frequency_portal": "P1D",
+    "version": "3"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/historical/spartacus-v3-1m-1km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/historical/spartacus-v3-1m-1km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/historical/spartacus-v3-1m-1km"
+    },
+    "available_forecast_reftimes": null,
+    "bbox_centers_south_west_north_east": [
+      46.16132856869247,
+      9.393909734939893,
+      49.177527691779716,
+      17.382180045432914
+    ],
+    "bbox_outer_south_west_north_east": [
+      46.15661379652522,
+      9.386722653137136,
+      49.18202316439182,
+      17.389375741207555
+    ],
+    "crs": "EPSG:3416",
+    "dataset_id": "spartacus-v3-1m-1km",
+    "dataset_status": "active",
+    "description": {
+      "de": "Der gegitterte Datensatz beschreibt die räumliche Verteilung der beobachteten mittleren Lufttemperatur (Minimumtemperatur (TN), Maximumtemperatur (TX) und zwei Varianten der Mitteltemperatur (TM, TM24)), der Niederschlag (RR) und der absoluten Sonnenscheindauer (SA) für jeden Monat seit 1961 in Kilometerauflösung über Österreich.  Neben den absoluten Werten stehen auch Anomalien in Bezug auf zwei Normalperioden (1961-1990 und 1991-2020) zur Verfügung. Der Datensatz wird täglich operationell aktualisiert.",
+      "en": "This gridded data set describes the spatial distribution of observed monthly mean air temperature (minimum (TN), maximum (TX) and two types of mean (TM, TM24)), precipitation (RR) and sunshine duration (SA) over Austria since 1961 at 1-km resolution. Anomalies relative to two reference periods (1961-1990 and 1991-2020) are also provided. The data set is updated daily."
+    },
+    "doi": "https://doi.org/10.60669/34gw-b457",
+    "end_time": "2026-10-01T00:00+00:00",
+    "forecast_length_count": null,
+    "frequency_api": "1MS",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      329,
+      584
+    ],
+    "issued": "2026-07-05T22:00:00",
+    "last_forecast_reftime": null,
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "historical",
+    "modified": "2026-10-28T09:51:32",
+    "parameter_count": 18,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 47.906131744384766,
+          "last": 48.39684295654297,
+          "max": 48.41859436035156,
+          "min": 47.88459014892578,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "latitude",
+          "step_max": -0.00030517578125,
+          "step_min": -0.00040435791015625,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 15.976447105407715,
+          "last": 16.826107025146484,
+          "max": 16.826107025146484,
+          "min": 15.976447105407715,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.013505935668945312,
+          "step_min": 0.013360977172851562,
+          "units": "degrees_east"
+        },
+        "x": {
+          "axis": "X",
+          "dtype": "float64",
+          "first": 597500.0,
+          "last": 658500.0,
+          "max": 658500.0,
+          "min": 597500.0,
+          "shape": [
+            62
+          ],
+          "standard_name": "projection_x_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        },
+        "y": {
+          "axis": "Y",
+          "dtype": "float64",
+          "first": 448500.0,
+          "last": 505500.0,
+          "max": 505500.0,
+          "min": 448500.0,
+          "shape": [
+            58
+          ],
+          "standard_name": "projection_y_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "RR",
+        "RRa_1961_1990",
+        "RRa_1991_2020",
+        "SA",
+        "SAa_1961_1990",
+        "SAa_1991_2020",
+        "TM",
+        "TM24",
+        "TM24a_1961_1990",
+        "TM24a_1991_2020",
+        "TMa_1961_1990",
+        "TMa_1991_2020",
+        "TN",
+        "TNa_1961_1990",
+        "TNa_1991_2020",
+        "TX",
+        "TXa_1961_1990",
+        "TXa_1991_2020"
+      ],
+      "dimensions": {
+        "time": 1,
+        "x": 62,
+        "y": 58
+      },
+      "global_crs": "EPSG:3416",
+      "grid_mapping": "lambert_conformal_conic",
+      "resource_id": "spartacus-v3-1m-1km",
+      "sample_file": "spartacus-v3-1m-1km__all-parameters__2026-10-01T0000.nc",
+      "spatial_resolution": "1000",
+      "spatial_resolution_unit": null
+    },
+    "spatial_resolution": [
+      1000,
+      1000
+    ],
+    "spatial_resolution_unit": "m",
+    "start_time": "1961-01-01T00:00+00:00",
+    "temporal_resolution_portal": "P1M",
+    "title": {
+      "de": "SPARTACUS-v3 (1 m): Klimatologische Monatsdaten für Österreich",
+      "en": "SPARTACUS-v3 (1 m): Monthly climate data for Austria"
+    },
+    "update_frequency_portal": "P1D",
+    "version": "3"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/historical/spartacus-v3-1q-1km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/historical/spartacus-v3-1q-1km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/historical/spartacus-v3-1q-1km"
+    },
+    "available_forecast_reftimes": null,
+    "bbox_centers_south_west_north_east": [
+      46.16132856869247,
+      9.393909734939893,
+      49.177527691779716,
+      17.382180045432914
+    ],
+    "bbox_outer_south_west_north_east": [
+      46.15661379652522,
+      9.386722653137136,
+      49.18202316439182,
+      17.389375741207555
+    ],
+    "crs": "EPSG:3416",
+    "dataset_id": "spartacus-v3-1q-1km",
+    "dataset_status": "active",
+    "description": {
+      "de": "Der gegitterte Datensatz beschreibt die räumliche Verteilung der beobachteten mittleren Lufttemperatur (Minimumtemperatur (TN), Maximumtemperatur (TX) und zwei Varianten der Mitteltemperatur (TM, TM24)), der Niederschlag (RR) und der absoluten Sonnenscheindauer (SA) für jede Jahreszeit seit 1961 in Kilometerauflösung über Österreich.  Neben den absoluten Werten stehen auch Anomalien in Bezug auf zwei Normalperioden (1961-1990 und 1991-2020) zur Verfügung. Der Datensatz wird täglich operationell aktualisiert.",
+      "en": "This gridded data set describes the spatial distribution of observed seasonal mean air temperature (minimum (TN), maximum (TX) and two types of mean (TM, TM24)), precipitation (RR) and sunshine duration (SA) over Austria since 1961 at 1-km resolution. Anomalies relative to two reference periods (1961-1990 and 1991-2020) are also provided. The data set is updated daily."
+    },
+    "doi": "https://doi.org/10.60669/dkb4-tj43",
+    "end_time": "2026-09-01T00:00+00:00",
+    "forecast_length_count": null,
+    "frequency_api": "QS-DEC",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      329,
+      584
+    ],
+    "issued": "2026-07-05T22:00:00",
+    "last_forecast_reftime": null,
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "historical",
+    "modified": "2026-10-28T09:51:53",
+    "parameter_count": 18,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 47.906131744384766,
+          "last": 48.39684295654297,
+          "max": 48.41859436035156,
+          "min": 47.88459014892578,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "latitude",
+          "step_max": -0.00030517578125,
+          "step_min": -0.00040435791015625,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 15.976447105407715,
+          "last": 16.826107025146484,
+          "max": 16.826107025146484,
+          "min": 15.976447105407715,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.013505935668945312,
+          "step_min": 0.013360977172851562,
+          "units": "degrees_east"
+        },
+        "x": {
+          "axis": "X",
+          "dtype": "float64",
+          "first": 597500.0,
+          "last": 658500.0,
+          "max": 658500.0,
+          "min": 597500.0,
+          "shape": [
+            62
+          ],
+          "standard_name": "projection_x_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        },
+        "y": {
+          "axis": "Y",
+          "dtype": "float64",
+          "first": 448500.0,
+          "last": 505500.0,
+          "max": 505500.0,
+          "min": 448500.0,
+          "shape": [
+            58
+          ],
+          "standard_name": "projection_y_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "RR",
+        "RRa_1961_1990",
+        "RRa_1991_2020",
+        "SA",
+        "SAa_1961_1990",
+        "SAa_1991_2020",
+        "TM",
+        "TM24",
+        "TM24a_1961_1990",
+        "TM24a_1991_2020",
+        "TMa_1961_1990",
+        "TMa_1991_2020",
+        "TN",
+        "TNa_1961_1990",
+        "TNa_1991_2020",
+        "TX",
+        "TXa_1961_1990",
+        "TXa_1991_2020"
+      ],
+      "dimensions": {
+        "time": 1,
+        "x": 62,
+        "y": 58
+      },
+      "global_crs": "EPSG:3416",
+      "grid_mapping": "lambert_conformal_conic",
+      "resource_id": "spartacus-v3-1q-1km",
+      "sample_file": "spartacus-v3-1q-1km__all-parameters__2026-09-01T0000.nc",
+      "spatial_resolution": "1000",
+      "spatial_resolution_unit": null
+    },
+    "spatial_resolution": [
+      1000,
+      1000
+    ],
+    "spatial_resolution_unit": "m",
+    "start_time": "1960-12-01T00:00+00:00",
+    "temporal_resolution_portal": "P3M",
+    "title": {
+      "de": "SPARTACUS-v3 (1 q): Klimatologische Jahreszeitendaten für Österreich",
+      "en": "SPARTACUS-v3 (1 q): Seasonal climate data for Austria"
+    },
+    "update_frequency_portal": "P1D",
+    "version": "3"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/historical/spartacus-v3-1y-1km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/historical/spartacus-v3-1y-1km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/historical/spartacus-v3-1y-1km"
+    },
+    "available_forecast_reftimes": null,
+    "bbox_centers_south_west_north_east": [
+      46.16132856869247,
+      9.393909734939893,
+      49.177527691779716,
+      17.382180045432914
+    ],
+    "bbox_outer_south_west_north_east": [
+      46.15661379652522,
+      9.386722653137136,
+      49.18202316439182,
+      17.389375741207555
+    ],
+    "crs": "EPSG:3416",
+    "dataset_id": "spartacus-v3-1y-1km",
+    "dataset_status": "active",
+    "description": {
+      "de": "Der gegitterte Datensatz beschreibt die räumliche Verteilung der beobachteten mittleren Lufttemperatur (Minimumtemperatur (TN), Maximumtemperatur (TX) und zwei Varianten der Mitteltemperatur (TM, TM24)), der Niederschlag (RR) und der absoluten Sonnenscheindauer (SA) für jedes Jahr seit 1961 in Kilometerauflösung über Österreich.  Neben den absoluten Werten stehen auch Anomalien in Bezug auf zwei Normalperioden (1961-1990 und 1991-2020) zur Verfügung. Der Datensatz wird täglich operationell aktualisiert.",
+      "en": "This gridded data set describes the spatial distribution of observed annual mean air temperature (minimum (TN), maximum (TX) and two types of mean (TM, TM24)), precipitation (RR) and sunshine duration (SA) over Austria since 1961 at 1-km resolution. Anomalies relative to two reference periods (1961-1990 and 1991-2020) are also provided. The data set is updated daily."
+    },
+    "doi": "https://doi.org/10.60669/s7ws-8v33",
+    "end_time": "2026-01-01T00:00+00:00",
+    "forecast_length_count": null,
+    "frequency_api": "1YS",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      329,
+      584
+    ],
+    "issued": "2026-07-05T22:00:00",
+    "last_forecast_reftime": null,
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "historical",
+    "modified": "2026-10-28T09:52:08",
+    "parameter_count": 18,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 47.906131744384766,
+          "last": 48.39684295654297,
+          "max": 48.41859436035156,
+          "min": 47.88459014892578,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "latitude",
+          "step_max": -0.00030517578125,
+          "step_min": -0.00040435791015625,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 15.976447105407715,
+          "last": 16.826107025146484,
+          "max": 16.826107025146484,
+          "min": 15.976447105407715,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.013505935668945312,
+          "step_min": 0.013360977172851562,
+          "units": "degrees_east"
+        },
+        "x": {
+          "axis": "X",
+          "dtype": "float64",
+          "first": 597500.0,
+          "last": 658500.0,
+          "max": 658500.0,
+          "min": 597500.0,
+          "shape": [
+            62
+          ],
+          "standard_name": "projection_x_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        },
+        "y": {
+          "axis": "Y",
+          "dtype": "float64",
+          "first": 448500.0,
+          "last": 505500.0,
+          "max": 505500.0,
+          "min": 448500.0,
+          "shape": [
+            58
+          ],
+          "standard_name": "projection_y_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "RR",
+        "RRa_1961_1990",
+        "RRa_1991_2020",
+        "SA",
+        "SAa_1961_1990",
+        "SAa_1991_2020",
+        "TM",
+        "TM24",
+        "TM24a_1961_1990",
+        "TM24a_1991_2020",
+        "TMa_1961_1990",
+        "TMa_1991_2020",
+        "TN",
+        "TNa_1961_1990",
+        "TNa_1991_2020",
+        "TX",
+        "TXa_1961_1990",
+        "TXa_1991_2020"
+      ],
+      "dimensions": {
+        "time": 1,
+        "x": 62,
+        "y": 58
+      },
+      "global_crs": "EPSG:3416",
+      "grid_mapping": "lambert_conformal_conic",
+      "resource_id": "spartacus-v3-1y-1km",
+      "sample_file": "spartacus-v3-1y-1km__all-parameters__2026-01-01T0000.nc",
+      "spatial_resolution": "1000",
+      "spatial_resolution_unit": null
+    },
+    "spatial_resolution": [
+      1000,
+      1000
+    ],
+    "spatial_resolution_unit": "m",
+    "start_time": "1961-01-01T00:00+00:00",
+    "temporal_resolution_portal": "P1Y",
+    "title": {
+      "de": "SPARTACUS-v3 (1 y): Klimatologische Jahresdaten für Österreich",
+      "en": "SPARTACUS-v3 (1 y): Annual climate data for Austria"
+    },
+    "update_frequency_portal": "P1D",
+    "version": "3"
+  },
+  {
+    "api": {
+      "grid": "https://dataset.api.hub.geosphere.at/v1/grid/historical/winfore-v2-1d-1km",
+      "grid_metadata": "https://dataset.api.hub.geosphere.at/v1/grid/historical/winfore-v2-1d-1km/metadata",
+      "response_formats": [
+        "geojson",
+        "netcdf"
+      ],
+      "timeseries": "https://dataset.api.hub.geosphere.at/v1/timeseries/historical/winfore-v2-1d-1km"
+    },
+    "available_forecast_reftimes": null,
+    "bbox_centers_south_west_north_east": [
+      46.16132856869247,
+      9.393909734939893,
+      49.177527691779716,
+      17.382180045432914
+    ],
+    "bbox_outer_south_west_north_east": [
+      46.15661379652522,
+      9.386722653137136,
+      49.18202316439182,
+      17.389375741207555
+    ],
+    "crs": "EPSG:3416",
+    "dataset_id": "winfore-v2-1d-1km",
+    "dataset_status": "active",
+    "description": {
+      "de": "WINFORE ist ein Datensatz potentieller Evapotranspiration (ET0) sowie standardisierter Indexwerte der klimatischen Wasserbilanz (SPEI – Standardized Precipitation Evapotranspiration Index). Grundlage dafür bilden die täglichen Temperatur und Niederschlagsfelder aus SPARTACUS, aus welchen die potentielle Evapotranspiration und die klimatische Wasserbilanz abgeleitet wird. Unter klimatischer Wasserbilanz versteht man die Differenz aus Niederschlag und potentieller Evapotranspiration. Letztere beschreibt jene Wassermenge, welche von einem gut mit Wasser versorgten Rasen verdunsten kann. Die potentielle Evapotranspiration wird in WINFORE mit einer optimierten Methode nach Hargreaves über die Tagesmitteltemperatur und dem Tagesgang der Temperatur (Maximum Temperatur minus Minimum Temperatur) bestimmt. Die klimatische Wasserbilanz wird täglich über die vergangenen 30, 90 und 365 Tage aufsummiert, wobei der Einfluss auf die Gesamtsumme für die beiden kürzeren Aggregationszeiträume linear in die Vergangenheit abnimmt. Die klimatische Wasserbilanz wird in weiterer Folge auf die Häufigkeitsverteilung in der Vergangenheit (umfasst zwei Klimanormalperioden 1961-2020; je Pixel und Tag des Jahres) bezogen und in eine Standard-Normalverteilung transformiert. Somit lässt sich feststellen ob und wie weit die klimatische Wasserbilanz am aktuellen Tag vom Normalzustand abweicht. Negative Werte kennzeichnen trockene und positive Werte feuchte Bedingungen. Je größer die Abweichung von Null desto extremer ist der Trocken/Feuchtezustand. Der Datensatz wird täglich operationell erweitert. Dabei werden Änderungen bei den eingehenden Beobachtungsdaten bis zu 180 Tage in die Vergangenheit berücksichtigt, weshalb der Datensatz in diesem Zeitraum vorläufigen Charakter besitzt. Der Datensatz umfasst die Variablen: ET0, SPEI30, SPEI90, SPEI365.",
+      "en": "WINFORE ist ein Datensatz potentieller Evapotranspiration (ET0) sowie standardisierter Indexwerte der klimatischen Wasserbilanz (SPEI – Standardized Precipitation Evapotranspiration Index). Grundlage dafür bilden die täglichen Temperatur und Niederschlagsfelder aus SPARTACUS, aus welchen die potentielle Evapotranspiration und die klimatische Wasserbilanz abgeleitet wird. Unter klimatischer Wasserbilanz versteht man die Differenz aus Niederschlag und potentieller Evapotranspiration. Letztere beschreibt jene Wassermenge, welche von einem gut mit Wasser versorgten Rasen verdunsten kann. Die potentielle Evapotranspiration wird in WINFORE mit einer optimierten Methode nach Hargreaves über die Tagesmitteltemperatur und dem Tagesgang der Temperatur (Maximum Temperatur minus Minimum Temperatur) bestimmt. Die klimatische Wasserbilanz wird täglich über die vergangenen 30, 90 und 365 Tage aufsummiert, wobei der Einfluss auf die Gesamtsumme für die beiden kürzeren Aggregationszeiträume linear in die Vergangenheit abnimmt. Die klimatische Wasserbilanz wird in weiterer Folge auf die Häufigkeitsverteilung in der Vergangenheit (umfasst zwei Klimanormalperioden 1961-2020; je Pixel und Tag des Jahres) bezogen und in eine Standard-Normalverteilung transformiert. Somit lässt sich feststellen ob und wie weit die klimatische Wasserbilanz am aktuellen Tag vom Normalzustand abweicht. Negative Werte kennzeichnen trockene und positive Werte feuchte Bedingungen. Je größer die Abweichung von Null desto extremer ist der Trocken/Feuchtezustand. Der Datensatz wird täglich operationell erweitert. Dabei werden Änderungen bei den eingehenden Beobachtungsdaten bis zu 180 Tage in die Vergangenheit berücksichtigt, weshalb der Datensatz in diesem Zeitraum vorläufigen Charakter besitzt. Der Datensatz umfasst die Variablen: ET0, SPEI30, SPEI90, SPEI365."
+    },
+    "doi": "https://doi.org/10.60669/f6ed-2p24",
+    "end_time": "2026-10-27T00:00+00:00",
+    "forecast_length_count": null,
+    "frequency_api": "1D",
+    "full_grid_shape_evidence": "Downloaded complete-grid NetCDF; APOLIS union of four API-limit-safe quadrants",
+    "full_grid_shape_y_x": [
+      329,
+      584
+    ],
+    "issued": "2020-09-09T00:00:00",
+    "last_forecast_reftime": null,
+    "license": {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "uri": "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0"
+    },
+    "mode": "historical",
+    "modified": "2026-10-28T09:09:36",
+    "parameter_count": 4,
+    "sample_geometry": {
+      "coordinates": {
+        "lat": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 47.906131744384766,
+          "last": 48.39684295654297,
+          "max": 48.41859436035156,
+          "min": 47.88459014892578,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "latitude",
+          "step_max": -0.00030517578125,
+          "step_min": -0.00040435791015625,
+          "units": "degrees_north"
+        },
+        "lon": {
+          "axis": "",
+          "dtype": "float32",
+          "first": 15.976447105407715,
+          "last": 16.826107025146484,
+          "max": 16.826107025146484,
+          "min": 15.976447105407715,
+          "shape": [
+            58,
+            62
+          ],
+          "standard_name": "longitude",
+          "step_max": 0.013505935668945312,
+          "step_min": 0.013360977172851562,
+          "units": "degrees_east"
+        },
+        "x": {
+          "axis": "X",
+          "dtype": "int32",
+          "first": 597500.0,
+          "last": 658500.0,
+          "max": 658500.0,
+          "min": 597500.0,
+          "shape": [
+            62
+          ],
+          "standard_name": "projection_x_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        },
+        "y": {
+          "axis": "Y",
+          "dtype": "int32",
+          "first": 448500.0,
+          "last": 505500.0,
+          "max": 505500.0,
+          "min": 448500.0,
+          "shape": [
+            58
+          ],
+          "standard_name": "projection_y_coordinate",
+          "step_max": 1000.0,
+          "step_min": 1000.0,
+          "units": "m"
+        }
+      },
+      "data_model": "NETCDF4",
+      "data_variables": [
+        "ET0",
+        "SPEI30",
+        "SPEI365",
+        "SPEI90"
+      ],
+      "dimensions": {
+        "time": 1,
+        "x": 62,
+        "y": 58
+      },
+      "global_crs": "EPSG:3416",
+      "grid_mapping": "lambert_conformal_conic",
+      "resource_id": "winfore-v2-1d-1km",
+      "sample_file": "winfore-v2-1d-1km__all-parameters__2026-10-27T0000.nc",
+      "spatial_resolution": "1000",
+      "spatial_resolution_unit": null
+    },
+    "spatial_resolution": [
+      1000,
+      1000
+    ],
+    "spatial_resolution_unit": "m",
+    "start_time": "1961-01-01T00:00+00:00",
+    "temporal_resolution_portal": "P1D",
+    "title": {
+      "de": "WINFORE v2.1",
+      "en": "WINFORE v2.1"
+    },
+    "update_frequency_portal": "P1D",
+    "version": "2.1"
+  }
+]
