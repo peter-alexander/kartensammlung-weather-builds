@@ -34,3 +34,9 @@ Der neue produktunabhängige Datenpfad wird in Stufen entwickelt:
 - Weiterer Schritt: räumlich und zeitlich korrekte Tile-Ausgabe samt getrennten Manifesten pro Variable, erst nach realen End-to-End-Tests.
 
 Die Tests verwenden synthetische Werte (keine Behauptung über tatsächliche C-LAEF-Parameternamen). Die bisherige wettermodellspezifische RGBA-Kodierung ist keine Vorgabe für neue Datensätze.
+
+## Experimenteller Float32-Rastertransport
+
+`weather_build/scalar_encoding.py` ist ein **Transportformat-Prototyp**, noch keine fertige PMTiles-Kodierung. Die vier RGBA-Bytes speichern den IEEE-754-Bitwert einer Zelle exakt (Byte-Reihenfolge MSB zuerst). Die Gültigkeit wird separat als binäre 8-Bit-Maske abgelegt (0 = NoData, 255 = gültig). Das RGBA-Alpha-Byte darf dabei **nicht** als Sichtbarkeit interpretiert werden: Es enthält Datenbits. Beide Raster müssen identisch projiziert und gekachelt werden.
+
+Der Decoder stellt den ursprünglichen Float32-Wert bitgenau wieder her und setzt NoData auf NaN. Die Umwandlung in PNG und die WebGL-/MapLibre-Dekodierung sind **noch nicht implementiert**. Vor einer Festlegung des Dateiformats prüfen wir die tatsächliche Browserkompatibilität und die Dateigrößen; eine visuelle Rasterbilddarstellung darf keine Farbkorrektur, Interpolation oder verlustbehaftete Kompression auf den codierten Bytes durchführen.
