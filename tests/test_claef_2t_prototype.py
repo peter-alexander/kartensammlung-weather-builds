@@ -48,3 +48,23 @@ def test_unit_and_time_must_match(tmp_path) -> None:
 	path = _sample(tmp_path)
 	with pytest.raises(ValueError, match="time"):
 		read_2t_netcdf(path, valid_time=datetime(2026, 10, 28, 14, tzinfo=timezone.utc))
+
+
+def test_api_request_uses_nonempty_minute_interval() -> None:
+	from scripts.build_claef_2t_prototype import forecast_request_parameters
+	request = forecast_request_parameters(datetime(2026, 10, 28, 13, tzinfo=timezone.utc))
+	assert request["start"] == "2026-10-28T13:00"
+	assert request["end"] == "2026-10-28T13:01"
+	assert request["parameters"] == "2t"
+	assert request["forecast_offset"] == 0
+
+
+def test_api_failure_exposes_validation_body() -> None:
+	import requests
+	from scripts.build_claef_2t_prototype import raise_geosphere_error
+	response = requests.Response()
+	response.status_code = 422
+	response.url = "https://example.invalid/grid"
+	response._content = b'{"detail":"Example validation error"}'
+	with pytest.raises(RuntimeError, match="Example validation error"):
+		raise_geosphere_error(response)
