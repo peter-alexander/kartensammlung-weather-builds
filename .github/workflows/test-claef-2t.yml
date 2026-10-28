@@ -1,0 +1,87 @@
+name: Test C-LAEF Temperature Build
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: test-claef-2t-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      PMTILES_BIN: ${{ github.workspace }}/.local/bin/pmtiles
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install Python dependencies
+        run: python -m pip install '.[dev]'
+
+      - name: Run prototype and encoding tests
+        run: |
+          python -m pytest -q \
+            tests/test_claef_2t_prototype.py \
+            tests/test_numeric_tiles.py \
+            tests/test_tile_png.py \
+            tests/test_tile_manifest.py \
+            tests/test_quantization_contracts.py
+
+      - name: Install pinned PMTiles CLI
+        run: |
+          mkdir -p "$(dirname "$PMTILES_BIN")"
+          curl --fail --silent --show-error --location \
+            https://github.com/protomaps/go-pmtiles/releases/download/v1.30.1/go-pmtiles_1.30.1_Linux_x86_64.tar.gz \
+            | tar -xz -C "$(dirname "$PMTILES_BIN")" pmtiles
+          "$PMTILES_BIN" version
+
+      - name: Build one C-LAEF temperature frame
+        run: |
+          python scripts/build_claef_2t_prototype.py \
+            --output out-claef-2t \
+            --min -50 \
+            --max 60 \
+            --min-zoom 5 \
+            --max-zoom 8 \
+            --pmtiles-binary "$PMTILES_BIN"
+
+      - name: Verify output and archive
+        run: |
+          test -s out-claef-2t/source-2t.nc
+          test -s out-claef-2t/2t-f001.pmtiles
+          test -s out-claef-2t/manifest.json
+          "$PMTILES_BIN" verify out-claef-2t/2t-f001.pmtiles
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from weather_build.tile_manifest import validate_manifest
+
+          directory = Path("out-claef-2t")
+          manifest = validate_manifest(json.loads((directory / "manifest.json").read_text(encoding="utf-8")))
+          for variable in manifest["variables"]:
+          	for frame in variable["frames"]:
+          		assert (directory / frame["href"]).is_file(), frame["href"]
+          print("Verified:", [f["href"] for v in manifest["variables"] for f in v["frames"]])
+          PY
+
+      - name: Upload prototype for inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: claef-2t-prototype
+          path: |
+            out-claef-2t/manifest.json
+            out-claef-2t/*.pmtiles
+            out-claef-2t/*.mbtiles
+            out-claef-2t/source-2t.nc
+          if-no-files-found: warn
+          retention-days: 3
