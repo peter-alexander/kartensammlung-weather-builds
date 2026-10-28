@@ -24,3 +24,13 @@ Datenproduzent für die Kartensammlung. Die Migration ersetzt das bisherige AROM
 GeoSphere: https://data.hub.geosphere.at/dataset/nwp-v2-1h-1km
 
 Offizielle Migrationshinweise: https://public.hub.geosphere.at/public/resources/misc/Hilfestellung_DE.pdf
+
+## Neuintegration flächiger Rasterdaten
+
+Der neue produktunabhängige Datenpfad wird in Stufen entwickelt:
+
+- `weather_build/grid_catalog.py`: Offizielle Grid-Parameter, Einheiten und Metadaten prüfen.
+- `weather_build/scalar_raster.py`: Skalare 2D/3D-Felder validieren; Einheitenumrechnung ausschließlich über expliziten `ScalarSpec`, fehlende Zellen als NaN, harte Fehler bei unplausiblen Werten. Das Ergebnis ist ein Float32-Raster, **noch keine PMTiles-Kodierung**.
+- Weiterer Schritt: räumlich und zeitlich korrekte Tile-Ausgabe samt getrennten Manifesten pro Variable, erst nach realen End-to-End-Tests.
+
+Die Tests verwenden synthetische Werte (keine Behauptung über tatsächliche C-LAEF-Parameternamen). Die bisherige wettermodellspezifische RGBA-Kodierung ist keine Vorgabe für neue Datensätze.
