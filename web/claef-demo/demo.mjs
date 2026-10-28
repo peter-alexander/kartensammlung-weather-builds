@@ -4,7 +4,7 @@ import { decodeAndStylePixels } from "../numeric-weather-decoder.mjs";
 
 const status = document.querySelector("#status");
 const setStatus = (message) => { status.textContent = message; };
-const manifestURL = new URL("../../manifest.json", import.meta.url);
+const manifestURL = new URL("../manifest.json", import.meta.url);
 const manifest = await fetch(manifestURL).then((response) => {
 	if (!response.ok) throw new Error("Manifest HTTP " + response.status);
 	return response.json();
