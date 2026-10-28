@@ -35,8 +35,7 @@ Der neue produktunabhängige Datenpfad wird in Stufen entwickelt:
 
 Die Tests verwenden synthetische Werte (keine Behauptung über tatsächliche C-LAEF-Parameternamen). Die bisherige wettermodellspezifische RGBA-Kodierung ist keine Vorgabe für neue Datensätze.
 
-## Experimenteller Float32-Rastertransport
 
-`weather_build/scalar_encoding.py` ist ein **Transportformat-Prototyp**, noch keine fertige PMTiles-Kodierung. Die vier RGBA-Bytes speichern den IEEE-754-Bitwert einer Zelle exakt (Byte-Reihenfolge MSB zuerst). Die Gültigkeit wird separat als binäre 8-Bit-Maske abgelegt (0 = NoData, 255 = gültig). Das RGBA-Alpha-Byte darf dabei **nicht** als Sichtbarkeit interpretiert werden: Es enthält Datenbits. Beide Raster müssen identisch projiziert und gekachelt werden.
+## Integer-Kodierung der Wetterraster
 
-Der Decoder stellt den ursprünglichen Float32-Wert bitgenau wieder her und setzt NoData auf NaN. Die Umwandlung in PNG und die WebGL-/MapLibre-Dekodierung sind **noch nicht implementiert**. Vor einer Festlegung des Dateiformats prüfen wir die tatsächliche Browserkompatibilität und die Dateigrößen; eine visuelle Rasterbilddarstellung darf keine Farbkorrektur, Interpolation oder verlustbehaftete Kompression auf den codierten Bytes durchführen.
+Der experimentelle Float32-RGBA-Transport wurde entfernt. Für numerische Kartenkacheln wird ein parameterabhängiger UInt8-/UInt16-Vertrag mit festem Skalierungsfaktor, Offset, quantifiziertem Wertebereich und reserviertem NoData-Code verwendet. Kodierungswahl und fachliche Auflösung sind pro Parameter aus dem GeoSphere-Audit abzuleiten; keine automatische stillschweigende Anpassung bei Werteüberlauf.
