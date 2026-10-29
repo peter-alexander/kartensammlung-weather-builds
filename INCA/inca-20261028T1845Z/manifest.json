@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "provider": "GeoSphere Austria",
+  "license": "CC BY 4.0",
+  "model": "INCA Nowcast",
+  "resource_id": "nowcast-v1-15min-1km",
+  "reference_time": "2026-10-28T18:45:00Z",
+  "release_tag": "inca-20261028T1845Z",
+  "generated_at": "2026-10-28T19:16:56.161899Z",
+  "forecast": {
+    "step_minutes": 15,
+    "precipitation_interval_minutes": 15,
+    "horizon_minutes": 180
+  },
+  "bounds": [
+    8.09080314984374,
+    45.49811305905748,
+    17.74953688061394,
+    49.48267002420558
+  ],
+  "grid": {
+    "width": 701,
+    "height": 431,
+    "points": 302131,
+    "spatial_resolution": [
+      1000.0,
+      1000.0
+    ],
+    "spatial_resolution_unit": "m"
+  },
+  "tiles": {
+    "format": "pmtiles",
+    "content_type": "image/png",
+    "tile_size": 256,
+    "minzoom": 3,
+    "maxzoom": 9,
+    "aggregation": {
+      "through_zoom": 6,
+      "precipitation": "maximum",
+      "above_aggregation_zoom": "nearest source cell"
+    }
+  },
+  "encoding": {
+    "red_green": {
+      "parameter": "precipitation_15min",
+      "unit": "mm",
+      "formula": "(R * 256 + G) / 100",
+      "maplibre_custom_encoding": {
+        "encoding": "custom",
+        "redFactor": 2.56,
+        "greenFactor": 0.01,
+        "blueFactor": 0,
+        "baseShift": 0
+      }
+    },
+    "blue": {
+      "availability": "unused",
+      "encoded_value": 0
+    },
+    "alpha": {
+      "parameter": "validity",
+      "valid": 255,
+      "nodata": 0
+    }
+  },
+  "download_url_template": null,
+  "timesteps": [
+    {
+      "forecast_minutes": 0,
+      "valid_time": "2026-10-28T18:45:00Z",
+      "asset": "inca_m000.pmtiles",
+      "tile_count": 205,
+      "bytes": 433756,
+      "sha256": "823c48ebfe88553a0afa49b108d5fafdf43596eb0e8a1cb41f6a28fe12ffcb91",
+      "precipitation_min_mm": 0.0,
+      "precipitation_max_mm": 2.490000009536743,
+      "cloud_min_fraction": 0.0,
+      "cloud_max_fraction": 0.0
+    },
+    {
+      "forecast_minutes": 15,
+      "valid_time": "2026-10-28T19:00:00Z",
+      "asset": "inca_m015.pmtiles",
+      "tile_count": 205,
+      "bytes": 416955,
+      "sha256": "2b4d7999fe7c7458307dc30695af9fd2f6da1d5a50e267f9d1d8471d3cce674c",
+      "precipitation_min_mm": 0.0,
+      "precipitation_max_mm": 2.440000057220459,
+      "cloud_min_fraction": 0.0,
+      "cloud_max_fraction": 0.0
+    },
+    {
+      "forecast_minutes": 30,
+      "valid_time": "2026-10-28T19:15:00Z",
+      "asset": "inca_m030.pmtiles",
+      "tile_count": 205,
+      "bytes": 410144,
+      "sha256": "9348dedf07b5952adfaddf1a41f57d10b512cc0302f4d15cf4f62767ae38f7bd",
+      "precipitation_min_mm": 0.0,
+      "precipitation_max_mm": 2.4100000858306885,
+      "cloud_min_fraction": 0.0,
+      "cloud_max_fraction": 0.0
+    },
+    {
+      "forecast_minutes": 45,
+      "valid_time": "2026-10-28T19:30:00Z",
+      "asset": "inca_m045.pmtiles",
+      "tile_count": 205,
+      "bytes": 404694,
+      "sha256": "01f9cdf39226eafd7d5af0074c68fd1ec4bcdf4d087479181ff05ea63d58e218",
+      "precipitation_min_mm": 0.0,
+      "precipitation_max_mm": 2.380000114440918,
+      "cloud_min_fraction": 0.0,
+      "cloud_max_fraction": 0.0
+    },
+    {
+      "forecast_minutes": 60,
+      "valid_time": "2026-10-28T19:45:00Z",
+      "asset": "inca_m060.pmtiles",
+      "tile_count": 205,
+      "bytes": 399665,
+      "sha256": "46bbb1db69f3ddc26db0cb021d05fb5e142440810ed69a50e6db3710e4ef568d",
+      "precipitation_min_mm": 0.0,
+      "precipitation_max_mm": 2.369999885559082,
+      "cloud_min_fraction": 0.0,
+      "cloud_max_fraction": 0.0
+    },
+    {
+      "forecast_minutes": 75,
+      "valid_time": "2026-10-28T20:00:00Z",
+      "asset": "inca_m075.pmtiles",
+      "tile_count": 205,
+      "bytes": 409686,
+      "sha256": "c82754c7fee1ef28fb2c76f25a18a21f1328f54d23ca69a3952f9ed76f596732",
+      "precipitation_min_mm": 0.0,
+      "precipitation_max_mm": 2.1500000953674316,
+      "cloud_min_fraction": 0.0,
+      "cloud_max_fraction": 0.0
+    },
+    {
+      "forecast_minutes": 90,
+      "valid_time": "2026-10-28T20:15:00Z",
+      "asset": "inca_m090.pmtiles",
+      "tile_count": 205,
+      "bytes": 411903,
+      "sha256": "37fcf0d65e43b2d30e705eab6b575cbdb774906180a099b52c5c0b56c41edc1f",
+      "precipitation_min_mm": 0.0,
+      "precipitation_max_mm": 1.9800000190734863,
+      "cloud_min_fraction": 0.0,
+      "cloud_max_fraction": 0.0
+    },
+    {
+      "forecast_minutes": 105,
+      "valid_time": "2026-10-28T20:30:00Z",
+      "asset": "inca_m105.pmtiles",
+      "tile_count": 205,
+      "bytes": 411211,
+      "sha256": "946adc0ee8e49a99a6225fd9d5f5e18bc468012269a1580106773480b2b97627",
+      "precipitation_min_mm": 0.0,
+      "precipitation_max_mm": 1.7799999713897705,
+      "cloud_min_fraction": 0.0,
+      "cloud_max_fraction": 0.0
+    },
+    {
+      "forecast_minutes": 120,
+      "valid_time": "2026-10-28T20:45:00Z",
+      "asset": "inca_m120.pmtiles",
+      "tile_count": 205,
+      "bytes": 407001,
+      "sha256": "9484399e0f99872934741641de683d12eafe71efcadda7771920ef1c9ff8c274",
+      "precipitation_min_mm": 0.0,
+      "precipitation_max_mm": 1.559999942779541,
+      "cloud_min_fraction": 0.0,
+      "cloud_max_fraction": 0.0
+    },
+    {
+      "forecast_minutes": 135,
+      "valid_time": "2026-10-28T21:00:00Z",
+      "asset": "inca_m135.pmtiles",
+      "tile_count": 205,
+      "bytes": 402663,
+      "sha256": "acafabed3bc621e55fe38183f1ac2af5878ba96012e241092d44b7bf82387783",
+      "precipitation_min_mm": 0.0,
+      "precipitation_max_mm": 1.3200000524520874,
+      "cloud_min_fraction": 0.0,
+      "cloud_max_fraction": 0.0
+    },
+    {
+      "forecast_minutes": 150,
+      "valid_time": "2026-10-28T21:15:00Z",
+      "asset": "inca_m150.pmtiles",
+      "tile_count": 205,
+      "bytes": 393394,
+      "sha256": "a9b59251f3aeef6ffee49af4482dc82f61ba4b1bd31ed58baf4fb9ec955cad38",
+      "precipitation_min_mm": 0.0,
+      "precipitation_max_mm": 1.1200000047683716,
+      "cloud_min_fraction": 0.0,
+      "cloud_max_fraction": 0.0
+    },
+    {
+      "forecast_minutes": 165,
+      "valid_time": "2026-10-28T21:30:00Z",
+      "asset": "inca_m165.pmtiles",
+      "tile_count": 205,
+      "bytes": 388582,
+      "sha256": "6426ed201ffee3844d2846a15fd1ed6391a264cfe70433af5ead520282f7fa45",
+      "precipitation_min_mm": 0.0,
+      "precipitation_max_mm": 0.9300000071525574,
+      "cloud_min_fraction": 0.0,
+      "cloud_max_fraction": 0.0
+    },
+    {
+      "forecast_minutes": 180,
+      "valid_time": "2026-10-28T21:45:00Z",
+      "asset": "inca_m180.pmtiles",
+      "tile_count": 205,
+      "bytes": 381355,
+      "sha256": "f69cfa711b2fe2dc0bc75942cc8f2df1590ace5f1399c430c779d7955766a8b8",
+      "precipitation_min_mm": 0.0,
+      "precipitation_max_mm": 0.9900000095367432,
+      "cloud_min_fraction": 0.0,
+      "cloud_max_fraction": 0.0
+    }
+  ]
+}

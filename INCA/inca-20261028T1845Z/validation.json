@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "generated_at": "2026-10-28T19:16:56.161941Z",
+  "source_downloads": [
+    {
+      "chunk": 0,
+      "start": "2026-10-28T18:45:00Z",
+      "end": "2026-10-28T21:45:00Z",
+      "time_count": 13,
+      "forecast_offset_used": 0,
+      "bytes": 1334453,
+      "request_url": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/nowcast-v1-15min-1km?parameters=rr&bbox=45.49811306%2C8.09080315%2C49.48267002%2C17.74953688&forecast_offset=0&start=2026-10-28T18%3A45&end=2026-10-28T21%3A45&output_format=netcdf&filename=source-00"
+    }
+  ],
+  "source_validation": {
+    "shape": [
+      13,
+      431,
+      701
+    ],
+    "time_count": 13,
+    "source_crs": "EPSG:31287",
+    "source_transform": [
+      1000.0,
+      0.0,
+      19500.0,
+      0.0,
+      -1000.0,
+      620500.0
+    ],
+    "x_min": 20000.0,
+    "x_max": 720000.0,
+    "y_min": 190000.0,
+    "y_max": 620000.0,
+    "precipitation": {
+      "mode": "interval",
+      "interval_minutes": 15,
+      "source_parameter": "rr",
+      "raw_min_mm": 0.0,
+      "interval_min_mm": 0.0,
+      "interval_max_mm": 2.490000009536743,
+      "tiny_negative_values_clamped": 0,
+      "serious_negative_values": 0,
+      "encoding_overflow_values": 0,
+      "nodata_values": 0
+    },
+    "cloud": {
+      "available": false,
+      "encoded_placeholder_fraction": 0.0
+    }
+  },
+  "encoding_validation": {
+    "precipitation_max_absolute_error_mm": 0.005,
+    "blue_channel": "unused_zero",
+    "alpha_values": [
+      0,
+      255
+    ]
+  },
+  "asset_count": 13,
+  "total_tiles": 2665,
+  "total_asset_bytes": 5271009
+}

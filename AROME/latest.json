@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "release_tag": "arome-20261028T1200Z",
+  "reference_time": "2026-10-28T12:00:00Z",
+  "manifest": "arome-20261028T1200Z/manifest.json",
+  "asset_url_template": "arome-20261028T1200Z/{asset}"
+}

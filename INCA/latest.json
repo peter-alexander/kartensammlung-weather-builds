@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "release_tag": "inca-20261028T1900Z",
+  "reference_time": "2026-10-28T19:00:00Z",
+  "manifest": "inca-20261028T1900Z/manifest.json",
+  "asset_url_template": "inca-20261028T1900Z/{asset}"
+}

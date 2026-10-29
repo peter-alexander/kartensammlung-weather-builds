@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "generated_at": "2026-10-28T15:34:58.066696Z",
+  "source_downloads": [
+    {
+      "chunk": 0,
+      "start": "2026-10-28T09:00:00Z",
+      "end": "2026-10-29T00:00:00Z",
+      "time_count": 16,
+      "forecast_offset_used": 0,
+      "bytes": 2825386,
+      "request_url": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/nwp-v1-1h-2500m?parameters=rr_acc&parameters=tcc&bbox=42.972%2C5.484%2C51.828%2C22.116&forecast_offset=0&start=2026-10-28T09%3A00&end=2026-10-29T00%3A00&output_format=netcdf&filename=source-00"
+    },
+    {
+      "chunk": 1,
+      "start": "2026-10-29T01:00:00Z",
+      "end": "2026-10-29T16:00:00Z",
+      "time_count": 16,
+      "forecast_offset_used": 0,
+      "bytes": 4450455,
+      "request_url": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/nwp-v1-1h-2500m?parameters=rr_acc&parameters=tcc&bbox=42.972%2C5.484%2C51.828%2C22.116&forecast_offset=0&start=2026-10-29T01%3A00&end=2026-10-29T16%3A00&output_format=netcdf&filename=source-01"
+    },
+    {
+      "chunk": 2,
+      "start": "2026-10-29T17:00:00Z",
+      "end": "2026-10-30T08:00:00Z",
+      "time_count": 16,
+      "forecast_offset_used": 0,
+      "bytes": 5217720,
+      "request_url": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/nwp-v1-1h-2500m?parameters=rr_acc&parameters=tcc&bbox=42.972%2C5.484%2C51.828%2C22.116&forecast_offset=0&start=2026-10-29T17%3A00&end=2026-10-30T08%3A00&output_format=netcdf&filename=source-02"
+    },
+    {
+      "chunk": 3,
+      "start": "2026-10-30T09:00:00Z",
+      "end": "2026-10-30T21:00:00Z",
+      "time_count": 13,
+      "forecast_offset_used": 0,
+      "bytes": 4991847,
+      "request_url": "https://dataset.api.hub.geosphere.at/v1/grid/forecast/nwp-v1-1h-2500m?parameters=rr_acc&parameters=tcc&bbox=42.972%2C5.484%2C51.828%2C22.116&forecast_offset=0&start=2026-10-30T09%3A00&end=2026-10-30T21%3A00&output_format=netcdf&filename=source-03"
+    }
+  ],
+  "source_validation": {
+    "shape": [
+      61,
+      492,
+      594
+    ],
+    "time_count": 61,
+    "source_crs": "EPSG:4326",
+    "source_transform": [
+      0.027999999999998693,
+      0.0,
+      5.484000000000001,
+      0.0,
+      -0.018000000000000682,
+      51.82800000000034
+    ],
+    "x_min": 5.498,
+    "x_max": 22.10199999999975,
+    "y_min": 42.981,
+    "y_max": 51.81900000000034,
+    "precipitation": {
+      "accumulated_min_mm": 0.0,
+      "accumulated_max_mm": 54.83700180053711,
+      "initial_accumulation_missing_assumed_zero": true,
+      "raw_interval_min_mm": -0.2879999876022339,
+      "interval_min_mm": 0.0,
+      "interval_max_mm": 20.00800132751465,
+      "tiny_negative_values_clamped": 469482,
+      "negative_accumulation_values_corrected": 1490066,
+      "maximum_accumulation_correction_mm": 0.2879999876022339,
+      "serious_negative_values": 0,
+      "encoding_overflow_values": 0,
+      "nodata_values": 0
+    },
+    "cloud": {
+      "min_fraction": 0.0,
+      "max_fraction": 1.0,
+      "values_clamped": 0,
+      "nodata_values": 0
+    }
+  },
+  "encoding_validation": {
+    "precipitation_max_absolute_error_mm": 0.005,
+    "cloud_max_absolute_error_fraction": 0.00196078431372549,
+    "alpha_values": [
+      0,
+      255
+    ]
+  },
+  "asset_count": 61,
+  "total_tiles": 12383,
+  "total_asset_bytes": 47192632
+}

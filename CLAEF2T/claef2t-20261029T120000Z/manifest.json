@@ -1,0 +1,406 @@
+{
+  "schema_version": 1,
+  "source": {
+    "provider": "GeoSphere Austria",
+    "dataset_id": "nwp-v2-1h-1km",
+    "license": "CC BY 4.0"
+  },
+  "reference_time": "2026-10-29T12:00:00Z",
+  "variables": [
+    {
+      "id": "2t",
+      "unit": "degree Celsius",
+      "temporal_semantics": "value_at_valid_time",
+      "encoding": {
+        "type": "uint16",
+        "layout": "rg8",
+        "nodata": 0,
+        "scale": 0.1,
+        "offset": -50.0
+      },
+      "style": {
+        "type": "color-ramp",
+        "stops": [
+          [
+            -20,
+            "#304c9e"
+          ],
+          [
+            0,
+            "#a9d5e7"
+          ],
+          [
+            15,
+            "#f5eba5"
+          ],
+          [
+            30,
+            "#cf342d"
+          ]
+        ]
+      },
+      "frames": [
+        {
+          "valid_time": "2026-10-29T13:00:00Z",
+          "href": "2t-f001.pmtiles",
+          "sha256": "1cd093e4f96c5870f4bd9baa64b33c9a7773939b74a07e89403897957a9f0559",
+          "bytes": 7066682
+        },
+        {
+          "valid_time": "2026-10-29T14:00:00Z",
+          "href": "2t-f002.pmtiles",
+          "sha256": "39823fb7aa2c7895c146fafe398d6c6b2d354a43e30508ff3b74c6d3f3bade42",
+          "bytes": 7008365
+        },
+        {
+          "valid_time": "2026-10-29T15:00:00Z",
+          "href": "2t-f003.pmtiles",
+          "sha256": "09db693fedbe67be48c28036806b0c5b6b17dc054f6dec5a356126c995720d77",
+          "bytes": 6994113
+        },
+        {
+          "valid_time": "2026-10-29T16:00:00Z",
+          "href": "2t-f004.pmtiles",
+          "sha256": "99ab97f81ea9b094d5966852da6e5b1f8e81843ae8ba6fc0804d653f3e4dd08f",
+          "bytes": 7075488
+        },
+        {
+          "valid_time": "2026-10-29T17:00:00Z",
+          "href": "2t-f005.pmtiles",
+          "sha256": "ba7b3e79124b4b347a752475457988fb07250be6f7f50be409fbb779b5ffeb6c",
+          "bytes": 7209743
+        },
+        {
+          "valid_time": "2026-10-29T18:00:00Z",
+          "href": "2t-f006.pmtiles",
+          "sha256": "04498c30c900a43bf82b8cb318a0058b1ffb9b7ba76c925e5f495766a25493d9",
+          "bytes": 7399043
+        },
+        {
+          "valid_time": "2026-10-29T19:00:00Z",
+          "href": "2t-f007.pmtiles",
+          "sha256": "2ac2845ce88ca9bd627597beabb99d95473f33ce603a8147940c8b5c4de5711e",
+          "bytes": 7538502
+        },
+        {
+          "valid_time": "2026-10-29T20:00:00Z",
+          "href": "2t-f008.pmtiles",
+          "sha256": "265e8aae5dd91ce4a86c4c0350e24e43c7a6bcaebe435a0ddb4dc93a2b9722f5",
+          "bytes": 7633096
+        },
+        {
+          "valid_time": "2026-10-29T21:00:00Z",
+          "href": "2t-f009.pmtiles",
+          "sha256": "79618404cc4e51fc00d7297305952b29ea5fdf5269de826512afaf56f189566b",
+          "bytes": 7692344
+        },
+        {
+          "valid_time": "2026-10-29T22:00:00Z",
+          "href": "2t-f010.pmtiles",
+          "sha256": "f524bc6e46a556e27d0f95be07c294d51184c520cca4b627d14dbec136831731",
+          "bytes": 7722005
+        },
+        {
+          "valid_time": "2026-10-29T23:00:00Z",
+          "href": "2t-f011.pmtiles",
+          "sha256": "587f60dad912e1dc223d08fb156fc709591f052ea9c7a9bd4129680eb97750c2",
+          "bytes": 7723403
+        },
+        {
+          "valid_time": "2026-10-30T00:00:00Z",
+          "href": "2t-f012.pmtiles",
+          "sha256": "28c739fe2b721df0afea25726a3b263e4ad30c14266caae4e37d9bbb8e5d35b6",
+          "bytes": 7706142
+        },
+        {
+          "valid_time": "2026-10-30T01:00:00Z",
+          "href": "2t-f013.pmtiles",
+          "sha256": "0404317fd520e17dd747df53dc80682dc1d0c873ac01d64421c88cbe0b593fa1",
+          "bytes": 7678566
+        },
+        {
+          "valid_time": "2026-10-30T02:00:00Z",
+          "href": "2t-f014.pmtiles",
+          "sha256": "b47778169fb6cfea18541ddb4cb556a4c4a14c62102e3f99530ba4a7c3dce13e",
+          "bytes": 7638744
+        },
+        {
+          "valid_time": "2026-10-30T03:00:00Z",
+          "href": "2t-f015.pmtiles",
+          "sha256": "496a6f709fb2c6dee5ad52bfb496a34fd4869ccc16b91d25a22b63db56b462d0",
+          "bytes": 7589119
+        },
+        {
+          "valid_time": "2026-10-30T04:00:00Z",
+          "href": "2t-f016.pmtiles",
+          "sha256": "cf74f85c27f08fe86df45edc3d00f929f91dae3f43a839e7230eb0709874decc",
+          "bytes": 7525745
+        },
+        {
+          "valid_time": "2026-10-30T05:00:00Z",
+          "href": "2t-f017.pmtiles",
+          "sha256": "0d0d86c57a1a34aa02ea80fd6ddec7e63f8ec1af5a0d94b85dc8ddf30a1d75f8",
+          "bytes": 7478276
+        },
+        {
+          "valid_time": "2026-10-30T06:00:00Z",
+          "href": "2t-f018.pmtiles",
+          "sha256": "c6d7371581b4db8886b1241cfb7e8ab300c4c8715606cab6caeaffc9e1d67d6e",
+          "bytes": 7405254
+        },
+        {
+          "valid_time": "2026-10-30T07:00:00Z",
+          "href": "2t-f019.pmtiles",
+          "sha256": "dd53a84933aeed578e7e796f421bab145a67f97a6611b25d8b3b9c23f904b644",
+          "bytes": 7189411
+        },
+        {
+          "valid_time": "2026-10-30T08:00:00Z",
+          "href": "2t-f020.pmtiles",
+          "sha256": "062d0c3d3897e8d35b0766c4adb0daddd78769d35ab8d31977eb510907b70913",
+          "bytes": 6994728
+        },
+        {
+          "valid_time": "2026-10-30T09:00:00Z",
+          "href": "2t-f021.pmtiles",
+          "sha256": "45df1b91b17367cb8fe2f0923d17ca25dad27cbe3c6a1f0ef34ca88bae24cff3",
+          "bytes": 6976151
+        },
+        {
+          "valid_time": "2026-10-30T10:00:00Z",
+          "href": "2t-f022.pmtiles",
+          "sha256": "c11118c485e0b0f32d789decb4b9ce32654d1e1d492347cf6aa53180cd8f4500",
+          "bytes": 7022080
+        },
+        {
+          "valid_time": "2026-10-30T11:00:00Z",
+          "href": "2t-f023.pmtiles",
+          "sha256": "ca1399231e70b66614b654c52a4005252a7688c09439e87181565d0c8be85685",
+          "bytes": 7050166
+        },
+        {
+          "valid_time": "2026-10-30T12:00:00Z",
+          "href": "2t-f024.pmtiles",
+          "sha256": "8d696de42210a2637ad14e30376f7781c107625c6d11cf867428fc5776344f59",
+          "bytes": 7051772
+        },
+        {
+          "valid_time": "2026-10-30T13:00:00Z",
+          "href": "2t-f025.pmtiles",
+          "sha256": "ca208993c1e1566820f20f3a46629073e3c22d038747de7c41af286e7d995595",
+          "bytes": 7020837
+        },
+        {
+          "valid_time": "2026-10-30T14:00:00Z",
+          "href": "2t-f026.pmtiles",
+          "sha256": "e63de95238d79a1a558c5fb4c8679b2e9473e04a05608f167340f1d9c2f5d0f2",
+          "bytes": 6969245
+        },
+        {
+          "valid_time": "2026-10-30T15:00:00Z",
+          "href": "2t-f027.pmtiles",
+          "sha256": "673eb75e2bb16557bbd9b5d036a32df556364cb7f5fc0d63cde6b8e210c2d6d6",
+          "bytes": 6944705
+        },
+        {
+          "valid_time": "2026-10-30T16:00:00Z",
+          "href": "2t-f028.pmtiles",
+          "sha256": "2087521fc53e94097e5c5d10f87b398282565f083c54fb8560053cd0820fd8a7",
+          "bytes": 7016052
+        },
+        {
+          "valid_time": "2026-10-30T17:00:00Z",
+          "href": "2t-f029.pmtiles",
+          "sha256": "46dc1a0d79c40b1787a60b1c5c05f13969d59b70a386a96a15dd3edfda4839f6",
+          "bytes": 7166166
+        },
+        {
+          "valid_time": "2026-10-30T18:00:00Z",
+          "href": "2t-f030.pmtiles",
+          "sha256": "ecdb9db5af35194b71fc6d1a2a0a1ae600a6041f6b8f5f168512c518bf640142",
+          "bytes": 7322993
+        },
+        {
+          "valid_time": "2026-10-30T19:00:00Z",
+          "href": "2t-f031.pmtiles",
+          "sha256": "9044bbc33f090d95bafc533554a27d5c07dec52e50146bb811da143c3ee6598c",
+          "bytes": 7437946
+        },
+        {
+          "valid_time": "2026-10-30T20:00:00Z",
+          "href": "2t-f032.pmtiles",
+          "sha256": "72fbb9aa99426e39a5fcb96e8f4864a1f0489525cdebc9fcc0fab6f620066527",
+          "bytes": 7502284
+        },
+        {
+          "valid_time": "2026-10-30T21:00:00Z",
+          "href": "2t-f033.pmtiles",
+          "sha256": "133cd3a27461fe2b5ec60ddb609a4a1040c294029e963876b7803a25a2aef36e",
+          "bytes": 7542665
+        },
+        {
+          "valid_time": "2026-10-30T22:00:00Z",
+          "href": "2t-f034.pmtiles",
+          "sha256": "01da3d87127e56b44f6430d374c555b6b58305d29042b3a480777471429f07b0",
+          "bytes": 7563558
+        },
+        {
+          "valid_time": "2026-10-30T23:00:00Z",
+          "href": "2t-f035.pmtiles",
+          "sha256": "d93b302705e69426a097e4f684d2cfcad8ede3623ba7b1f319197dfbb14ec4f2",
+          "bytes": 7572084
+        },
+        {
+          "valid_time": "2026-10-31T00:00:00Z",
+          "href": "2t-f036.pmtiles",
+          "sha256": "9d5fb6e4b018672ea806022a6833bc7a560e4687a0db8139df8ffeb09db601fa",
+          "bytes": 7559530
+        },
+        {
+          "valid_time": "2026-10-31T01:00:00Z",
+          "href": "2t-f037.pmtiles",
+          "sha256": "0a9b0d8439112da0181520949fa2731a7969b36fc0d7917140c86e8fae7be92d",
+          "bytes": 7543940
+        },
+        {
+          "valid_time": "2026-10-31T02:00:00Z",
+          "href": "2t-f038.pmtiles",
+          "sha256": "2547faa8ebb9df93385d177d152c5e0b5645925da1016ceb833157b1e28671b8",
+          "bytes": 7513151
+        },
+        {
+          "valid_time": "2026-10-31T03:00:00Z",
+          "href": "2t-f039.pmtiles",
+          "sha256": "312f3aca5855c5d3a7e5da7c8abf69621abec3861009dfa9996ad4694ebca07c",
+          "bytes": 7480852
+        },
+        {
+          "valid_time": "2026-10-31T04:00:00Z",
+          "href": "2t-f040.pmtiles",
+          "sha256": "1d86028dcb6a22d5b7de58a86b29942fcb76deee1549454cf384904d165d69ec",
+          "bytes": 7447520
+        },
+        {
+          "valid_time": "2026-10-31T05:00:00Z",
+          "href": "2t-f041.pmtiles",
+          "sha256": "89139b1cd845ea3a74eb88ba9e4beedd7b141b0135ee5c1add661e6b9722f2ec",
+          "bytes": 7431637
+        },
+        {
+          "valid_time": "2026-10-31T06:00:00Z",
+          "href": "2t-f042.pmtiles",
+          "sha256": "886c13c8f263ed1b46c3d8486cc249086d7bb3883da8cb38adf2e08fa4f85b74",
+          "bytes": 7392906
+        },
+        {
+          "valid_time": "2026-10-31T07:00:00Z",
+          "href": "2t-f043.pmtiles",
+          "sha256": "5d425e2ebd8935b6905b5432ad60bb8dc5d01ba0e133d604bfaeaba565744570",
+          "bytes": 7224540
+        },
+        {
+          "valid_time": "2026-10-31T08:00:00Z",
+          "href": "2t-f044.pmtiles",
+          "sha256": "99e2f3aa6a1398a8988843e912f40ff8a80cbced75ae367f9d8782ba0eb2c79f",
+          "bytes": 7061749
+        },
+        {
+          "valid_time": "2026-10-31T09:00:00Z",
+          "href": "2t-f045.pmtiles",
+          "sha256": "9cfd8fa68c4004e5fe592c1cb420eb0ccafc2f77398c1e224b4e5fa4020fedfb",
+          "bytes": 7056372
+        },
+        {
+          "valid_time": "2026-10-31T10:00:00Z",
+          "href": "2t-f046.pmtiles",
+          "sha256": "374b3d0310a8c68ec8f9f70149d41b42fdd717965296eed8a28d2bde8aa8aac7",
+          "bytes": 7090522
+        },
+        {
+          "valid_time": "2026-10-31T11:00:00Z",
+          "href": "2t-f047.pmtiles",
+          "sha256": "b49f4a9622e65a4bd56159df65c2be994b08f80e35d78686fec1261150f07679",
+          "bytes": 7109063
+        },
+        {
+          "valid_time": "2026-10-31T12:00:00Z",
+          "href": "2t-f048.pmtiles",
+          "sha256": "309b364abb744ac4dcf6ff073e55445a5f0c00f6a948be5c461f3c85371f15b6",
+          "bytes": 7106978
+        },
+        {
+          "valid_time": "2026-10-31T13:00:00Z",
+          "href": "2t-f049.pmtiles",
+          "sha256": "b22eed879fcca27ea3ee483e7b188ccd8a139ce296329a1403d2805c3c321df8",
+          "bytes": 7085615
+        },
+        {
+          "valid_time": "2026-10-31T14:00:00Z",
+          "href": "2t-f050.pmtiles",
+          "sha256": "628be0fb17b6a7bc21221cf7be2a56ee768dbe38ca1d388ed2d2a5a486c12f43",
+          "bytes": 7043466
+        },
+        {
+          "valid_time": "2026-10-31T15:00:00Z",
+          "href": "2t-f051.pmtiles",
+          "sha256": "f6a74cd309062b19c7490304fb37ffd23869eec8c88d94d9d88405c55f53dea9",
+          "bytes": 7038079
+        },
+        {
+          "valid_time": "2026-10-31T16:00:00Z",
+          "href": "2t-f052.pmtiles",
+          "sha256": "305c2d122a297e951bba7f2364079184e0699c98ee594d49dc7968061cbfaba0",
+          "bytes": 7158504
+        },
+        {
+          "valid_time": "2026-10-31T17:00:00Z",
+          "href": "2t-f053.pmtiles",
+          "sha256": "61fa29c04a5870b902a8adf86c04b102698c6f4bf0347b04b11042fe9024972e",
+          "bytes": 7303687
+        },
+        {
+          "valid_time": "2026-10-31T18:00:00Z",
+          "href": "2t-f054.pmtiles",
+          "sha256": "17d552c0f356dea069201c5508a11ef019fc7e2f6c4510015ccfe5bd99cb97fe",
+          "bytes": 7423691
+        },
+        {
+          "valid_time": "2026-10-31T19:00:00Z",
+          "href": "2t-f055.pmtiles",
+          "sha256": "323118ac50f4b6deeb9cc80a53152101b912afc0ad0872d655470138e0edcf4f",
+          "bytes": 7499008
+        },
+        {
+          "valid_time": "2026-10-31T20:00:00Z",
+          "href": "2t-f056.pmtiles",
+          "sha256": "6446784ff18baaa49a8375672c502b30a34f13de401f646797cb13b03f0602c1",
+          "bytes": 7532122
+        },
+        {
+          "valid_time": "2026-10-31T21:00:00Z",
+          "href": "2t-f057.pmtiles",
+          "sha256": "9408e595df41d8041fae16c3447f02e09705f9d6b13247ffc8094919f0c929c7",
+          "bytes": 7555683
+        },
+        {
+          "valid_time": "2026-10-31T22:00:00Z",
+          "href": "2t-f058.pmtiles",
+          "sha256": "85e84346561bc924d9ebe7f7658f4d483ccdb271bb723345c20ab4c31eb15618",
+          "bytes": 7562336
+        },
+        {
+          "valid_time": "2026-10-31T23:00:00Z",
+          "href": "2t-f059.pmtiles",
+          "sha256": "b4cc4fac224a35bf13a642366b0da29b61fc2c0276bad2d7f4bd2578fa9189a4",
+          "bytes": 7547255
+        },
+        {
+          "valid_time": "2026-11-01T00:00:00Z",
+          "href": "2t-f060.pmtiles",
+          "sha256": "2313ef60dc6cc1e1bccc063b69b1215a019a0ab777505b4767036aa3229f75b0",
+          "bytes": 7525694
+        }
+      ]
+    }
+  ]
+}
