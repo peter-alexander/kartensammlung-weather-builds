@@ -98,3 +98,35 @@ def test_native_grid_resolution_check_rejects_under_sampling() -> None:
 	assert report["minimum_pixels_per_source_cell"] >= 2
 	with pytest.raises(ValueError, match="undersamples"):
 		check_numeric_tile_resolution(transform, bbox, 6)
+
+
+def test_six_hour_request_window() -> None:
+	from scripts.build_claef_2t_prototype import forecast_request_parameters
+	first = datetime(2026, 10, 28, 13, tzinfo=timezone.utc)
+	bbox = [42.9975, 5.02495, 51.5025, 22.57495]
+	params = forecast_request_parameters(first, bbox, frame_count=6)
+	assert params["start"] == "2026-10-28T13:00"
+	assert params["end"] == "2026-10-28T18:01"
+	with pytest.raises(ValueError, match="frames"):
+		forecast_request_parameters(first, bbox, frame_count=7)
+
+
+def test_six_frame_netcdf_reads_all_native_fields(tmp_path) -> None:
+	from scripts.build_claef_2t_prototype import read_2t_frames_netcdf
+	base = datetime(2026, 10, 28, 13, tzinfo=timezone.utc)
+	times = [base.replace(hour=base.hour + offset) for offset in range(6)]
+	lat = 43 + np.arange(945, dtype=np.float64) * 0.009
+	lon = 5 + np.arange(1300, dtype=np.float64) * 0.0135
+	values = np.broadcast_to(np.arange(6, dtype=np.float32)[:, None, None], (6, 945, 1300))
+	dataset = xr.Dataset(
+		{"2t": (("time", "lat", "lon"), values, {"units": "degree Celsius"})},
+		coords={"time": np.array(times, dtype="datetime64[s]"), "lat": lat, "lon": lon}
+	)
+	path = tmp_path / "six.nc"
+	dataset.to_netcdf(path)
+	frames, transform, bbox = read_2t_frames_netcdf(path, valid_times=times)
+	assert frames.shape == (6, 945, 1300)
+	assert [frames[index, 0, 0] for index in range(6)] == list(range(6))
+	assert transform.e < 0 and bbox.west < bbox.east
+	with pytest.raises(ValueError, match="time"):
+		read_2t_frames_netcdf(path, valid_times=times[::-1])

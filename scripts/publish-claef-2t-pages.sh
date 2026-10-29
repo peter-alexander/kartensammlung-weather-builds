@@ -16,13 +16,16 @@ manifest = validate_manifest(json.loads((folder / "manifest.json").read_text()))
 assert manifest["source"]["dataset_id"] == "nwp-v2-1h-1km"
 assert len(manifest["variables"]) == 1
 variable = manifest["variables"][0]
-assert variable["id"] == "2t" and len(variable["frames"]) == 1
-frame = variable["frames"][0]
-assert frame["href"] == "2t-f001.pmtiles"
-assert (folder / frame["href"]).is_file()
+assert variable["id"] == "2t" and len(variable["frames"]) == 6
 import hashlib
-asset = folder / frame["href"]
-assert hashlib.sha256(asset.read_bytes()).hexdigest() == frame["sha256"]
+from datetime import datetime, timedelta, timezone
+reference_time = datetime.fromisoformat(manifest["reference_time"].replace("Z", "+00:00"))
+for index, frame in enumerate(variable["frames"], start=1):
+	assert frame["href"] == f"2t-f{index:03d}.pmtiles"
+	assert frame["valid_time"] == (reference_time + timedelta(hours=index)).strftime("%Y-%m-%dT%H:%M:%SZ")
+	asset = folder / frame["href"]
+	assert asset.is_file() and asset.stat().st_size == frame["bytes"]
+	assert hashlib.sha256(asset.read_bytes()).hexdigest() == frame["sha256"]
 reference = manifest["reference_time"]
 assert re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:00:00Z", reference)
 print("claef2t-" + reference.replace("-", "").replace(":", "").replace("T", "T").replace("Z", "Z"))
@@ -43,7 +46,7 @@ fi
 touch "$site/.nojekyll"
 target="$site/CLAEF2T/$TAG"
 mkdir -p "$target"
-cp "$LOCAL_DIR/manifest.json" "$LOCAL_DIR/2t-f001.pmtiles" "$target/"
+cp "$LOCAL_DIR/manifest.json" "$LOCAL_DIR"/2t-f???.pmtiles "$target/"
 python3 - "$site/CLAEF2T/latest.json" "$TAG" <<'PY'
 import json, sys
 from pathlib import Path

@@ -16,7 +16,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 50
     env:
       PMTILES_BIN: ${{ github.workspace }}/.local/bin/pmtiles
     steps:
@@ -47,7 +47,7 @@ jobs:
             | tar -xz -C "$(dirname "$PMTILES_BIN")" pmtiles
           "$PMTILES_BIN" version
 
-      - name: Build one C-LAEF temperature frame
+      - name: Build six C-LAEF temperature frames
         run: |
           python scripts/build_claef_2t_prototype.py \
             --output out-claef-2t \
@@ -55,6 +55,7 @@ jobs:
             --max 60 \
             --min-zoom 5 \
             --max-zoom 10 \
+            --frames 6 \
             --pmtiles-binary "$PMTILES_BIN"
 
       - name: Verify output and archive
@@ -62,7 +63,9 @@ jobs:
           test -s out-claef-2t/source-2t.nc
           test -s out-claef-2t/2t-f001.pmtiles
           test -s out-claef-2t/manifest.json
-          "$PMTILES_BIN" verify out-claef-2t/2t-f001.pmtiles
+          for file in out-claef-2t/2t-f???.pmtiles; do
+            "$PMTILES_BIN" verify "$file"
+          done
           python - <<'PY'
           import json
           from pathlib import Path
@@ -71,6 +74,7 @@ jobs:
           directory = Path("out-claef-2t")
           manifest = validate_manifest(json.loads((directory / "manifest.json").read_text(encoding="utf-8")))
           for variable in manifest["variables"]:
+          	assert len(variable["frames"]) == 6
           	for frame in variable["frames"]:
           		assert (directory / frame["href"]).is_file(), frame["href"]
           print("Verified:", [f["href"] for v in manifest["variables"] for f in v["frames"]])
