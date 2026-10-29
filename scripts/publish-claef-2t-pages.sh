@@ -16,7 +16,7 @@ manifest = validate_manifest(json.loads((folder / "manifest.json").read_text()))
 assert manifest["source"]["dataset_id"] == "nwp-v2-1h-1km"
 assert len(manifest["variables"]) == 1
 variable = manifest["variables"][0]
-assert variable["id"] == "2t" and len(variable["frames"]) == 6
+assert variable["id"] == "2t" and len(variable["frames"]) == 61
 import hashlib
 from datetime import datetime, timedelta, timezone
 reference_time = datetime.fromisoformat(manifest["reference_time"].replace("Z", "+00:00"))
@@ -58,14 +58,24 @@ Path(path).write_text(json.dumps({
 }, indent=2) + "\n")
 PY
 
-# Keep the latest two test versions, and do not touch INCA/AROME.
+# Retain only the latest C-LAEF full forecast; do not touch INCA/AROME.
 python3 - "$site/CLAEF2T" <<'PY'
 from pathlib import Path
 import re, shutil, sys
 folder = Path(sys.argv[1])
 runs = sorted((p for p in folder.iterdir() if p.is_dir() and re.fullmatch(r"claef2t-\d{8}T\d{6}Z", p.name)), reverse=True)
-for old in runs[2:]:
+for old in runs[1:]:
 	shutil.rmtree(old)
+PY
+
+python3 - "$site" <<'PY'
+from pathlib import Path
+import sys
+site = Path(sys.argv[1])
+size = sum(file.stat().st_size for file in site.rglob("*") if file.is_file() and ".git" not in file.parts)
+print(f"GitHub Pages snapshot: {size / 1048576:.1f} MiB")
+if size > 950 * 1048576:
+	raise SystemExit("Pages snapshot exceeds 950 MiB safety limit; refusing publication")
 PY
 
 git -C "$site" add -A
