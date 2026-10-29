@@ -70,8 +70,8 @@ def read_2t_netcdf(path: Path, *, valid_time: datetime) -> tuple[np.ndarray, obj
 
 def forecast_request_parameters(valid_time: datetime, bbox: list[float], *, frame_count: int = 1) -> dict[str, str | int]:
 	"""Request a bounded interval covering the specified consecutive hourly timestamps."""
-	if not 1 <= frame_count <= 61:
-		raise ValueError("Expected 1 to 61 forecast frames")
+	if not 1 <= frame_count <= 60:
+		raise ValueError("Expected 1 to 60 forecast frames")
 	if valid_time.tzinfo is None or valid_time.utcoffset() != timedelta(0):
 		raise ValueError("Forecast timestamp must be UTC")
 	if not isinstance(bbox, list) or len(bbox) != 4 or not all(isinstance(v, (int, float)) and np.isfinite(v) for v in bbox):
@@ -136,7 +136,7 @@ def check_numeric_tile_resolution(source_transform: object, bbox: BoundingBox,
 
 
 def build(output: Path, inventory_path: Path, *, minimum: float, maximum: float,
-	min_zoom: int, max_zoom: int, pmtiles_binary: str, frame_count: int = 61) -> dict:
+	min_zoom: int, max_zoom: int, pmtiles_binary: str, frame_count: int = 60) -> dict:
 	output.mkdir(parents=True, exist_ok=True)
 	session = requests.Session()
 	session.headers["User-Agent"] = "ks-wetter-builds/claef-prototype"
@@ -236,7 +236,7 @@ def main() -> None:
 		help="Explicit reviewed encoding upper bound in Celsius")
 	parser.add_argument("--min-zoom", type=int, default=5)
 	parser.add_argument("--max-zoom", type=int, default=10)
-	parser.add_argument("--frames", type=int, default=61)
+	parser.add_argument("--frames", type=int, default=60)
 	parser.add_argument("--pmtiles-binary", default="pmtiles")
 	args = parser.parse_args()
 	print(json.dumps(build(args.output, args.inventory, minimum=args.minimum,
