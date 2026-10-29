@@ -1,4 +1,4 @@
-"""Experimental six-frame C-LAEF 2t build: live NetCDF -> PMTiles + manifest.
+"""Experimental full-forecast C-LAEF 2t build: live NetCDF -> PMTiles + manifest.
 
 Run manually; this script does not publish or modify the existing forecast builds.
 """
@@ -70,8 +70,8 @@ def read_2t_netcdf(path: Path, *, valid_time: datetime) -> tuple[np.ndarray, obj
 
 def forecast_request_parameters(valid_time: datetime, bbox: list[float], *, frame_count: int = 1) -> dict[str, str | int]:
 	"""Request a non-empty minute interval containing exactly one hourly grid timestamp."""
-	if not 1 <= frame_count <= 6:
-		raise ValueError("Expected 1 to 6 forecast frames")
+	if not 1 <= frame_count <= 61:
+		raise ValueError("Expected 1 to 61 forecast frames")
 	if valid_time.tzinfo is None or valid_time.utcoffset() != timedelta(0):
 		raise ValueError("Forecast timestamp must be UTC")
 	if not isinstance(bbox, list) or len(bbox) != 4 or not all(isinstance(v, (int, float)) and np.isfinite(v) for v in bbox):
@@ -136,7 +136,7 @@ def check_numeric_tile_resolution(source_transform: object, bbox: BoundingBox,
 
 
 def build(output: Path, inventory_path: Path, *, minimum: float, maximum: float,
-	min_zoom: int, max_zoom: int, pmtiles_binary: str, frame_count: int = 6) -> dict:
+	min_zoom: int, max_zoom: int, pmtiles_binary: str, frame_count: int = 61) -> dict:
 	output.mkdir(parents=True, exist_ok=True)
 	session = requests.Session()
 	session.headers["User-Agent"] = "ks-wetter-builds/claef-prototype"
@@ -154,36 +154,50 @@ def build(output: Path, inventory_path: Path, *, minimum: float, maximum: float,
 	valid_time = reftime + timedelta(hours=1)
 	reftime_iso = reftime.strftime("%Y-%m-%dT%H:%M:%SZ")
 	valid_times = [valid_time + timedelta(hours=step) for step in range(frame_count)]
-	nc_path = output / "source-2t.nc"
-	response = session.get(API, params=forecast_request_parameters(valid_time, meta["bbox_outer"], frame_count=frame_count), timeout=180)
-	raise_geosphere_error(response)
-	if not response.content.startswith(b"\x89HDF\r\n\x1a\n") and not response.content.startswith(b"CDF"):
-		raise ValueError("Expected NetCDF response")
-	nc_path.write_bytes(response.content)
-	values, source_transform, bbox = read_2t_frames_netcdf(nc_path, valid_times=valid_times)
-	resolution_report = check_numeric_tile_resolution(source_transform, bbox, max_zoom)
-	print("Native grid sampling:", json.dumps(resolution_report), flush=True)
+
 	inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
 	contract = contract_from_audit(inventory, DATASET, "2t",
 		declared_min=minimum, declared_max=maximum)
 	frames = []
-	for step, (field, timestamp) in enumerate(zip(values, valid_times), start=1):
-		valid_iso = timestamp.strftime("%Y-%m-%dT%H:%M:%SZ")
-		filename = f"2t-f{step:03d}.pmtiles"
-		archive = build_numeric_pmtiles(
-			field, source_transform=source_transform, source_crs=CRS.from_epsg(4326),
-			bbox=bbox, quantization=contract.quantization,
-			parameter="2t", valid_time=valid_iso,
-			min_zoom=min_zoom, max_zoom=max_zoom, tile_size=256,
-			mbtiles_path=output / f"2t-f{step:03d}.mbtiles",
-			pmtiles_path=output / filename,
-			pmtiles_binary=pmtiles_binary,
-		)
-		frames.append({
-			"valid_time": valid_iso, "href": filename,
-			"sha256": archive["sha256"], "bytes": archive["bytes"]
-		})
-		print(f"Built {filename} ({archive['bytes']} bytes)", flush=True)
+	resolution_report = None
+	# Keep API responses and native grids bounded: build all hours in one run,
+	# but download consecutive chunks of at most six hours.
+	for chunk_start in range(0, frame_count, 6):
+		chunk_times = valid_times[chunk_start:chunk_start + 6]
+		nc_path = output / "source-2t.nc"
+		response = session.get(API, params=forecast_request_parameters(
+			chunk_times[0], meta["bbox_outer"], frame_count=len(chunk_times)), timeout=300)
+		raise_geosphere_error(response)
+		if not response.content.startswith(b"\\x89HDF\\r\\n\\x1a\\n") and not response.content.startswith(b"CDF"):
+			raise ValueError("Expected NetCDF response")
+		nc_path.write_bytes(response.content)
+		del response
+		values, source_transform, bbox = read_2t_frames_netcdf(nc_path, valid_times=chunk_times)
+		if resolution_report is None:
+			resolution_report = check_numeric_tile_resolution(source_transform, bbox, max_zoom)
+			print("Native grid sampling:", json.dumps(resolution_report), flush=True)
+		for offset, (field, timestamp) in enumerate(zip(values, chunk_times), start=1):
+			step = chunk_start + offset
+			valid_iso = timestamp.strftime("%Y-%m-%dT%H:%M:%SZ")
+			filename = f"2t-f{step:03d}.pmtiles"
+			mbtiles_path = output / f"2t-f{step:03d}.mbtiles"
+			archive = build_numeric_pmtiles(
+				field, source_transform=source_transform, source_crs=CRS.from_epsg(4326),
+				bbox=bbox, quantization=contract.quantization,
+				parameter="2t", valid_time=valid_iso,
+				min_zoom=min_zoom, max_zoom=max_zoom, tile_size=256,
+				mbtiles_path=mbtiles_path,
+				pmtiles_path=output / filename,
+				pmtiles_binary=pmtiles_binary,
+			)
+			frames.append({
+				"valid_time": valid_iso, "href": filename,
+				"sha256": archive["sha256"], "bytes": archive["bytes"]
+			})
+			mbtiles_path.unlink(missing_ok=True)
+			print(f"Built {filename} ({archive['bytes']} bytes)", flush=True)
+		del values
+		nc_path.unlink(missing_ok=True)
 	manifest = {
 		"schema_version": 1,
 		"source": {"provider": "GeoSphere Austria", "dataset_id": DATASET,
@@ -222,7 +236,7 @@ def main() -> None:
 		help="Explicit reviewed encoding upper bound in Celsius")
 	parser.add_argument("--min-zoom", type=int, default=5)
 	parser.add_argument("--max-zoom", type=int, default=10)
-	parser.add_argument("--frames", type=int, default=6)
+	parser.add_argument("--frames", type=int, default=61)
 	parser.add_argument("--pmtiles-binary", default="pmtiles")
 	args = parser.parse_args()
 	print(json.dumps(build(args.output, args.inventory, minimum=args.minimum,
