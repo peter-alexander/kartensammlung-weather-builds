@@ -16,7 +16,7 @@ manifest = validate_manifest(json.loads((folder / "manifest.json").read_text()))
 assert manifest["source"]["dataset_id"] == "nwp-v2-1h-1km"
 assert len(manifest["variables"]) == 1
 variable = manifest["variables"][0]
-assert variable["id"] == "2t" and len(variable["frames"]) == 61
+assert variable["id"] == "2t" and len(variable["frames"]) == 60
 import hashlib
 from datetime import datetime, timedelta, timezone
 reference_time = datetime.fromisoformat(manifest["reference_time"].replace("Z", "+00:00"))
