@@ -168,7 +168,7 @@ def build(output: Path, inventory_path: Path, *, minimum: float, maximum: float,
 		response = session.get(API, params=forecast_request_parameters(
 			chunk_times[0], meta["bbox_outer"], frame_count=len(chunk_times)), timeout=300)
 		raise_geosphere_error(response)
-		if not response.content.startswith(b"\\x89HDF\\r\\n\\x1a\\n") and not response.content.startswith(b"CDF"):
+		if not response.content.startswith(b"\x89HDF\r\n\x1a\n") and not response.content.startswith(b"CDF"):
 			raise ValueError("Expected NetCDF response")
 		nc_path.write_bytes(response.content)
 		del response
