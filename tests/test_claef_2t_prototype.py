@@ -86,3 +86,15 @@ def test_hdf5_magic_header_is_real_bytes_not_escaped_text() -> None:
 	source = Path("scripts/build_claef_2t_prototype.py").read_text(encoding="utf-8")
 	assert 'b"\\\\x89HDF' not in source
 	assert b"\x89HDF\r\n\x1a\n".startswith(b"\x89HDF\r\n\x1a\n")
+
+
+def test_native_grid_resolution_check_rejects_under_sampling() -> None:
+	from rasterio.transform import from_bounds
+	from weather_build.geosphere import BoundingBox
+	from scripts.build_claef_2t_prototype import check_numeric_tile_resolution
+	bbox = BoundingBox(south=43.0, west=5.0, north=51.0, east=22.5)
+	transform = from_bounds(bbox.west, bbox.south, bbox.east, bbox.north, 1300, 945)
+	report = check_numeric_tile_resolution(transform, bbox, 10)
+	assert report["minimum_pixels_per_source_cell"] >= 2
+	with pytest.raises(ValueError, match="undersamples"):
+		check_numeric_tile_resolution(transform, bbox, 6)
