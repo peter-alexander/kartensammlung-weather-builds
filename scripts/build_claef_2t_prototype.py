@@ -69,7 +69,7 @@ def read_2t_netcdf(path: Path, *, valid_time: datetime) -> tuple[np.ndarray, obj
 
 
 def forecast_request_parameters(valid_time: datetime, bbox: list[float], *, frame_count: int = 1) -> dict[str, str | int]:
-	"""Request a non-empty minute interval containing exactly one hourly grid timestamp."""
+	"""Request a bounded interval covering the specified consecutive hourly timestamps."""
 	if not 1 <= frame_count <= 61:
 		raise ValueError("Expected 1 to 61 forecast frames")
 	if valid_time.tzinfo is None or valid_time.utcoffset() != timedelta(0):
