@@ -54,7 +54,7 @@ jobs:
             --min -50 \
             --max 60 \
             --min-zoom 5 \
-            --max-zoom 8 \
+            --max-zoom 10 \
             --pmtiles-binary "$PMTILES_BIN"
 
       - name: Verify output and archive
