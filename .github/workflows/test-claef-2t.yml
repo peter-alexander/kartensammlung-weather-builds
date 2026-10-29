@@ -4,7 +4,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+  actions: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: test-claef-2t-${{ github.ref }}
@@ -93,3 +96,46 @@ jobs:
             out-claef-2t/numeric-weather-decoder.mjs
           if-no-files-found: warn
           retention-days: 3
+
+  publish:
+    needs: build
+    if: needs.build.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: geosphere-weather-pages-publisher
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install manifest validator
+        run: python -m pip install '.[dev]'
+
+      - name: Download verified test build
+        uses: actions/download-artifact@v6
+        with:
+          name: claef-2t-prototype
+          path: out-claef-2t
+
+      - name: Publish immutable CLAEF temperature version
+        env:
+          LOCAL_DIR: out-claef-2t
+          GITHUB_TOKEN: ${{ github.token }}
+        run: bash scripts/publish-claef-2t-pages.sh
+
+      - name: Upload complete Pages snapshot
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ runner.temp }}/weather-pages-site
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
