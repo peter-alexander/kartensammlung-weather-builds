@@ -91,6 +91,43 @@ def raise_geosphere_error(response: requests.Response) -> None:
 	)
 
 
+
+def projected_source_cell_size_m(source_transform: object, bbox: BoundingBox) -> tuple[float, float]:
+	"""Native lon/lat cell pitch measured in EPSG:3857 (not a lossless grid transform)."""
+	from math import pi, radians, cos, log, tan
+	earth_radius = 6378137.0
+	lon_m = abs(float(source_transform.a)) * pi / 180 * earth_radius
+	lat_step = abs(float(source_transform.e))
+	def mercator_y(lat: float) -> float:
+		return earth_radius * log(tan(pi / 4 + radians(lat) / 2))
+	lat_m = min(
+		abs(mercator_y(bbox.south + lat_step) - mercator_y(bbox.south)),
+		abs(mercator_y(bbox.north) - mercator_y(bbox.north - lat_step)),
+	)
+	return lon_m, lat_m
+
+
+def check_numeric_tile_resolution(source_transform: object, bbox: BoundingBox,
+		max_zoom: int, min_pixels_per_cell: float = 2.0) -> dict:
+	"""Fail when the highest zoom undersamples the native grid spatially."""
+	from math import pi
+	x_m, y_m = projected_source_cell_size_m(source_transform, bbox)
+	output_pixel_m = 2 * pi * 6378137.0 / (256 * (2 ** max_zoom))
+	ratio = min(x_m, y_m) / output_pixel_m
+	if ratio < min_pixels_per_cell:
+		raise ValueError(
+			f"Zoom {max_zoom} undersamples native C-LAEF cells: "
+			f"{ratio:.2f} output pixels per shortest source cell; "
+			f"require >= {min_pixels_per_cell:.1f}"
+		)
+	return {
+		"zoom": max_zoom,
+		"source_cell_webmercator_m": [round(x_m, 2), round(y_m, 2)],
+		"output_pixel_webmercator_m": round(output_pixel_m, 2),
+		"minimum_pixels_per_source_cell": round(ratio, 2),
+	}
+
+
 def build(output: Path, inventory_path: Path, *, minimum: float, maximum: float,
 	min_zoom: int, max_zoom: int, pmtiles_binary: str) -> dict:
 	output.mkdir(parents=True, exist_ok=True)
@@ -117,6 +154,8 @@ def build(output: Path, inventory_path: Path, *, minimum: float, maximum: float,
 		raise ValueError("Expected NetCDF response")
 	nc_path.write_bytes(response.content)
 	values, source_transform, bbox = read_2t_netcdf(nc_path, valid_time=valid_time)
+	resolution_report = check_numeric_tile_resolution(source_transform, bbox, max_zoom)
+	print("Native grid sampling:", json.dumps(resolution_report), flush=True)
 	inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
 	contract = contract_from_audit(inventory, DATASET, "2t",
 		declared_min=minimum, declared_max=maximum)
@@ -154,7 +193,7 @@ def build(output: Path, inventory_path: Path, *, minimum: float, maximum: float,
 	}
 	validate_manifest(manifest)
 	(output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-	return archive
+	return {**archive, "resolution_report": resolution_report}
 
 
 def main() -> None:
