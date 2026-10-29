@@ -108,7 +108,7 @@ def test_six_hour_request_window() -> None:
 	assert params["start"] == "2026-10-28T13:00"
 	assert params["end"] == "2026-10-28T18:01"
 	with pytest.raises(ValueError, match="frames"):
-		forecast_request_parameters(first, bbox, frame_count=7)
+		forecast_request_parameters(first, bbox, frame_count=62)
 
 
 def test_six_frame_netcdf_reads_all_native_fields(tmp_path) -> None:
@@ -130,3 +130,12 @@ def test_six_frame_netcdf_reads_all_native_fields(tmp_path) -> None:
 	assert transform.e < 0 and bbox.west < bbox.east
 	with pytest.raises(ValueError, match="time"):
 		read_2t_frames_netcdf(path, valid_times=times[::-1])
+
+
+def test_full_forecast_request_window() -> None:
+	from scripts.build_claef_2t_prototype import forecast_request_parameters
+	first = datetime(2026, 10, 28, 13, tzinfo=timezone.utc)
+	bbox = [42.9975, 5.02495, 51.5025, 22.57495]
+	params = forecast_request_parameters(first, bbox, frame_count=61)
+	assert params["start"] == "2026-10-28T13:00"
+	assert params["end"] == "2026-10-31T01:01"
