@@ -47,7 +47,7 @@ jobs:
             | tar -xz -C "$(dirname "$PMTILES_BIN")" pmtiles
           "$PMTILES_BIN" version
 
-      - name: Build all 61 C-LAEF temperature frames
+      - name: Build all 60 C-LAEF temperature frames
         run: |
           python scripts/build_claef_2t_prototype.py \
             --output out-claef-2t \
@@ -55,7 +55,7 @@ jobs:
             --max 60 \
             --min-zoom 5 \
             --max-zoom 10 \
-            --frames 61 \
+            --frames 60 \
             --pmtiles-binary "$PMTILES_BIN"
 
       - name: Verify output and archive
@@ -73,7 +73,7 @@ jobs:
           directory = Path("out-claef-2t")
           manifest = validate_manifest(json.loads((directory / "manifest.json").read_text(encoding="utf-8")))
           for variable in manifest["variables"]:
-          	assert len(variable["frames"]) == 61
+          	assert len(variable["frames"]) == 60
           	for frame in variable["frames"]:
           		assert (directory / frame["href"]).is_file(), frame["href"]
           print("Verified:", [f["href"] for v in manifest["variables"] for f in v["frames"]])
